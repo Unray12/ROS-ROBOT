@@ -1,0 +1,5 @@
+esp32_cam
+/home/aclab/Desktop/ROS-VR/catkin_ws/devel/.private/esp32_cam/cmake.lock /home/aclab/Desktop/ROS-VR/catkin_ws/devel/./cmake.lock
+/home/aclab/Desktop/ROS-VR/catkin_ws/devel/.private/esp32_cam/share/esp32_cam/cmake/esp32_camConfig-version.cmake /home/aclab/Desktop/ROS-VR/catkin_ws/devel/share/esp32_cam/cmake/esp32_camConfig-version.cmake
+/home/aclab/Desktop/ROS-VR/catkin_ws/devel/.private/esp32_cam/share/esp32_cam/cmake/esp32_camConfig.cmake /home/aclab/Desktop/ROS-VR/catkin_ws/devel/share/esp32_cam/cmake/esp32_camConfig.cmake
+/home/aclab/Desktop/ROS-VR/catkin_ws/devel/.private/esp32_cam/lib/pkgconfig/esp32_cam.pc /home/aclab/Desktop/ROS-VR/catkin_ws/devel/lib/pkgconfig/esp32_cam.pc

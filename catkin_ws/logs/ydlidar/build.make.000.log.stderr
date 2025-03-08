@@ -1,0 +1,111 @@
+In file included from [01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/src/Console.cpp:1[m[K:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:[m[K In member function ‘[01m[Kvoid ydlidar::Console::show(const char*, ...)[m[K’:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:40:17:[m[K [01;35m[Kwarning: [m[Kformat not a string literal and no format arguments [[01;35m[K-Wformat-security[m[K]
+   40 |         printf ([01;35m[Kout[m[K);
+      |                 [01;35m[K^~~[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:[m[K In member function ‘[01m[Kvoid ydlidar::Console::message(const char*, ...)[m[K’:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:53:15:[m[K [01;35m[Kwarning: [m[Kformat not a string literal and no format arguments [[01;35m[K-Wformat-security[m[K]
+   53 |       printf ([01;35m[Kout[m[K);
+      |               [01;35m[K^~~[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:[m[K In member function ‘[01m[Kvoid ydlidar::Console::warning(const char*, ...)[m[K’:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:69:15:[m[K [01;35m[Kwarning: [m[Kformat not a string literal and no format arguments [[01;35m[K-Wformat-security[m[K]
+   69 |       printf ([01;35m[Kout[m[K);
+      |               [01;35m[K^~~[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:[m[K In member function ‘[01m[Kvoid ydlidar::Console::error(const char*, ...)[m[K’:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:85:15:[m[K [01;35m[Kwarning: [m[Kformat not a string literal and no format arguments [[01;35m[K-Wformat-security[m[K]
+   85 |       printf ([01;35m[Kout[m[K);
+      |               [01;35m[K^~~[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:[m[K In member function ‘[01m[Kvoid ydlidar::Console::debug(const char*, ...)[m[K’:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:104:17:[m[K [01;35m[Kwarning: [m[Kformat not a string literal and no format arguments [[01;35m[K-Wformat-security[m[K]
+  104 |         printf ([01;35m[Kout[m[K);
+      |                 [01;35m[K^~~[m[K
+In file included from [01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/src/common.h:17[m[K,
+                 from [01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/src/ydlidar_driver.cpp:9[m[K:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:[m[K In member function ‘[01m[Kvoid ydlidar::Console::show(const char*, ...)[m[K’:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:40:17:[m[K [01;35m[Kwarning: [m[Kformat not a string literal and no format arguments [[01;35m[K-Wformat-security[m[K]
+   40 |         printf ([01;35m[Kout[m[K);
+      |                 [01;35m[K^~~[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:[m[K In member function ‘[01m[Kvoid ydlidar::Console::message(const char*, ...)[m[K’:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:53:15:[m[K [01;35m[Kwarning: [m[Kformat not a string literal and no format arguments [[01;35m[K-Wformat-security[m[K]
+   53 |       printf ([01;35m[Kout[m[K);
+      |               [01;35m[K^~~[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:[m[K In member function ‘[01m[Kvoid ydlidar::Console::warning(const char*, ...)[m[K’:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:69:15:[m[K [01;35m[Kwarning: [m[Kformat not a string literal and no format arguments [[01;35m[K-Wformat-security[m[K]
+   69 |       printf ([01;35m[Kout[m[K);
+      |               [01;35m[K^~~[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:[m[K In member function ‘[01m[Kvoid ydlidar::Console::error(const char*, ...)[m[K’:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:85:15:[m[K [01;35m[Kwarning: [m[Kformat not a string literal and no format arguments [[01;35m[K-Wformat-security[m[K]
+   85 |       printf ([01;35m[Kout[m[K);
+      |               [01;35m[K^~~[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:[m[K In member function ‘[01m[Kvoid ydlidar::Console::debug(const char*, ...)[m[K’:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:104:17:[m[K [01;35m[Kwarning: [m[Kformat not a string literal and no format arguments [[01;35m[K-Wformat-security[m[K]
+  104 |         printf ([01;35m[Kout[m[K);
+      |                 [01;35m[K^~~[m[K
+In file included from [01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/ydlidar_driver.h:10[m[K,
+                 from [01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/CYdLidar.h:4[m[K,
+                 from [01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/src/CYdLidar.cpp:1[m[K:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:[m[K In member function ‘[01m[Kvoid ydlidar::Console::show(const char*, ...)[m[K’:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:40:17:[m[K [01;35m[Kwarning: [m[Kformat not a string literal and no format arguments [[01;35m[K-Wformat-security[m[K]
+   40 |         printf ([01;35m[Kout[m[K);
+      |                 [01;35m[K^~~[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:[m[K In member function ‘[01m[Kvoid ydlidar::Console::message(const char*, ...)[m[K’:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:53:15:[m[K [01;35m[Kwarning: [m[Kformat not a string literal and no format arguments [[01;35m[K-Wformat-security[m[K]
+   53 |       printf ([01;35m[Kout[m[K);
+      |               [01;35m[K^~~[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:[m[K In member function ‘[01m[Kvoid ydlidar::Console::warning(const char*, ...)[m[K’:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:69:15:[m[K [01;35m[Kwarning: [m[Kformat not a string literal and no format arguments [[01;35m[K-Wformat-security[m[K]
+   69 |       printf ([01;35m[Kout[m[K);
+      |               [01;35m[K^~~[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:[m[K In member function ‘[01m[Kvoid ydlidar::Console::error(const char*, ...)[m[K’:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:85:15:[m[K [01;35m[Kwarning: [m[Kformat not a string literal and no format arguments [[01;35m[K-Wformat-security[m[K]
+   85 |       printf ([01;35m[Kout[m[K);
+      |               [01;35m[K^~~[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:[m[K In member function ‘[01m[Kvoid ydlidar::Console::debug(const char*, ...)[m[K’:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:104:17:[m[K [01;35m[Kwarning: [m[Kformat not a string literal and no format arguments [[01;35m[K-Wformat-security[m[K]
+  104 |         printf ([01;35m[Kout[m[K);
+      |                 [01;35m[K^~~[m[K
+In file included from [01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/src/common.h:17[m[K,
+                 from [01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/src/serial.cpp:12[m[K:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:[m[K In member function ‘[01m[Kvoid ydlidar::Console::show(const char*, ...)[m[K’:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:40:17:[m[K [01;35m[Kwarning: [m[Kformat not a string literal and no format arguments [[01;35m[K-Wformat-security[m[K]
+   40 |         printf ([01;35m[Kout[m[K);
+      |                 [01;35m[K^~~[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:[m[K In member function ‘[01m[Kvoid ydlidar::Console::message(const char*, ...)[m[K’:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:53:15:[m[K [01;35m[Kwarning: [m[Kformat not a string literal and no format arguments [[01;35m[K-Wformat-security[m[K]
+   53 |       printf ([01;35m[Kout[m[K);
+      |               [01;35m[K^~~[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:[m[K In member function ‘[01m[Kvoid ydlidar::Console::warning(const char*, ...)[m[K’:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:69:15:[m[K [01;35m[Kwarning: [m[Kformat not a string literal and no format arguments [[01;35m[K-Wformat-security[m[K]
+   69 |       printf ([01;35m[Kout[m[K);
+      |               [01;35m[K^~~[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:[m[K In member function ‘[01m[Kvoid ydlidar::Console::error(const char*, ...)[m[K’:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:85:15:[m[K [01;35m[Kwarning: [m[Kformat not a string literal and no format arguments [[01;35m[K-Wformat-security[m[K]
+   85 |       printf ([01;35m[Kout[m[K);
+      |               [01;35m[K^~~[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:[m[K In member function ‘[01m[Kvoid ydlidar::Console::debug(const char*, ...)[m[K’:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:104:17:[m[K [01;35m[Kwarning: [m[Kformat not a string literal and no format arguments [[01;35m[K-Wformat-security[m[K]
+  104 |         printf ([01;35m[Kout[m[K);
+      |                 [01;35m[K^~~[m[K
+In file included from [01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/ydlidar_driver.h:10[m[K,
+                 from [01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/CYdLidar.h:4[m[K,
+                 from [01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/src/ydlidar_node.cpp:12[m[K:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:[m[K In member function ‘[01m[Kvoid ydlidar::Console::show(const char*, ...)[m[K’:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:40:17:[m[K [01;35m[Kwarning: [m[Kformat not a string literal and no format arguments [[01;35m[K-Wformat-security[m[K]
+   40 |         printf ([01;35m[Kout[m[K);
+      |                 [01;35m[K^~~[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:[m[K In member function ‘[01m[Kvoid ydlidar::Console::message(const char*, ...)[m[K’:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:53:15:[m[K [01;35m[Kwarning: [m[Kformat not a string literal and no format arguments [[01;35m[K-Wformat-security[m[K]
+   53 |       printf ([01;35m[Kout[m[K);
+      |               [01;35m[K^~~[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:[m[K In member function ‘[01m[Kvoid ydlidar::Console::warning(const char*, ...)[m[K’:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:69:15:[m[K [01;35m[Kwarning: [m[Kformat not a string literal and no format arguments [[01;35m[K-Wformat-security[m[K]
+   69 |       printf ([01;35m[Kout[m[K);
+      |               [01;35m[K^~~[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:[m[K In member function ‘[01m[Kvoid ydlidar::Console::error(const char*, ...)[m[K’:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:85:15:[m[K [01;35m[Kwarning: [m[Kformat not a string literal and no format arguments [[01;35m[K-Wformat-security[m[K]
+   85 |       printf ([01;35m[Kout[m[K);
+      |               [01;35m[K^~~[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:[m[K In member function ‘[01m[Kvoid ydlidar::Console::debug(const char*, ...)[m[K’:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/ydlidar/sdk/include/Console.h:104:17:[m[K [01;35m[Kwarning: [m[Kformat not a string literal and no format arguments [[01;35m[K-Wformat-security[m[K]
+  104 |         printf ([01;35m[Kout[m[K);
+      |                 [01;35m[K^~~[m[K

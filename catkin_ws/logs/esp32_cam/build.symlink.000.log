@@ -1,0 +1,3 @@
+Symlinking /home/aclab/Desktop/ROS-VR/catkin_ws/devel/share/esp32_cam/cmake/esp32_camConfig-version.cmake
+Symlinking /home/aclab/Desktop/ROS-VR/catkin_ws/devel/share/esp32_cam/cmake/esp32_camConfig.cmake
+Symlinking /home/aclab/Desktop/ROS-VR/catkin_ws/devel/lib/pkgconfig/esp32_cam.pc

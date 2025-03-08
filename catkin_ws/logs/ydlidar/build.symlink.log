@@ -1,0 +1,5 @@
+Symlinking /home/aclab/Desktop/ROS-VR/catkin_ws/devel/share/ydlidar/cmake/ydlidarConfig.cmake
+Symlinking /home/aclab/Desktop/ROS-VR/catkin_ws/devel/share/ydlidar/cmake/ydlidarConfig-version.cmake
+Symlinking /home/aclab/Desktop/ROS-VR/catkin_ws/devel/lib/ydlidar/ydlidar_node
+Symlinking /home/aclab/Desktop/ROS-VR/catkin_ws/devel/lib/ydlidar/ydlidar_client
+Symlinking /home/aclab/Desktop/ROS-VR/catkin_ws/devel/lib/pkgconfig/ydlidar.pc

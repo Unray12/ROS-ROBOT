@@ -8,6 +8,7 @@ from urllib.request import urlopen
 import numpy as np
 from cv_bridge import CvBridge, CvBridgeError
 import std_msgs.msg
+from QRprocess import *
 
 STREAM_URL = "http://172.28.181.168:81/stream"
 def publishImage():
@@ -28,5 +29,5 @@ if __name__ == "__main__":
     rospy.init_node("esp32_cam", anonymous=True)
     print("Publishing...")
     publishImage()
-    rospy,spin()
+    rospy.spin()
     

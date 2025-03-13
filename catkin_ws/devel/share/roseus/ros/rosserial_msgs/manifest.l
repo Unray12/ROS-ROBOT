@@ -1,0 +1,1 @@
+/home/aclab/Desktop/ROS-VR/catkin_ws/devel/.private/rosserial_msgs/share/roseus/ros/rosserial_msgs/manifest.l

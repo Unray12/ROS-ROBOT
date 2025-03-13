@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/aclab/Desktop/ROS-VR/catkin_ws/devel/.private/rosserial_xbee/setup.sh

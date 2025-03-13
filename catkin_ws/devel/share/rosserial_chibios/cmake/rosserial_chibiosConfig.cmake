@@ -1,0 +1,1 @@
+/home/aclab/Desktop/ROS-VR/catkin_ws/devel/.private/rosserial_chibios/share/rosserial_chibios/cmake/rosserial_chibiosConfig.cmake

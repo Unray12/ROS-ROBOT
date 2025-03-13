@@ -1,0 +1,1 @@
+/home/aclab/Desktop/ROS-VR/catkin_ws/devel/.private/unity_robotics_demo_msgs/share/roseus/ros/unity_robotics_demo_msgs/manifest.l

@@ -1,0 +1,1 @@
+/home/aclab/Desktop/ROS-VR/catkin_ws/devel/.private/rosserial_embeddedlinux/lib/rosserial_embeddedlinux/make_libraries.py

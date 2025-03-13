@@ -1,0 +1,1 @@
+/home/aclab/Desktop/ROS-VR/catkin_ws/devel/.private/rosserial_mbed/share/roseus/ros/rosserial_mbed/msg/Adc.l

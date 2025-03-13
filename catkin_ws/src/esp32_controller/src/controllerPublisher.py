@@ -89,6 +89,12 @@ import rospy
 from geometry_msgs.msg import Twist #ros msg that deals with moving the robot
 from sensor_msgs.msg import LaserScan #ros msg that gets the laser scans
 
+def callback_cmd_vel(msg):
+    linear_x = msg.linear.x
+    angular_z = msg.angular.z
+    print("Linear X: %.2f, Angular Z: %.2f", linear_x, angular_z)
+
+
 def main():
 
     vel = Twist()
@@ -97,7 +103,7 @@ def main():
     # Initialize our node
     rospy.init_node("esp32_controller")
     # Subscribe to the "/scan" topic in order to read laser scans data from it
-    rospy.Subscriber("/scan", LaserScan, avoider.indentify_regions)
+    rospy.Subscriber("/scan", LaserScan, avoider.indentify_regions, callback=callback_cmd_vel)
     #create our publisher that'll publish to the "/cmd_vel" topic
     pub = rospy.Publisher("/cmd_vel", Twist, queue_size = 1)
     #ros will try to run this code 10 times/second

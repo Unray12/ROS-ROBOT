@@ -1,0 +1,1 @@
+/home/aclab/Desktop/ROS-VR/catkin_ws/devel/.private/rosserial_python/lib/rosserial_python/message_info_service.py

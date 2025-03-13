@@ -1,0 +1,6 @@
+Symlinking /home/aclab/Desktop/ROS-VR/catkin_ws/devel/share/unity_robotics_demo/cmake/unity_robotics_demoConfig-version.cmake
+Symlinking /home/aclab/Desktop/ROS-VR/catkin_ws/devel/share/unity_robotics_demo/cmake/unity_robotics_demoConfig.cmake
+Symlinking /home/aclab/Desktop/ROS-VR/catkin_ws/devel/lib/unity_robotics_demo/color_publisher.py
+Symlinking /home/aclab/Desktop/ROS-VR/catkin_ws/devel/lib/unity_robotics_demo/position_service.py
+Symlinking /home/aclab/Desktop/ROS-VR/catkin_ws/devel/lib/unity_robotics_demo/cmake.lock
+Symlinking /home/aclab/Desktop/ROS-VR/catkin_ws/devel/lib/pkgconfig/unity_robotics_demo.pc

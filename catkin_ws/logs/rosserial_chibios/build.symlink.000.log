@@ -1,0 +1,5 @@
+Symlinking /home/aclab/Desktop/ROS-VR/catkin_ws/devel/share/rosserial_chibios/make_libraries.py
+Symlinking /home/aclab/Desktop/ROS-VR/catkin_ws/devel/share/rosserial_chibios/cmake.lock
+Symlinking /home/aclab/Desktop/ROS-VR/catkin_ws/devel/share/rosserial_chibios/cmake/rosserial_chibiosConfig-version.cmake
+Symlinking /home/aclab/Desktop/ROS-VR/catkin_ws/devel/share/rosserial_chibios/cmake/rosserial_chibiosConfig.cmake
+Symlinking /home/aclab/Desktop/ROS-VR/catkin_ws/devel/lib/pkgconfig/rosserial_chibios.pc

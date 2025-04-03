@@ -10,6 +10,7 @@ import sensor_msgs.msg
 import rospy
 from cv_bridge import CvBridge, CvBridgeError
 from pynput import keyboard
+import json
 
 class RTSPQRScanner:
     def __init__(self, rtsp_url):
@@ -112,16 +113,29 @@ class RTSPQRScanner:
                 
             except queue.Empty:
                 continue
-                
+
+
+    def QRresultJson(self, raw_text):
+        result_dict = {}
+        for line in raw_text.split("\n"):
+            if ": " in line:
+                key, value = line.split(": ", 1)
+                result_dict[key.strip()] = value.strip()
+        return result_dict
+
     def get_result(self):
         """Taking the newest QR result"""
         try:
-            return self.result_queue.get_nowait()
+            # return self.result_queue.get_nowait()
+            resultJson = self.QRresultJson(self.result_queue.get_nowait())
+            QR_pub = rospy.Publisher("/QR_info", std_msgs.msg.String, queue_size = 1)
+            QR_pub.publish(json.dumps(resultJson))
+
         except queue.Empty:
             return None
 
 def main():
-    rtsp_url = "rtsp://admin:ACLAB2023@172.28.182.165/ISAPI/Streaming/channels/1"
+    rtsp_url = "rtsp://admin:ACLAB2023@172.28.182.200/ISAPI/Streaming/channels/1"
     
     scanner = RTSPQRScanner(rtsp_url)
     scanner.start()

@@ -68,55 +68,54 @@ void twistMessage(const geometry_msgs::Twist& msg) {
         else
             mecanumRobot.goBackward(0);
             robotNextState = 4;
-            Serial.println("hellio");
+            Serial.println("hello");
     }
 }
 
 ros::Subscriber<geometry_msgs::Twist> sub("cmd_vel", &twistMessage);
-std_msgs::String strMsg;
-ros::Publisher chatter("chatter", &strMsg);
-char hello[13] = "Hello world!";
 
 
 
-void testTask(void *pvParameters)
-{
-    mecanumRobot.goForward(50);
-    delay(1000);
+
+void testTask(void *pvParameters) {
     mecanumRobot.stop();
-    delay(100);
+    // mecanumRobot.goForward(50);
+    // delay(1000);
+    // mecanumRobot.stop();
+    // delay(100);
 
-    mecanumRobot.goBackward(50);
-    delay(1000);
-    mecanumRobot.stop();
-    delay(100);
+    // mecanumRobot.goBackward(50);
+    // delay(1000);
+    // mecanumRobot.stop();
+    // delay(100);
 
-    mecanumRobot.goLeft(50);
-    delay(1000);
-    mecanumRobot.stop();
-    delay(100);
+    // mecanumRobot.goLeft(50);
+    // delay(1000);
+    // mecanumRobot.stop();
+    // delay(100);
 
-    mecanumRobot.goRight(50);
-    delay(1000);
-    mecanumRobot.stop();
-    delay(100);
+    // mecanumRobot.goRight(50);
+    // delay(1000);
+    // mecanumRobot.stop();
+    // delay(100);
 
-    mecanumRobot.turnLeft(50);
-    delay(1000);
-    mecanumRobot.stop();
-    delay(100);
+    // mecanumRobot.turnLeft(50);
+    // delay(1000);
+    // mecanumRobot.stop();
+    // delay(100);
 
-    mecanumRobot.turnRight(50);
-    delay(1000);
-    mecanumRobot.stop();
-    delay(100);
+    // mecanumRobot.turnRight(50);
+    // delay(1000);
+    // mecanumRobot.stop();
+    // delay(100);
 
-    mecanumRobot.stop();
-    vTaskDelete(NULL);
+    // mecanumRobot.stop();
+    // vTaskDelete(NULL);
 }
 
 void wifiTask(void *pvParameters) {
     Serial.begin(115200);
+    WiFi.mode(WIFI_STA);
     WiFi.begin(ssid, password);
     while (WiFi.status() != WL_CONNECTED) {
       vTaskDelay(1000 / portTICK_PERIOD_MS);
@@ -131,34 +130,47 @@ void wifiTask(void *pvParameters) {
     vTaskDelete(NULL);  // Delete the task when done
 }
 
+void esp32PublishTask(void *pvParameter) {
+    std_msgs::String strMsg;
+    ros::Publisher chatter("chatter", &strMsg);
+    char hello[13] = "Hello world!";
+    nodeHandle.initNode();
+    nodeHandle.advertise(chatter);
+    while (true) {
+        strMsg.data = hello;
+        Serial.println("hello");
+        chatter.publish(&strMsg);
+        nodeHandle.spinOnce();
+        vTaskDelay(2000/portTICK_PERIOD_MS);
+    }
+}
 
+void esp32SubcribeTask(void *pvParameter) {
+
+}
+
+void spinOnceTask(void *pvParameter) {
+    while (true) {
+        nodeHandle.spinOnce();
+        vTaskDelay(100/portTICK_PERIOD_MS);
+    }
+    
+}
 void setup()
 {
     Serial.begin(115200);
 
     pinMode(48, OUTPUT);
-    WiFi.mode(WIFI_STA);
+    nodeHandle.subscribe(sub);
     xTaskCreate(wifiTask, "WiFiTask", 4096, NULL, 1, NULL);
     
     
-    // mecanumRobot.stop();
     // xTaskCreate(testTask, "testTask", 4096, NULL, 1, NULL);
-    
-
-    nodeHandle.initNode();
-    nodeHandle.advertise(chatter);
-    nodeHandle.subscribe(sub);
-    Serial.println("Hello");
-
-    // delay(10000);
+    xTaskCreate(esp32PublishTask, "esp32PublishTask", 4096, NULL, 1, NULL);
+    xTaskCreate(spinOnceTask, "spinOnceTask", 4096, NULL, 1, NULL);
 }
 
 void loop()
 {
-    digitalWrite(48, HIGH);
-    // Serial.println("Hello");
-    strMsg.data = hello;
-    chatter.publish(&strMsg);
-    nodeHandle.spinOnce();
-    delay(1000);
+
 }

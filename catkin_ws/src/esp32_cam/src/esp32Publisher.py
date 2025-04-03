@@ -18,7 +18,7 @@ def publishImage():
     
 
     while not rospy.is_shutdown():
-        capture = cv2.VideoCapture("http://172.28.181.168/capture")
+        capture = cv2.VideoCapture("http://172.28.182.200/capture")
         ret, img = capture.read()
 
         imageMsg = bridge.cv2_to_imgmsg(img, "bgr8")

@@ -8,8 +8,21 @@ class Robot
 {
 private:
     MotorDriverV2 motorDriver;
+    /* 
+    0: go forward
+    1: go backward
+    2: rotate right
+    3: rotate left
+    4: stop
+    */
+
+    int currentState = 0;
+    int nextState = 4;
 
 public:
+
+
+
     Robot()
     {
     }
@@ -66,6 +79,11 @@ public:
         motorDriver.set_motors(M3, speed * -1);
         motorDriver.set_motors(M4, speed * -1);
     }
+
+    int getCurrentState() {return this->currentState;}
+    int getNextState()  {return this->nextState;}
+    void setCurrentState(int val) {this->currentState = val;}
+    void setNextState(int val) {this->nextState = val;}
 };
 
 #endif

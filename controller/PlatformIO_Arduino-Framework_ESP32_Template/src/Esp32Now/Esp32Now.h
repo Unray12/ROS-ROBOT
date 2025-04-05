@@ -6,16 +6,15 @@
 #include <Arduino.h>
 
 extern esp_now_peer_info_t peerInfo;
-typedef struct struct_message {
-    char a[32];
-    int b;
-    float c;
-    bool d;
-  } struct_message;
+typedef struct infoSensorMsg {
+    uint8_t typeMessage;
+    // sensor value: type 0
+    uint16_t humidityValue;
+    uint16_t temperatureValue;
+  } infoSensorMsg;
+
 void intEsp32Now(void (*OnDataSentCB)(const uint8_t *mac_addr, esp_now_send_status_t status), void (*OnDataRcvCB)(const uint8_t * mac, const uint8_t *incomingData, int len));
 void readMacAddress();
-void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status);
-void sendEspNow(uint8_t *peerMAC, char* data, size_t dataSize);
+void sendEspNow(uint8_t *peerMAC, infoSensorMsg myData);
 void addPeer(uint8_t* peerMAC, esp_now_peer_info_t peerInfo);
-void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len);
 #endif

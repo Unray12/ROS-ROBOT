@@ -11,19 +11,14 @@ void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
 }
 // callback when data is receive
 void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
-  struct_message myData;
+  infoSensorMsg myData;
   memcpy(&myData, incomingData, sizeof(myData));
-  Serial.print("Bytes received: ");
-  Serial.println(len);
-  Serial.print("Char: ");
-  Serial.println(myData.a);
-  Serial.print("Int: ");
-  Serial.println(myData.b);
-  Serial.print("Float: ");
-  Serial.println(myData.c);
-  Serial.print("Bool: ");
-  Serial.println(myData.d);
-  Serial.println();
+  // Serial.print("Bytes received: ");
+  // Serial.println(len);
+  // Serial.print("Humid: ");
+  Serial.println(myData.humidityValue);
+  // Serial.print("Temp: ");
+  Serial.println(myData.temperatureValue);
 }
 
 void setup(){
@@ -31,17 +26,17 @@ void setup(){
   WiFi.mode(WIFI_STA);
   Serial.print("[DEFAULT] ESP32 Board MAC Address: ");
   readMacAddress();
-
-
-
   intEsp32Now(OnDataSent, OnDataRecv);
   addPeer(broadcastAddress, peerInfo);
 }
 
 
 void loop(){
-  char text1[] = "THIS";
-  sendEspNow(broadcastAddress, text1, 4);
+  infoSensorMsg myData;
+  myData.temperatureValue = 10;
+  myData.humidityValue = 20;
+  myData.typeMessage = 0;
+  sendEspNow(broadcastAddress, myData);
   Serial.println("hello");
   delay(1000);
 }

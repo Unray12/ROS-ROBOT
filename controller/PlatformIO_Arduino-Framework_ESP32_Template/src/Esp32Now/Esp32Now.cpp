@@ -1,6 +1,5 @@
 #include "Esp32Now.h"
 
-
 // {0xCC, 0xBA, 0x97, 0x0D, 0xE4, 0xA0};
 void readMacAddress(){
     uint8_t baseMac[6];
@@ -14,7 +13,6 @@ void readMacAddress(){
     }
 }
 
-
 void intEsp32Now(void (*OnDataSentCB)(const uint8_t *mac_addr, esp_now_send_status_t status), void (*OnDataRcvCB)(const uint8_t * mac, const uint8_t *incomingData, int len)) {
     if (esp_now_init() != ESP_OK) {
         Serial.println("Error initializing ESP-NOW");
@@ -23,16 +21,14 @@ void intEsp32Now(void (*OnDataSentCB)(const uint8_t *mac_addr, esp_now_send_stat
     esp_now_register_send_cb(OnDataSentCB);
     esp_now_register_recv_cb(esp_now_recv_cb_t(OnDataRcvCB));
 }
-void sendEspNow(uint8_t* peerMAC, char* data, size_t dataSize) {
 
-    struct_message myData;
-    strcpy(myData.a, data);
-    myData.b = random(1,20);
-    myData.c = 1.2;
-    myData.d = false;
+void sendEspNow(uint8_t* peerMAC, infoSensorMsg myData) {
+
+    infoSensorMsg myDataTemp = myData;
+    // strcpy(myData.a, data);
   
-    esp_err_t result = esp_now_send(peerMAC, (uint8_t *) &myData, dataSize);
-
+    esp_err_t result = esp_now_send(peerMAC, (uint8_t *) &myData, sizeof(myData));
+    Serial.print(sizeof(myData));
     if (result == ESP_OK) {
       Serial.println("Sent with success");
     }

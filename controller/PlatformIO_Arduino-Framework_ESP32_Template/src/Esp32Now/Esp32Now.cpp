@@ -14,12 +14,15 @@ void readMacAddress(){
     }
 }
 
-// callback when data is sent
-void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
-    Serial.print("\r\nLast Packet Send Status:\t");
-    Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
-}
 
+void intEsp32Now(void (*OnDataSentCB)(const uint8_t *mac_addr, esp_now_send_status_t status), void (*OnDataRcvCB)(const uint8_t * mac, const uint8_t *incomingData, int len)) {
+    if (esp_now_init() != ESP_OK) {
+        Serial.println("Error initializing ESP-NOW");
+        return;
+    }
+    esp_now_register_send_cb(OnDataSentCB);
+    esp_now_register_recv_cb(esp_now_recv_cb_t(OnDataRcvCB));
+}
 void sendEspNow(uint8_t* peerMAC, char* data, size_t dataSize) {
 
     struct_message myData;
@@ -51,18 +54,3 @@ void addPeer(uint8_t*  peerMAC, esp_now_peer_info_t peerInfo) {
 }
 
 
-void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
-    struct_message myData;
-    memcpy(&myData, incomingData, sizeof(myData));
-    Serial.print("Bytes received: ");
-    Serial.println(len);
-    Serial.print("Char: ");
-    Serial.println(myData.a);
-    Serial.print("Int: ");
-    Serial.println(myData.b);
-    Serial.print("Float: ");
-    Serial.println(myData.c);
-    Serial.print("Bool: ");
-    Serial.println(myData.d);
-    Serial.println();
-  }

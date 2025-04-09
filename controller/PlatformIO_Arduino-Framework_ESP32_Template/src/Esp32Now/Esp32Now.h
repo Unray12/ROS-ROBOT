@@ -11,7 +11,7 @@ typedef struct infoSensorMsg {
     // sensor value: type 0
     uint16_t humidityValue;
     uint16_t temperatureValue;
-  } infoSensorMsg;
+} infoSensorMsg;
 
 void intEsp32Now(void (*OnDataSentCB)(const uint8_t *mac_addr, esp_now_send_status_t status), void (*OnDataRcvCB)(const uint8_t * mac, const uint8_t *incomingData, int len));
 void readMacAddress();

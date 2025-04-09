@@ -16,12 +16,13 @@ private:
     4: stop
     */
 
-    int currentState = 0;
-    int nextState = 4;
+
 
 public:
-
-
+    int currentLinearState = 1;
+    int nextLinearState = 1;
+    int currentAngularState = 0;
+    int nextAngularState = 0;
 
     Robot()
     {
@@ -80,10 +81,6 @@ public:
         motorDriver.set_motors(M4, speed * -1);
     }
 
-    int getCurrentState() {return this->currentState;}
-    int getNextState()  {return this->nextState;}
-    void setCurrentState(int val) {this->currentState = val;}
-    void setNextState(int val) {this->nextState = val;}
 };
 
 #endif

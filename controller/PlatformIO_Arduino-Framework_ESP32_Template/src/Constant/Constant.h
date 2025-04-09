@@ -1,4 +1,5 @@
 #include <cstdint>
+#include <WiFi.h>
 #ifndef CONSTANT_
 #define CONSTANT_
 
@@ -48,4 +49,6 @@ const uint8_t E2 = 32;
 
 const uint8_t SCL_PIN = 12;
 const uint8_t SDA_PIN = 11;
+
+
 #endif

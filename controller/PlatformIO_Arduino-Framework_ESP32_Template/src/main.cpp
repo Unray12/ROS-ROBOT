@@ -29,6 +29,25 @@ Angular state
 1: left
 2: right
 */
+void robotAction(int val) {
+    if (mecanumRobot.currentAngularState == 1) {
+        mecanumRobot.turnLeft(val);
+        Serial.println("1 left");
+    } 
+    else if (mecanumRobot.currentAngularState == 2) {
+        mecanumRobot.turnRight(val);
+        Serial.println("1 right");
+    }
+    else if (mecanumRobot.currentLinearState == 1) {
+        mecanumRobot.goForward(val);
+    }
+    else if (mecanumRobot.currentLinearState == 2) {
+        mecanumRobot.goBackward(val);
+    }
+    else
+        mecanumRobot.stop();
+}
+
 void twistMessage(const geometry_msgs::Twist &msg) {
     double angular_z = msg.angular.z;
     double linear_x = msg.linear.x;
@@ -38,38 +57,24 @@ void twistMessage(const geometry_msgs::Twist &msg) {
         mecanumRobot.nextAngularState = 1;
     }
     else if (angular_z < 0) {
-        mecanumRobot.nextAngularState = 2;
+        mecanumRobot.nextAngularState = 2;    
     }
-    else 
+    else {
         mecanumRobot.nextAngularState = 0;
+        mecanumRobot.currentLinearState
+    }
 
-
-    // if (mecanumRobot.nextState != mecanumRobot.currentState) {
-    //     mecanumRobot.currentState = mecanumRobot.nextState;
-
-    //     // liX > 0 & angZ > 0 -> forward, left
-    //     // liX > 0 & angZ < 0 -> forward, right
-    //     // liX < 0 & angZ > 0 -> back, left
-    //     // liX < 0 & angZ < 0 -> back, right
-    //     if (linear_x > 0 && angular_z > 0) {
-
-    //     } 
-    //     else if (linear_x > 0 && angular_z < 0) {
-
-    //     }
-    //     else if (linear_x < 0 && angular_z > 0) {
-
-    //     }
-    //     else if (linear_x < 0 && angular_z < 0) {
-            
-    //     }
-        
-    //     mecanumRobot.nextState = 4;
-    //     Serial.println("hello");
-    // }
+    if (mecanumRobot.nextAngularState != mecanumRobot.currentAngularState) {
+        mecanumRobot.currentAngularState = mecanumRobot.nextAngularState;
+        robotAction(30);
+    }
 }
 
-ros::Subscriber<geometry_msgs::Twist> sub("cmd_vel", &twistMessage);
+void processVRMessage(const std_msgs::String &msg) {
+    
+}
+ros::Subscriber<geometry_msgs::Twist> lidarSub("cmd_vel", &twistMessage);
+ros::Subscriber<std_msgs::String> VRcontrolSub("VR_control", &processVRMessage);
 
 void testTask(void *pvParameters) {
     mecanumRobot.stop();
@@ -146,15 +151,17 @@ void robotActionTask(void *pvParameter) {
         if (mecanumRobot.nextAngularState != mecanumRobot.currentAngularState) {
             mecanumRobot.currentAngularState = mecanumRobot.nextAngularState;
             mecanumRobot.nextAngularState = 0;
+        
+            if (mecanumRobot.currentAngularState == 1) {
+                mecanumRobot.turnLeft(30);
+                Serial.println("1 left");
+            } 
+            else if (mecanumRobot.currentAngularState == 2) {
+                mecanumRobot.turnRight(30);
+                Serial.println("1 right");
+            }
+            vTaskDelay(100 / portTICK_PERIOD_MS);
         }
-
-        if (mecanumRobot.currentAngularState > 0) {
-            mecanumRobot.turnLeft(30);
-        } 
-        else if (mecanumRobot.currentAngularState < 0) {
-            mecanumRobot.turnRight(30);
-        }
-        vTaskDelay(100 / portTICK_PERIOD_MS);
     }
 }
 
@@ -174,8 +181,8 @@ void setup()
 {
     Serial.begin(115200);
     pinMode(48, OUTPUT);
-    nodeHandle.subscribe(sub);
-
+    nodeHandle.subscribe(lidarSub);
+    mecanumRobot.stop();
     xTaskCreate(wifiTask, "WiFiTask", 4096, NULL, 1, NULL);
     // xTaskCreate(testTask, "testTask", 4096, NULL, 1, NULL);
     xTaskCreate(esp32PublishTask, "esp32PublishTask", 4096, NULL, 1, NULL);
@@ -185,4 +192,5 @@ void setup()
 
 void loop()
 {
+
 }

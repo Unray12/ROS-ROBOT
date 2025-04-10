@@ -127,9 +127,9 @@ class RTSPQRScanner:
         """Taking the newest QR result"""
         try:
             # return self.result_queue.get_nowait()
-            resultJson = self.QRresultJson(self.result_queue.get_nowait())
+            resultJson = self.result_queue.get_nowait()
             QR_pub = rospy.Publisher("/QR_info", std_msgs.msg.String, queue_size = 1)
-            QR_pub.publish(json.dumps(resultJson))
+            QR_pub.publish(resultJson)
 
         except queue.Empty:
             return None

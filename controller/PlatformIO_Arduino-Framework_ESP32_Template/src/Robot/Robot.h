@@ -19,8 +19,8 @@ private:
 
 
 public:
-    int currentLinearState = 1;
-    int nextLinearState = 1;
+    int currentLinearState = 0;
+    int nextLinearState = 0;
     int currentAngularState = 0;
     int nextAngularState = 0;
 
@@ -35,40 +35,40 @@ public:
 
     void goForward(int speed)
     {
-        motorDriver.set_motors(M1, speed * -1);
+        motorDriver.set_motors(M1, speed);
         motorDriver.set_motors(M2, speed);
-        motorDriver.set_motors(M3, speed * -1);
-        motorDriver.set_motors(M4, speed);
+        motorDriver.set_motors(M3, speed);
+        motorDriver.set_motors(M4, speed * -1);
     }
 
     void goBackward(int speed)
     {
-        motorDriver.set_motors(M1, speed);
+        motorDriver.set_motors(M1, speed * -1);
         motorDriver.set_motors(M2, speed * -1);
-        motorDriver.set_motors(M3, speed);
-        motorDriver.set_motors(M4, speed * -1);
+        motorDriver.set_motors(M3, speed * -1);
+        motorDriver.set_motors(M4, speed);
     }
 
     void goLeft(int speed)
     {
-        motorDriver.set_motors(M1, speed);
+        motorDriver.set_motors(M1, speed * -1);
         motorDriver.set_motors(M2, speed);
-        motorDriver.set_motors(M3, speed * -1);
-        motorDriver.set_motors(M4, speed * -1);
+        motorDriver.set_motors(M3, speed);
+        motorDriver.set_motors(M4, speed);
     }
 
     void goRight(int speed)
     {
-        motorDriver.set_motors(M1, speed * -1);
+        motorDriver.set_motors(M1, speed);
         motorDriver.set_motors(M2, speed * -1);
-        motorDriver.set_motors(M3, speed);
-        motorDriver.set_motors(M4, speed);
+        motorDriver.set_motors(M3, speed * -1);
+        motorDriver.set_motors(M4, speed* -1);
     }
 
     void turnLeft(int speed)
     {
         motorDriver.set_motors(M1, speed);
-        motorDriver.set_motors(M2, speed);
+        motorDriver.set_motors(M2, speed * -1);
         motorDriver.set_motors(M3, speed);
         motorDriver.set_motors(M4, speed);
     }
@@ -76,7 +76,7 @@ public:
     void turnRight(int speed)
     {
         motorDriver.set_motors(M1, speed * -1);
-        motorDriver.set_motors(M2, speed * -1);
+        motorDriver.set_motors(M2, speed );
         motorDriver.set_motors(M3, speed * -1);
         motorDriver.set_motors(M4, speed * -1);
     }

@@ -15,10 +15,10 @@
 #define GATEWAY
 const char *ssid = "ACLAB";
 const char *password = "ACLAB2023";
-IPAddress IPRosSerialServer(172, 28, 182, 34); //34 162
+IPAddress IPRosSerialServer(172, 28, 182, 162); //34 162
 const uint16_t rosSerialserverPort = 11411;
 
-uint8_t broadcastAddress[] = {0xCC, 0xBA, 0x97, 0x0D, 0xE4, 0xA0};
+uint8_t broadcastAddress[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 esp_now_peer_info_t peerInfo;
 
 ros::NodeHandle_<ArduinoHardware> nodeHandle;
@@ -162,12 +162,15 @@ void wifiTask(void *pvParameters) {
         // delay(100);
         Serial.println("Connecting to WiFi..");
     }
-
     // Print ESP32 Local IP Address
     Serial.println(WiFi.localIP());
-    //init esp 32
+
+    //init esp32 now
     intEsp32Now(OnDataSent, OnDataRecv);
-    addPeer(broadcastAddress, peerInfo);
+    #ifdef GATEWAY
+        addPeer(broadcastAddress, peerInfo);
+    #endif
+
     // connect to rosserial server
     nodeHandle.getHardware()->setConnection(IPRosSerialServer, rosSerialserverPort);
     vTaskDelete(NULL); // Delete the task when done
@@ -226,16 +229,25 @@ void espNowGwTask(void *pvParamater) {
     while (true) {
         if (true) {
             infoSensorMsg myData;
-            sendEspNow(broadcastAddress, myData);
+            // myData.humidityValue = 0;
+            // myData.typeMessage = 0;
+            dht20.read();
+            myData.temperatureValue = dht20.getTemperature();
+            myData.infoSensorType = dht20.getHumidity();
+            if (WiFi.status() == WL_CONNECTED) {
+                sendEspNow(broadcastAddress, myData);
+            }
         }
         vTaskDelay(2000 / portTICK_PERIOD_MS);
     }
+    vTaskDelete(NULL);
 }
 
 void espNowSensorTask(void * pvParameter) {
     dht20.read();
     // infoSensorMsg myData();
     // sendEspNow(broadcastAddress, myData);
+    vTaskDelete(NULL);
 
 }
 
@@ -243,6 +255,7 @@ void setup()
 {
     Serial.begin(115200);
     pinMode(48, OUTPUT);
+    xTaskCreate(wifiTask, "WiFiTask", 4096, NULL, 3, NULL);
 
 #ifdef SENSOR
     dht20.begin();
@@ -252,17 +265,14 @@ void setup()
 #ifdef GATEWAY
     nodeHandle.subscribe(lidarSub);
     nodeHandle.subscribe(VRcontrolSub);
-    mecanumRobot.stop();
+    // mecanumRobot.stop();
 
     Serial.print("[DEFAULT] ESP32 Board MAC Address: ");
     readMacAddress();
-    
-    xTaskCreate(wifiTask, "WiFiTask", 4096, NULL, 1, NULL);
-    // xTaskCreate(testTask, "testTask", 4096, NULL, 1, NULL);
     xTaskCreate(esp32PublishTask, "esp32PublishTask", 4096, NULL, 1, NULL);
     xTaskCreate(robotActionTask, "robotActionTask", 4096, NULL, 1, NULL);
-    // xTaskCreate(espNowGwTask, "espNowGwTask", 4096, NULL, 1, NULL);
-    xTaskCreate(spinOnceTask, "spinOnceTask", 4096, NULL, 1, NULL);
+    xTaskCreate(espNowGwTask, "espNowGwTask", 4096, NULL, 1, NULL);
+    // xTaskCreate(spinOnceTask, "spinOnceTask", 4096, NULL, 1, NULL);
 #endif
 }
 

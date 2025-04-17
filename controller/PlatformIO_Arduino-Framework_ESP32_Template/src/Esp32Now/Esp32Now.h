@@ -15,7 +15,7 @@ typedef struct infoSensorMsg {
     uint16_t humidityValue;
     uint16_t temperatureValue;
 
-    infoSensorMsg(uint8_t typeMsg = 0, uint8_t sensorType = 0, uint16_t humidity = -1, uint16_t temperature = -1) 
+    infoSensorMsg(uint8_t typeMsg = 0, uint8_t sensorType = 0, uint16_t humidity = 0, uint16_t temperature = 0) 
     : typeMessage(typeMsg), infoSensorType(sensorType), humidityValue(humidity), temperatureValue(temperature) {}
 } infoSensorMsg;
 

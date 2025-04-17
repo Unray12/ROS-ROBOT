@@ -9,3 +9,13 @@ run ros bridge websocket: roslaunch rosbridge_server rosbridge_websocket.launch
 monitor topic from esp32: rostopic echo chatter
 monitor topic cmd_vel: rostopic echo cmd_vel
 show all topic: rostopic list
+
+ros2
+colcon build 
+//colcon build --packages-select esp32_controller
+source install/setup.bash
+//in setup.py at "entry point" -> 'esp32_controller = esp32_controller.main:main'
+ros2 run esp32_controller esp32_controller
+
+ros2 launch rplidar_ros rplidar_a2m8_launch.py serial_port:=/dev/ttyUSB0
+

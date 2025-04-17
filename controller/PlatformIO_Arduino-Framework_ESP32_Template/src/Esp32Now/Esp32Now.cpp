@@ -18,6 +18,9 @@ void intEsp32Now(void (*OnDataSentCB)(const uint8_t *mac_addr, esp_now_send_stat
         Serial.println("Error initializing ESP-NOW");
         return;
     }
+    else {
+      Serial.println("ESP init");
+    }
     esp_now_register_send_cb(OnDataSentCB);
     esp_now_register_recv_cb(esp_now_recv_cb_t(OnDataRcvCB));
 }
@@ -37,7 +40,7 @@ void sendEspNow(uint8_t* peerMAC, infoSensorMsg myData) {
     }
 }
 
-void addPeer(uint8_t*  peerMAC, esp_now_peer_info_t peerInfo) {
+void addPeer(uint8_t*  peerMAC, esp_now_peer_info_t &peerInfo) {
     // Register peer
     memcpy(peerInfo.peer_addr, peerMAC, 6);
     peerInfo.channel = 0;  

@@ -80,11 +80,9 @@ class Avoider:
         blocked_zones = [zone for zone in danger_zones if len(self.Regions_Report[zone]) > 0]
 
         if not blocked_zones:
-            # Không có chướng ngại vật → đi thẳng
             self._set_velocity(self.NORMAL_LIN_VEL, 0.0)
             return self.vel_obj
 
-        # Nếu có vật cản ở vùng ưu tiên → xoay tránh theo quy tắc
         if "front_C" in blocked_zones or "front_L" in blocked_zones or "right_L" in blocked_zones:
             self._set_velocity(self.TRANS_LIN_VEL, -self.TRANS_ANG_VEL)
             return self.vel_obj
@@ -92,8 +90,7 @@ class Avoider:
             self._set_velocity(self.TRANS_LIN_VEL, self.TRANS_ANG_VEL)
             return self.vel_obj
 
-        # Nếu tất cả đều bị chắn, dùng _clearance_test để chọn hướng thay thế tốt nhất
-        should_rotate, rotation_vel = self._clearance_test()
+        should_rotate, rotation_vel = self._clearance_test("front_C")
         if should_rotate:
             self._set_velocity(0.0, rotation_vel)
         else:

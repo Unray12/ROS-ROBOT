@@ -248,7 +248,6 @@ private:
         }
         Wire.endTransmission();
         int status = Wire.endTransmission();
-        Serial.println("hellllllllllllllllllllllo");
         Serial.println(status);
     }
 

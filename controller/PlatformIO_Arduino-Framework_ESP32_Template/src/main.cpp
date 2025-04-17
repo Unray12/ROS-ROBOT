@@ -9,15 +9,39 @@
 #include <std_msgs/String.h>
 #include <geometry_msgs/Twist.h>
 #include "Esp32Now/Esp32Now.h"
+#include "DHT20.h"
 
-const char *ssid = "RD-SEAI_2.4G";
-const char *password = "";
-IPAddress IPRosSerialServer(172, 28, 182, 162);
+// #define SENSOR
+#define GATEWAY
+const char *ssid = "ACLAB";
+const char *password = "ACLAB2023";
+IPAddress IPRosSerialServer(172, 28, 182, 34); //34 162
 const uint16_t rosSerialserverPort = 11411;
+
+uint8_t broadcastAddress[] = {0xCC, 0xBA, 0x97, 0x0D, 0xE4, 0xA0};
+esp_now_peer_info_t peerInfo;
 
 ros::NodeHandle_<ArduinoHardware> nodeHandle;
 Robot mecanumRobot;
+DHT20 dht20;
 
+
+// callback when data is sent
+void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
+  Serial.print("\r\nLast Packet Send Status:\t");
+  Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
+}
+// callback when data is receive
+void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
+  infoSensorMsg myData;
+  memcpy(&myData, incomingData, sizeof(infoSensorMsg));
+  // Serial.print("Bytes received: ");
+  // Serial.println(len);
+  // Serial.print("Humid: ");
+  Serial.println(myData.humidityValue);
+  // Serial.print("Temp: ");
+  Serial.println(myData.temperatureValue);
+}
 /* 
 Linear state
 0: stop
@@ -30,6 +54,7 @@ Angular state
 2: right
 */
 void robotAction(int val) {
+    mecanumRobot.stop();
     if (mecanumRobot.currentAngularState == 1) {
         mecanumRobot.turnLeft(val);
         Serial.println("1 left");
@@ -61,7 +86,7 @@ void twistMessage(const geometry_msgs::Twist &msg) {
     }
     else {
         mecanumRobot.nextAngularState = 0;
-        mecanumRobot.currentLinearState
+        mecanumRobot.currentLinearState;
     }
 
     if (mecanumRobot.nextAngularState != mecanumRobot.currentAngularState) {
@@ -71,8 +96,23 @@ void twistMessage(const geometry_msgs::Twist &msg) {
 }
 
 void processVRMessage(const std_msgs::String &msg) {
-    
+    if (!mecanumRobot.isAutoMode) {
+        if (msg.data == "Right") {
+            mecanumRobot.currentAngularState = 2;
+            mecanumRobot.currentLinearState = 0;
+        } else if (msg.data == "Left") {
+            mecanumRobot.currentAngularState = 1;
+            mecanumRobot.currentLinearState = 0;
+        } else if (msg.data == "Forward") {
+            mecanumRobot.currentLinearState = 1;
+            mecanumRobot.currentAngularState = 0;
+        } else if (msg.data == "Backward") {
+            mecanumRobot.currentLinearState = 2;
+            mecanumRobot.currentAngularState = 0;
+        }
+    }
 }
+
 ros::Subscriber<geometry_msgs::Twist> lidarSub("cmd_vel", &twistMessage);
 ros::Subscriber<std_msgs::String> VRcontrolSub("VR_control", &processVRMessage);
 
@@ -119,12 +159,15 @@ void wifiTask(void *pvParameters) {
     while (WiFi.status() != WL_CONNECTED)
     {
         vTaskDelay(1000 / portTICK_PERIOD_MS);
+        // delay(100);
         Serial.println("Connecting to WiFi..");
     }
 
     // Print ESP32 Local IP Address
     Serial.println(WiFi.localIP());
-
+    //init esp 32
+    intEsp32Now(OnDataSent, OnDataRecv);
+    addPeer(broadcastAddress, peerInfo);
     // connect to rosserial server
     nodeHandle.getHardware()->setConnection(IPRosSerialServer, rosSerialserverPort);
     vTaskDelete(NULL); // Delete the task when done
@@ -160,8 +203,8 @@ void robotActionTask(void *pvParameter) {
                 mecanumRobot.turnRight(30);
                 Serial.println("1 right");
             }
-            vTaskDelay(100 / portTICK_PERIOD_MS);
         }
+        vTaskDelay(100 / portTICK_PERIOD_MS);
     }
 }
 
@@ -173,24 +216,56 @@ void spinOnceTask(void *pvParameter) {
     while (true)
     {
         nodeHandle.spinOnce();
+        // Serial.print("[DEFAULT] ESP32 Board MAC Address: ");
+        // readMacAddress();
         vTaskDelay(10 / portTICK_PERIOD_MS);
     }
+}
+
+void espNowGwTask(void *pvParamater) {
+    while (true) {
+        if (true) {
+            infoSensorMsg myData;
+            sendEspNow(broadcastAddress, myData);
+        }
+        vTaskDelay(2000 / portTICK_PERIOD_MS);
+    }
+}
+
+void espNowSensorTask(void * pvParameter) {
+    dht20.read();
+    // infoSensorMsg myData();
+    // sendEspNow(broadcastAddress, myData);
+
 }
 
 void setup()
 {
     Serial.begin(115200);
     pinMode(48, OUTPUT);
+
+#ifdef SENSOR
+    dht20.begin();
+    xTaskCreate(espNowSensorTask, "espNowSensorTask", 4096, NULL, 1, NULL);
+#endif
+
+#ifdef GATEWAY
     nodeHandle.subscribe(lidarSub);
+    nodeHandle.subscribe(VRcontrolSub);
     mecanumRobot.stop();
+
+    Serial.print("[DEFAULT] ESP32 Board MAC Address: ");
+    readMacAddress();
+    
     xTaskCreate(wifiTask, "WiFiTask", 4096, NULL, 1, NULL);
     // xTaskCreate(testTask, "testTask", 4096, NULL, 1, NULL);
     xTaskCreate(esp32PublishTask, "esp32PublishTask", 4096, NULL, 1, NULL);
     xTaskCreate(robotActionTask, "robotActionTask", 4096, NULL, 1, NULL);
+    // xTaskCreate(espNowGwTask, "espNowGwTask", 4096, NULL, 1, NULL);
     xTaskCreate(spinOnceTask, "spinOnceTask", 4096, NULL, 1, NULL);
+#endif
 }
 
 void loop()
 {
-
 }

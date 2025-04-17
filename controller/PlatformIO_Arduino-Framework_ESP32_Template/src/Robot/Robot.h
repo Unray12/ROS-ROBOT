@@ -19,6 +19,7 @@ private:
 
 
 public:
+    bool isAutoMode = 0;
     int currentLinearState = 0;
     int nextLinearState = 0;
     int currentAngularState = 0;

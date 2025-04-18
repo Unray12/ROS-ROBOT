@@ -10,6 +10,7 @@
 #include <geometry_msgs/Twist.h>
 #include "Esp32Now/Esp32Now.h"
 #include "DHT20.h"
+#include <json_generator.h>
 
 // #define SENSOR
 #define GATEWAY
@@ -176,12 +177,16 @@ void wifiTask(void *pvParameters) {
     vTaskDelete(NULL); // Delete the task when done
 }
 
-void esp32PublishTask(void *pvParameter)
+void esp32PublishTask()
 {
     std_msgs::String strMsg;
-    ros::Publisher chatter("chatter", &strMsg);
+    json_gen_str_t jstr;
+    json_gen_start_object(&jstr);
+    json_gen_obj_set_string(&jstr, "key", "value");
+    json_gen_end_object(&jstr);
+    ros::Publisher chatter("Sensors", &strMsg);
     char hello[13] = "Hello world!";
-    nodeHandle.initNode();
+    
     nodeHandle.advertise(chatter);
     while (true)
     {
@@ -190,6 +195,7 @@ void esp32PublishTask(void *pvParameter)
         chatter.publish(&strMsg);
         vTaskDelay(2000 / portTICK_PERIOD_MS);
     }
+    
 }
 
 void robotActionTask(void *pvParameter) {
@@ -229,11 +235,6 @@ void espNowGwTask(void *pvParamater) {
     while (true) {
         if (true) {
             infoSensorMsg myData;
-            // myData.humidityValue = 0;
-            // myData.typeMessage = 0;
-            dht20.read();
-            myData.temperatureValue = dht20.getTemperature();
-            myData.infoSensorType = dht20.getHumidity();
             if (WiFi.status() == WL_CONNECTED) {
                 sendEspNow(broadcastAddress, myData);
             }
@@ -244,9 +245,18 @@ void espNowGwTask(void *pvParamater) {
 }
 
 void espNowSensorTask(void * pvParameter) {
-    dht20.read();
-    // infoSensorMsg myData();
-    // sendEspNow(broadcastAddress, myData);
+    while (true) {
+        if (true) {
+            infoSensorMsg myData;
+            dht20.read();
+            myData.temperatureValue = dht20.getTemperature();
+            myData.infoSensorType = dht20.getHumidity();
+            if (WiFi.status() == WL_CONNECTED) {
+                sendEspNow(broadcastAddress, myData);
+            }
+        }
+        vTaskDelay(2000 / portTICK_PERIOD_MS);
+    }
     vTaskDelete(NULL);
 
 }
@@ -256,6 +266,7 @@ void setup()
     Serial.begin(115200);
     pinMode(48, OUTPUT);
     xTaskCreate(wifiTask, "WiFiTask", 4096, NULL, 3, NULL);
+    
 
 #ifdef SENSOR
     dht20.begin();
@@ -263,16 +274,17 @@ void setup()
 #endif
 
 #ifdef GATEWAY
+    nodeHandle.initNode();
     nodeHandle.subscribe(lidarSub);
     nodeHandle.subscribe(VRcontrolSub);
     // mecanumRobot.stop();
 
     Serial.print("[DEFAULT] ESP32 Board MAC Address: ");
     readMacAddress();
-    xTaskCreate(esp32PublishTask, "esp32PublishTask", 4096, NULL, 1, NULL);
+    // xTaskCreate(esp32PublishTask, "esp32PublishTask", 4096, NULL, 1, NULL);
     xTaskCreate(robotActionTask, "robotActionTask", 4096, NULL, 1, NULL);
     xTaskCreate(espNowGwTask, "espNowGwTask", 4096, NULL, 1, NULL);
-    // xTaskCreate(spinOnceTask, "spinOnceTask", 4096, NULL, 1, NULL);
+    xTaskCreate(spinOnceTask, "spinOnceTask", 4096, NULL, 1, NULL);
 #endif
 }
 

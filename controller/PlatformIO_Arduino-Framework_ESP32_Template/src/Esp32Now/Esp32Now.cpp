@@ -25,7 +25,7 @@ void intEsp32Now(void (*OnDataSentCB)(const uint8_t *mac_addr, esp_now_send_stat
     esp_now_register_recv_cb(esp_now_recv_cb_t(OnDataRcvCB));
 }
 
-void sendEspNow(uint8_t* peerMAC, infoSensorMsg myData) {
+void sendEspNow(const uint8_t* peerMAC, infoSensorMsg myData) {
 
     infoSensorMsg myDataTemp = myData;
     // strcpy(myData.a, data);
@@ -40,7 +40,7 @@ void sendEspNow(uint8_t* peerMAC, infoSensorMsg myData) {
     }
 }
 
-void addPeer(uint8_t*  peerMAC, esp_now_peer_info_t &peerInfo) {
+void addPeer(const uint8_t*  peerMAC, esp_now_peer_info_t &peerInfo) {
     // Register peer
     memcpy(peerInfo.peer_addr, peerMAC, 6);
     peerInfo.channel = 0;  

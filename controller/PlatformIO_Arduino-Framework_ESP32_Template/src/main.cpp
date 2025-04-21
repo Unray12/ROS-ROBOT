@@ -12,37 +12,74 @@
 #include "DHT20.h"
 #include <json_generator.h>
 
-// #define SENSOR
-#define GATEWAY
+#define SENSOR
+// #define GATEWAY
 const char *ssid = "ACLAB";
 const char *password = "ACLAB2023";
 IPAddress IPRosSerialServer(172, 28, 182, 162); //34 162
 const uint16_t rosSerialserverPort = 11411;
 
-uint8_t broadcastAddress[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
+const uint8_t broadcastAddress[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
+
 esp_now_peer_info_t peerInfo;
+
 
 ros::NodeHandle_<ArduinoHardware> nodeHandle;
 Robot mecanumRobot;
 DHT20 dht20;
 
+void sendSensorInfo(const uint8_t *gwMAC) {
+    esp_now_peer_info_t gwPeerInfo;
+    addPeer(gwMAC, gwPeerInfo);
+    dht20.read();
+    infoSensorMsg myData(0, 1, dht20.getHumidity(), dht20.getTemperature());
+    if (WiFi.status() == WL_CONNECTED) {
+        sendEspNow(gwMAC, myData);
+    }
+}
 
+void publishSensorInfo(infoSensorMsg mySensorData) {
+    std_msgs::String strMsg;
+    ros::Publisher chatter("Sensors", &strMsg);
+
+    char buffer[256] = {'\0'};
+    json_gen_str_t jsonString;
+    json_gen_str_start(&jsonString, buffer, sizeof(buffer), NULL, NULL);
+
+    json_gen_start_object(&jsonString);
+    json_gen_obj_set_float(&jsonString, "Humidity", mySensorData.humidityValue);
+    json_gen_obj_set_float(&jsonString, "Temperature", mySensorData.temperatureValue);
+    json_gen_end_object(&jsonString);
+
+    nodeHandle.advertise(chatter);
+
+    strMsg.data = buffer;
+    Serial.println("hello");
+    chatter.publish(&strMsg);
+}
 // callback when data is sent
 void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
   Serial.print("\r\nLast Packet Send Status:\t");
   Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
 }
+
 // callback when data is receive
 void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
-  infoSensorMsg myData;
-  memcpy(&myData, incomingData, sizeof(infoSensorMsg));
-  // Serial.print("Bytes received: ");
-  // Serial.println(len);
-  // Serial.print("Humid: ");
-  Serial.println(myData.humidityValue);
-  // Serial.print("Temp: ");
-  Serial.println(myData.temperatureValue);
+    infoSensorMsg myData;
+    memcpy(&myData, incomingData, sizeof(infoSensorMsg));
+    if (myData.typeMessage == 0) {
+        if (myData.infoSensorType == 0) {
+            sendSensorInfo(mac);
+        }
+    #ifdef GATEWAY 
+        else if (myData.infoSensorType == 1) {
+            publishSensorInfo(myData);
+        }
+    #endif
+    }
 }
+
+
 /* 
 Linear state
 0: stop
@@ -54,6 +91,7 @@ Angular state
 1: left
 2: right
 */
+
 void robotAction(int val) {
     mecanumRobot.stop();
     if (mecanumRobot.currentAngularState == 1) {
@@ -116,6 +154,7 @@ void processVRMessage(const std_msgs::String &msg) {
 
 ros::Subscriber<geometry_msgs::Twist> lidarSub("cmd_vel", &twistMessage);
 ros::Subscriber<std_msgs::String> VRcontrolSub("VR_control", &processVRMessage);
+
 
 void testTask(void *pvParameters) {
     mecanumRobot.stop();
@@ -180,22 +219,27 @@ void wifiTask(void *pvParameters) {
 void esp32PublishTask()
 {
     std_msgs::String strMsg;
-    json_gen_str_t jstr;
-    json_gen_start_object(&jstr);
-    json_gen_obj_set_string(&jstr, "key", "value");
-    json_gen_end_object(&jstr);
     ros::Publisher chatter("Sensors", &strMsg);
     char hello[13] = "Hello world!";
-    
+
+    char buffer[256] = {'\0'};
+    json_gen_str_t jsonString;
+    json_gen_str_start(&jsonString, buffer, sizeof(buffer), NULL, NULL);
+
+    json_gen_start_object(&jsonString);
+    json_gen_obj_set_float(&jsonString, "Humidity", 10.0);
+    json_gen_obj_set_float(&jsonString, "Temperature", 10.0);
+    json_gen_end_object(&jsonString);
+
     nodeHandle.advertise(chatter);
+    
     while (true)
     {
-        strMsg.data = hello;
+        strMsg.data = buffer;
         Serial.println("hello");
         chatter.publish(&strMsg);
         vTaskDelay(2000 / portTICK_PERIOD_MS);
     }
-    
 }
 
 void robotActionTask(void *pvParameter) {
@@ -265,12 +309,13 @@ void setup()
 {
     Serial.begin(115200);
     pinMode(48, OUTPUT);
-    xTaskCreate(wifiTask, "WiFiTask", 4096, NULL, 3, NULL);
+    // xTaskCreate(wifiTask, "WiFiTask", 4096, NULL, 3, NULL);
+    xTaskCreatePinnedToCore(wifiTask, "WiFiTask", 4096, NULL, 3, NULL, 1);
     
 
 #ifdef SENSOR
     dht20.begin();
-    xTaskCreate(espNowSensorTask, "espNowSensorTask", 4096, NULL, 1, NULL);
+    // xTaskCreate(espNowSensorTask, "espNowSensorTask", 4096, NULL, 1, NULL);
 #endif
 
 #ifdef GATEWAY
@@ -284,10 +329,12 @@ void setup()
     // xTaskCreate(esp32PublishTask, "esp32PublishTask", 4096, NULL, 1, NULL);
     xTaskCreate(robotActionTask, "robotActionTask", 4096, NULL, 1, NULL);
     xTaskCreate(espNowGwTask, "espNowGwTask", 4096, NULL, 1, NULL);
-    xTaskCreate(spinOnceTask, "spinOnceTask", 4096, NULL, 1, NULL);
+    // xTaskCreate(spinOnceTask, "spinOnceTask", 4096, NULL, 1, NULL);
+    xTaskCreatePinnedToCore(spinOnceTask, "spinOnceTask", 4096, NULL, 1, NULL, 1);
 #endif
 }
 
 void loop()
 {
+
 }

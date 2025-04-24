@@ -100,7 +100,7 @@ void publishSensorInfo(infoSensorMsg mySensorData) {
 // callback when data is sent
 void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
 //   Serial.print("\r\nLast Packet Send Status:\t");
-//   Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
+  Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
 }
 
 // callback when data is receive
@@ -137,21 +137,6 @@ Angular state
 1: left
 2: right
 */
-std::time_t convertROSTimeToCTime(const std::string& ros_time_str) {
-    std::tm tm = {};
-    int hour, minute, second;
-    sscanf(ros_time_str.c_str(), "%d:%d:%d", &hour, &minute, &second);
-
-    // Fill tm structure
-    tm.tm_year = 100;  // Year since 1900 (2000 = 100)
-    tm.tm_mon  = 0;    // January
-    tm.tm_mday = 1;    // 1st day of the month
-    tm.tm_hour = hour;
-    tm.tm_min  = minute;
-    tm.tm_sec  = second;
-
-    return std::mktime(&tm);
-}
 
 void robotAction(int val) {
     // mecanumRobot.stop();
@@ -196,21 +181,18 @@ void twistMessage(const geometry_msgs::Twist &msg) {
 }
 
 void processVRMessage(const std_msgs::String &msg) {
-    Serial.println(msg.data);
-    if (0) {
-        Serial.println("hello");
+    if (!mecanumRobot.isAutoMode) {
         mecanumRobot.goRight(30);
-        if (strcmp(msg.data, "Right1") == 0) {
+        if (strcmp(msg.data, "Right") == 0) {
             mecanumRobot.currentAngularState = 2;
             mecanumRobot.currentLinearState = 0;
-            
-        } else if (msg.data == "Left") {
+        } else if (strcmp(msg.data, "Left") == 0) {
             mecanumRobot.currentAngularState = 1;
             mecanumRobot.currentLinearState = 0;
-        } else if (msg.data == "Forward") {
+        } else if (strcmp(msg.data, "Forward") == 0) {
             mecanumRobot.currentLinearState = 1;
             mecanumRobot.currentAngularState = 0;
-        } else if (msg.data == "Backward") {
+        } else if (strcmp(msg.data, "Backward") == 0) {
             mecanumRobot.currentLinearState = 2;
             mecanumRobot.currentAngularState = 0;
         }
@@ -271,7 +253,7 @@ void robotActionTask(void *pvParameter) {
                 Serial.println("1 right");
             }
         }
-        vTaskDelay(100 / portTICK_PERIOD_MS);
+        vTaskDelay(10 / portTICK_PERIOD_MS);
     }
 }
 
@@ -298,7 +280,7 @@ void espNowGwTask(void *pvParamater) {
             }
         }
         // mecanumRobot.motorDriver.printTime();
-        vTaskDelay(100 / portTICK_PERIOD_MS);
+        vTaskDelay(2000 / portTICK_PERIOD_MS);
     }
 
     vTaskDelete(NULL);
@@ -343,8 +325,8 @@ void setup()
     Serial.print("[DEFAULT] ESP32 Board MAC Address: ");
     readMacAddress();
     // xTaskCreate(esp32PublishTask, "esp32PublishTask", 4096, NULL, 1, NULL);
-    // xTaskCreate(robotActionTask, "robotActionTask", 4096, NULL, 1, NULL);
-    // xTaskCreate(espNowGwTask, "espNowGwTask", 4096, NULL, 1, NULL);
+    xTaskCreate(robotActionTask, "robotActionTask", 4096, NULL, 1, NULL);
+    xTaskCreate(espNowGwTask, "espNowGwTask", 4096, NULL, 1, NULL);
     // xTaskCreate(spinOnceTask, "spinOnceTask", 4096, NULL, 1, NULL);
     xTaskCreatePinnedToCore(spinOnceTask, "spinOnceTask", 4096, NULL, 1, NULL, 1);
 #endif

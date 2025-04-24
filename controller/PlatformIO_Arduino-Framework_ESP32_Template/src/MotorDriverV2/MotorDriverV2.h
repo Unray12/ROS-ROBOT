@@ -2,6 +2,9 @@
 #include <Wire.h>
 #include <Constant/Constant.h>
 #include <Arduino.h>
+#include <chrono>
+#include <ctime>
+#include <sys/time.h>
 #ifndef MOTORDRIVERV2_
 #define MOTORDRIVERV2_
 
@@ -29,6 +32,7 @@ private:
     }
 
 public:
+    int packageSequence = 1;
     MotorDriverV2(uint8_t address = MDV2_DEFAULT_I2C_ADDRESS)
     {
         _addr = address;
@@ -151,6 +155,7 @@ private:
 public:
     void set_motors(uint8_t motors, int speed)
     {
+
         uint16_t data[] = {motors, (uint16_t)(speed * 10)};
         _write_16_array(MDV2_REG_MOTOR_INDEX, data, 2);
         // for (uint8_t i : {M3, M4}) {
@@ -219,6 +224,39 @@ public:
     }
 
     // I2C Commands
+    void printTime() {
+        // struct tm timeinfo;
+
+        // while (!getLocalTime(&timeinfo)) {
+        //     Serial.println("Waiting for time...");
+        //     delay(1);
+        // }
+
+        
+        // std::time_t now = std::time(nullptr);       // Get current time
+        // unsigned long milliseconds = millis() % 1000;  // Get ms part from millis()
+
+        // char timeStr[50];
+        // strftime(timeStr, sizeof(timeStr), "%H:%M:%S", &timeinfo);
+        // Serial.printf("%d %s.%03lu\n", this->packageSequence, timeStr, milliseconds);
+
+        struct timeval tv;
+        gettimeofday(&tv, NULL);
+      
+        struct tm *timeinfo = localtime(&tv.tv_sec);
+      
+        // Lấy giờ phút giây và mili giây
+        int hour   = timeinfo->tm_hour;
+        int minute = timeinfo->tm_min;
+        int second = timeinfo->tm_sec;
+        int millis = tv.tv_usec / 1000;
+      
+        // In chỉ thời gian (không có ngày)
+        Serial.printf("%d %02d:%02d:%02d.%03d\n", this->packageSequence, hour, minute, second, millis);
+
+
+        this->packageSequence++;
+    }
 private:
     void _write_8(uint8_t register_addr, uint8_t data)
     {
@@ -230,6 +268,7 @@ private:
 
     void _write_16(uint8_t register_addr, uint16_t data)
     {
+
         Wire.beginTransmission(_addr);
         Wire.write(register_addr);
         Wire.write(data & 0xFF);
@@ -239,7 +278,6 @@ private:
 
     void _write_16_array(uint8_t register_addr, uint16_t *data, size_t length)
     {
-        Wire.beginTransmission(_addr);
         Wire.write(register_addr);
         for (size_t i = 0; i < length; i++)
         {
@@ -248,7 +286,6 @@ private:
         }
         Wire.endTransmission();
         int status = Wire.endTransmission();
-        Serial.println(status);
     }
 
     //   void _write_16_array(uint8_t register_addr, uint16_t* data, size_t length) {

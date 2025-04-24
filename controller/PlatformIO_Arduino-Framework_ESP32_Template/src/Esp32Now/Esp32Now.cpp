@@ -31,12 +31,12 @@ void sendEspNow(const uint8_t* peerMAC, infoSensorMsg myData) {
     // strcpy(myData.a, data);
   
     esp_err_t result = esp_now_send(peerMAC, (uint8_t *) &myData, sizeof(myData));
-    Serial.print(sizeof(myData));
+    // Serial.print(sizeof(myData));
     if (result == ESP_OK) {
-      Serial.println("Sent with success");
+      // Serial.println("Sent with success");
     }
     else {
-      Serial.println("Error sending the data");
+      // Serial.println("Error sending the data");
     }
 }
 

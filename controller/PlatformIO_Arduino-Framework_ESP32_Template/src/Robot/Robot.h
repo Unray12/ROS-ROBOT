@@ -7,7 +7,7 @@
 class Robot
 {
 private:
-    MotorDriverV2 motorDriver;
+    
     /* 
     0: go forward
     1: go backward
@@ -19,6 +19,7 @@ private:
 
 
 public:
+    MotorDriverV2 motorDriver;
     bool isAutoMode = 0;
     int currentLinearState = 0;
     int nextLinearState = 0;

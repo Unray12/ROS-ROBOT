@@ -249,6 +249,7 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/DependInfo.cmake"
   "CMakeFiles/download_extra_data.dir/DependInfo.cmake"
   "CMakeFiles/run_tests.dir/DependInfo.cmake"
+  "CMakeFiles/ctrl_auto.dir/DependInfo.cmake"
   "CMakeFiles/roscpp_generate_messages_lisp.dir/DependInfo.cmake"
   "CMakeFiles/clean_test_results.dir/DependInfo.cmake"
   "CMakeFiles/tests.dir/DependInfo.cmake"

@@ -9,7 +9,9 @@ int main(int argc, char **argv)
     ros::init(argc, argv, "ctrl_manual");
     ros::NodeHandle nh;
     ros::Publisher pub = nh.advertise<can_control::MecanumControl>("mecanum_cmd", 10);
-    
+
+    ros::Rate loop_rate(10); 
+
     std::cout << "Manual mode: [id] [cmd] [value?]\n"
               << "  cmd=calib|idle|clc|clear|target\n";
     
@@ -55,6 +57,7 @@ int main(int argc, char **argv)
 
         pub.publish(msg);
         ros::spinOnce();
+        loop_rate.sleep();
     }
 
     return 0;

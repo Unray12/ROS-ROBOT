@@ -389,6 +389,19 @@ run_tests/fast:
 .PHONY : run_tests/fast
 
 #=============================================================================
+# Target rules for targets named ctrl_auto
+
+# Build rule for target.
+ctrl_auto: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ctrl_auto
+.PHONY : ctrl_auto
+
+# fast build rule for target.
+ctrl_auto/fast:
+	$(MAKE) -f CMakeFiles/ctrl_auto.dir/build.make CMakeFiles/ctrl_auto.dir/build
+.PHONY : ctrl_auto/fast
+
+#=============================================================================
 # Target rules for targets named roscpp_generate_messages_lisp
 
 # Build rule for target.
@@ -701,6 +714,33 @@ src/can_comm.cpp.s:
 	$(MAKE) -f CMakeFiles/drivetrain.dir/build.make CMakeFiles/drivetrain.dir/src/can_comm.cpp.s
 .PHONY : src/can_comm.cpp.s
 
+src/ctrl_auto.o: src/ctrl_auto.cpp.o
+
+.PHONY : src/ctrl_auto.o
+
+# target to build an object file
+src/ctrl_auto.cpp.o:
+	$(MAKE) -f CMakeFiles/ctrl_auto.dir/build.make CMakeFiles/ctrl_auto.dir/src/ctrl_auto.cpp.o
+.PHONY : src/ctrl_auto.cpp.o
+
+src/ctrl_auto.i: src/ctrl_auto.cpp.i
+
+.PHONY : src/ctrl_auto.i
+
+# target to preprocess a source file
+src/ctrl_auto.cpp.i:
+	$(MAKE) -f CMakeFiles/ctrl_auto.dir/build.make CMakeFiles/ctrl_auto.dir/src/ctrl_auto.cpp.i
+.PHONY : src/ctrl_auto.cpp.i
+
+src/ctrl_auto.s: src/ctrl_auto.cpp.s
+
+.PHONY : src/ctrl_auto.s
+
+# target to generate assembly for a file
+src/ctrl_auto.cpp.s:
+	$(MAKE) -f CMakeFiles/ctrl_auto.dir/build.make CMakeFiles/ctrl_auto.dir/src/ctrl_auto.cpp.s
+.PHONY : src/ctrl_auto.cpp.s
+
 src/ctrl_manual.o: src/ctrl_manual.cpp.o
 
 .PHONY : src/ctrl_manual.o
@@ -812,6 +852,7 @@ help:
 	@echo "... rosgraph_msgs_generate_messages_lisp"
 	@echo "... download_extra_data"
 	@echo "... run_tests"
+	@echo "... ctrl_auto"
 	@echo "... roscpp_generate_messages_lisp"
 	@echo "... clean_test_results"
 	@echo "... tests"
@@ -837,6 +878,9 @@ help:
 	@echo "... src/can_comm.o"
 	@echo "... src/can_comm.i"
 	@echo "... src/can_comm.s"
+	@echo "... src/ctrl_auto.o"
+	@echo "... src/ctrl_auto.i"
+	@echo "... src/ctrl_auto.s"
 	@echo "... src/ctrl_manual.o"
 	@echo "... src/ctrl_manual.i"
 	@echo "... src/ctrl_manual.s"

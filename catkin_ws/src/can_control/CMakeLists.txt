@@ -44,6 +44,12 @@ target_link_libraries(drivetrain ${catkin_LIBRARIES} pthread)
 add_executable(ctrl_manual src/ctrl_manual.cpp)
 add_dependencies(ctrl_manual ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(ctrl_manual ${catkin_LIBRARIES})
+
+# Ctrl_auto executable
+add_executable(ctrl_auto src/ctrl_auto.cpp)
+add_dependencies(ctrl_auto ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(ctrl_auto ${catkin_LIBRARIES})
+
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 

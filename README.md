@@ -19,3 +19,8 @@ ros2 run esp32_controller esp32_controller
 
 ros2 launch rplidar_ros rplidar_a2m8_launch.py serial_port:=/dev/ttyUSB0
 
+// can robot
+rosrun can_control drivetrai
+rosrun can_control ctrl_manual 
+// send cmd for unlock mode: 0 -> 3 clc
+rosrun can_control ctrl_auto

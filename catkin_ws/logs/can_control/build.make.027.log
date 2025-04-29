@@ -1,0 +1,29 @@
+[  0%] Built target _can_control_generate_messages_check_deps_EncoderEstimates
+[  0%] Built target std_msgs_generate_messages_eus
+[  0%] Built target _can_control_generate_messages_check_deps_MecanumControl
+[  0%] Built target std_msgs_generate_messages_py
+[  0%] Built target std_msgs_generate_messages_nodejs
+[  0%] Built target rosgraph_msgs_generate_messages_eus
+[  0%] Built target rosgraph_msgs_generate_messages_cpp
+[  0%] Built target roscpp_generate_messages_nodejs
+[  0%] Built target roscpp_generate_messages_cpp
+[  0%] Built target roscpp_generate_messages_eus
+[  0%] Built target roscpp_generate_messages_py
+[  0%] Built target roscpp_generate_messages_lisp
+[  0%] Built target rosgraph_msgs_generate_messages_lisp
+[  0%] Built target rosgraph_msgs_generate_messages_nodejs
+[  0%] Built target std_msgs_generate_messages_lisp
+[ 15%] Built target can_control_generate_messages_eus
+[ 15%] Built target std_msgs_generate_messages_cpp
+[ 15%] Built target rosgraph_msgs_generate_messages_py
+[ 30%] Built target can_control_generate_messages_py
+[ 40%] Built target can_control_generate_messages_nodejs
+[ 50%] Built target can_control_generate_messages_cpp
+[ 60%] Built target can_control_generate_messages_lisp
+[35m[1mScanning dependencies of target ctrl_auto[0m
+[ 70%] Built target ctrl_manual
+[ 90%] Built target drivetrain
+[ 90%] Built target can_control_generate_messages
+[ 95%] [32mBuilding CXX object CMakeFiles/ctrl_auto.dir/src/ctrl_auto.cpp.o[0m
+[100%] [32m[1mLinking CXX executable /home/aclab/Desktop/ROS-VR/catkin_ws/devel/.private/can_control/lib/can_control/ctrl_auto[0m
+[100%] Built target ctrl_auto

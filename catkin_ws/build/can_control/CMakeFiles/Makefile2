@@ -56,6 +56,7 @@ CMAKE_BINARY_DIR = /home/aclab/Desktop/ROS-VR/catkin_ws/build/can_control
 all: CMakeFiles/ctrl_manual.dir/all
 all: CMakeFiles/drivetrain.dir/all
 all: CMakeFiles/can_control_generate_messages.dir/all
+all: CMakeFiles/ctrl_auto.dir/all
 all: gtest/all
 
 .PHONY : all
@@ -83,6 +84,7 @@ clean: CMakeFiles/roscpp_generate_messages_py.dir/clean
 clean: CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/clean
 clean: CMakeFiles/download_extra_data.dir/clean
 clean: CMakeFiles/run_tests.dir/clean
+clean: CMakeFiles/ctrl_auto.dir/clean
 clean: CMakeFiles/roscpp_generate_messages_lisp.dir/clean
 clean: CMakeFiles/clean_test_results.dir/clean
 clean: CMakeFiles/tests.dir/clean
@@ -188,7 +190,7 @@ CMakeFiles/ctrl_manual.dir/all: CMakeFiles/std_msgs_generate_messages_lisp.dir/a
 CMakeFiles/ctrl_manual.dir/all: CMakeFiles/can_control_generate_messages_eus.dir/all
 	$(MAKE) -f CMakeFiles/ctrl_manual.dir/build.make CMakeFiles/ctrl_manual.dir/depend
 	$(MAKE) -f CMakeFiles/ctrl_manual.dir/build.make CMakeFiles/ctrl_manual.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/aclab/Desktop/ROS-VR/catkin_ws/build/can_control/CMakeFiles --progress-num=13,14 "Built target ctrl_manual"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/aclab/Desktop/ROS-VR/catkin_ws/build/can_control/CMakeFiles --progress-num=15,16 "Built target ctrl_manual"
 .PHONY : CMakeFiles/ctrl_manual.dir/all
 
 # Build rule for subdir invocation for target.
@@ -234,7 +236,7 @@ CMakeFiles/drivetrain.dir/all: CMakeFiles/std_msgs_generate_messages_lisp.dir/al
 CMakeFiles/drivetrain.dir/all: CMakeFiles/can_control_generate_messages_eus.dir/all
 	$(MAKE) -f CMakeFiles/drivetrain.dir/build.make CMakeFiles/drivetrain.dir/depend
 	$(MAKE) -f CMakeFiles/drivetrain.dir/build.make CMakeFiles/drivetrain.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/aclab/Desktop/ROS-VR/catkin_ws/build/can_control/CMakeFiles --progress-num=15,16,17,18 "Built target drivetrain"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/aclab/Desktop/ROS-VR/catkin_ws/build/can_control/CMakeFiles --progress-num=17,18,19,20 "Built target drivetrain"
 .PHONY : CMakeFiles/drivetrain.dir/all
 
 # Build rule for subdir invocation for target.
@@ -666,6 +668,52 @@ run_tests: CMakeFiles/run_tests.dir/rule
 CMakeFiles/run_tests.dir/clean:
 	$(MAKE) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/clean
 .PHONY : CMakeFiles/run_tests.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/ctrl_auto.dir
+
+# All Build rule for target.
+CMakeFiles/ctrl_auto.dir/all: CMakeFiles/can_control_generate_messages_py.dir/all
+CMakeFiles/ctrl_auto.dir/all: CMakeFiles/can_control_generate_messages_nodejs.dir/all
+CMakeFiles/ctrl_auto.dir/all: CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/all
+CMakeFiles/ctrl_auto.dir/all: CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/all
+CMakeFiles/ctrl_auto.dir/all: CMakeFiles/roscpp_generate_messages_nodejs.dir/all
+CMakeFiles/ctrl_auto.dir/all: CMakeFiles/std_msgs_generate_messages_eus.dir/all
+CMakeFiles/ctrl_auto.dir/all: CMakeFiles/roscpp_generate_messages_eus.dir/all
+CMakeFiles/ctrl_auto.dir/all: CMakeFiles/roscpp_generate_messages_cpp.dir/all
+CMakeFiles/ctrl_auto.dir/all: CMakeFiles/roscpp_generate_messages_py.dir/all
+CMakeFiles/ctrl_auto.dir/all: CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/all
+CMakeFiles/ctrl_auto.dir/all: CMakeFiles/roscpp_generate_messages_lisp.dir/all
+CMakeFiles/ctrl_auto.dir/all: CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/all
+CMakeFiles/ctrl_auto.dir/all: CMakeFiles/can_control_generate_messages_lisp.dir/all
+CMakeFiles/ctrl_auto.dir/all: CMakeFiles/std_msgs_generate_messages_cpp.dir/all
+CMakeFiles/ctrl_auto.dir/all: CMakeFiles/rosgraph_msgs_generate_messages_py.dir/all
+CMakeFiles/ctrl_auto.dir/all: CMakeFiles/std_msgs_generate_messages_nodejs.dir/all
+CMakeFiles/ctrl_auto.dir/all: CMakeFiles/std_msgs_generate_messages_py.dir/all
+CMakeFiles/ctrl_auto.dir/all: CMakeFiles/can_control_generate_messages_cpp.dir/all
+CMakeFiles/ctrl_auto.dir/all: CMakeFiles/std_msgs_generate_messages_lisp.dir/all
+CMakeFiles/ctrl_auto.dir/all: CMakeFiles/can_control_generate_messages_eus.dir/all
+	$(MAKE) -f CMakeFiles/ctrl_auto.dir/build.make CMakeFiles/ctrl_auto.dir/depend
+	$(MAKE) -f CMakeFiles/ctrl_auto.dir/build.make CMakeFiles/ctrl_auto.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/aclab/Desktop/ROS-VR/catkin_ws/build/can_control/CMakeFiles --progress-num=13,14 "Built target ctrl_auto"
+.PHONY : CMakeFiles/ctrl_auto.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/ctrl_auto.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/aclab/Desktop/ROS-VR/catkin_ws/build/can_control/CMakeFiles 14
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/ctrl_auto.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/aclab/Desktop/ROS-VR/catkin_ws/build/can_control/CMakeFiles 0
+.PHONY : CMakeFiles/ctrl_auto.dir/rule
+
+# Convenience name for target.
+ctrl_auto: CMakeFiles/ctrl_auto.dir/rule
+
+.PHONY : ctrl_auto
+
+# clean rule for target.
+CMakeFiles/ctrl_auto.dir/clean:
+	$(MAKE) -f CMakeFiles/ctrl_auto.dir/build.make CMakeFiles/ctrl_auto.dir/clean
+.PHONY : CMakeFiles/ctrl_auto.dir/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/roscpp_generate_messages_lisp.dir
@@ -1167,7 +1215,7 @@ gtest/googlemock/CMakeFiles/gmock_main.dir/all: gtest/googlemock/CMakeFiles/gmoc
 gtest/googlemock/CMakeFiles/gmock_main.dir/all: gtest/googletest/CMakeFiles/gtest.dir/all
 	$(MAKE) -f gtest/googlemock/CMakeFiles/gmock_main.dir/build.make gtest/googlemock/CMakeFiles/gmock_main.dir/depend
 	$(MAKE) -f gtest/googlemock/CMakeFiles/gmock_main.dir/build.make gtest/googlemock/CMakeFiles/gmock_main.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/aclab/Desktop/ROS-VR/catkin_ws/build/can_control/CMakeFiles --progress-num=21,22 "Built target gmock_main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/aclab/Desktop/ROS-VR/catkin_ws/build/can_control/CMakeFiles --progress-num=23,24 "Built target gmock_main"
 .PHONY : gtest/googlemock/CMakeFiles/gmock_main.dir/all
 
 # Build rule for subdir invocation for target.
@@ -1194,7 +1242,7 @@ gtest/googlemock/CMakeFiles/gmock_main.dir/clean:
 gtest/googlemock/CMakeFiles/gmock.dir/all: gtest/googletest/CMakeFiles/gtest.dir/all
 	$(MAKE) -f gtest/googlemock/CMakeFiles/gmock.dir/build.make gtest/googlemock/CMakeFiles/gmock.dir/depend
 	$(MAKE) -f gtest/googlemock/CMakeFiles/gmock.dir/build.make gtest/googlemock/CMakeFiles/gmock.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/aclab/Desktop/ROS-VR/catkin_ws/build/can_control/CMakeFiles --progress-num=19,20 "Built target gmock"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/aclab/Desktop/ROS-VR/catkin_ws/build/can_control/CMakeFiles --progress-num=21,22 "Built target gmock"
 .PHONY : gtest/googlemock/CMakeFiles/gmock.dir/all
 
 # Build rule for subdir invocation for target.
@@ -1221,7 +1269,7 @@ gtest/googlemock/CMakeFiles/gmock.dir/clean:
 gtest/googletest/CMakeFiles/gtest_main.dir/all: gtest/googletest/CMakeFiles/gtest.dir/all
 	$(MAKE) -f gtest/googletest/CMakeFiles/gtest_main.dir/build.make gtest/googletest/CMakeFiles/gtest_main.dir/depend
 	$(MAKE) -f gtest/googletest/CMakeFiles/gtest_main.dir/build.make gtest/googletest/CMakeFiles/gtest_main.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/aclab/Desktop/ROS-VR/catkin_ws/build/can_control/CMakeFiles --progress-num=25,26 "Built target gtest_main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/aclab/Desktop/ROS-VR/catkin_ws/build/can_control/CMakeFiles --progress-num=27,28 "Built target gtest_main"
 .PHONY : gtest/googletest/CMakeFiles/gtest_main.dir/all
 
 # Build rule for subdir invocation for target.
@@ -1248,7 +1296,7 @@ gtest/googletest/CMakeFiles/gtest_main.dir/clean:
 gtest/googletest/CMakeFiles/gtest.dir/all:
 	$(MAKE) -f gtest/googletest/CMakeFiles/gtest.dir/build.make gtest/googletest/CMakeFiles/gtest.dir/depend
 	$(MAKE) -f gtest/googletest/CMakeFiles/gtest.dir/build.make gtest/googletest/CMakeFiles/gtest.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/aclab/Desktop/ROS-VR/catkin_ws/build/can_control/CMakeFiles --progress-num=23,24 "Built target gtest"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/aclab/Desktop/ROS-VR/catkin_ws/build/can_control/CMakeFiles --progress-num=25,26 "Built target gtest"
 .PHONY : gtest/googletest/CMakeFiles/gtest.dir/all
 
 # Build rule for subdir invocation for target.

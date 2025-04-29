@@ -10,7 +10,7 @@
 class Drivetrain
 {
 public:
-    Drivetrain() : nh_("~")
+    Drivetrain() : nh_("")
     {
         can_ = std::make_shared<CANInterface>();
         if (!can_->openInterface("can0"))
@@ -19,7 +19,6 @@ public:
             ros::shutdown();
             return;
         }
-
         for (uint8_t id = 0; id < 4; ++id)
             motors_.push_back(std::make_shared<OdriveMotor>(
                 id, OdriveMotor::VELOCITY, can_.get()));

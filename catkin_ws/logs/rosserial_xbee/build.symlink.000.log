@@ -1,5 +1,0 @@
-Symlinking /home/aclab/Desktop/ROS-VR/catkin_ws/devel/share/rosserial_xbee/cmake/rosserial_xbeeConfig-version.cmake
-Symlinking /home/aclab/Desktop/ROS-VR/catkin_ws/devel/share/rosserial_xbee/cmake/rosserial_xbeeConfig.cmake
-Symlinking /home/aclab/Desktop/ROS-VR/catkin_ws/devel/lib/python3/dist-packages/rosserial_xbee/__init__.py
-Symlinking /home/aclab/Desktop/ROS-VR/catkin_ws/devel/lib/python3/dist-packages/xbee/__init__.py
-Symlinking /home/aclab/Desktop/ROS-VR/catkin_ws/devel/lib/pkgconfig/rosserial_xbee.pc

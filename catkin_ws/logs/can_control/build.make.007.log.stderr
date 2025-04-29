@@ -1,0 +1,7 @@
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:2:10:[m[K [01;31m[Kfatal error: [m[Kmecanum_drivetrain/MecanumControl.h: No such file or directory
+    2 | #include [01;31m[K"mecanum_drivetrain/MecanumControl.h"[m[K
+      |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+compilation terminated.
+make[2]: *** [CMakeFiles/drivetrain.dir/build.make:63: CMakeFiles/drivetrain.dir/src/drivetrain.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:169: CMakeFiles/drivetrain.dir/all] Error 2
+make: *** [Makefile:141: all] Error 2

@@ -1,0 +1,1 @@
+/home/aclab/Desktop/ROS-VR/catkin_ws/devel/.private/can_control/share/roseus/ros/can_control/msg/MecanumControl.l

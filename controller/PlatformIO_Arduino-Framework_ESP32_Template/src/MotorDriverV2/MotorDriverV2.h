@@ -32,7 +32,7 @@ private:
     }
 
 public:
-    int packageSequence = 1;
+    int packageSequence = 41;
     MotorDriverV2(uint8_t address = MDV2_DEFAULT_I2C_ADDRESS)
     {
         _addr = address;
@@ -155,7 +155,6 @@ private:
 public:
     void set_motors(uint8_t motors, int speed)
     {
-
         uint16_t data[] = {motors, (uint16_t)(speed * 10)};
         _write_16_array(MDV2_REG_MOTOR_INDEX, data, 2);
         // for (uint8_t i : {M3, M4}) {
@@ -258,6 +257,7 @@ public:
         this->packageSequence++;
     }
 private:
+
     void _write_8(uint8_t register_addr, uint8_t data)
     {
         Wire.beginTransmission(_addr);
@@ -278,6 +278,11 @@ private:
 
     void _write_16_array(uint8_t register_addr, uint16_t *data, size_t length)
     {
+
+    #ifdef EVALUATE
+        this->printTime();
+    #endif EVALUATE
+
         Wire.write(register_addr);
         for (size_t i = 0; i < length; i++)
         {

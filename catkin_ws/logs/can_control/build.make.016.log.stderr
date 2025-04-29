@@ -1,0 +1,6 @@
+/usr/bin/ld: CMakeFiles/drivetrain.dir/src/ctrl_manual.cpp.o: in function `main':
+ctrl_manual.cpp:(.text+0x1f): multiple definition of `main'; CMakeFiles/drivetrain.dir/src/drivetrain.cpp.o:drivetrain.cpp:(.text+0x1f): first defined here
+collect2: error: ld returned 1 exit status
+make[2]: *** [CMakeFiles/drivetrain.dir/build.make:146: /home/aclab/Desktop/ROS-VR/catkin_ws/devel/.private/can_control/lib/can_control/drivetrain] Error 1
+make[1]: *** [CMakeFiles/Makefile2:188: CMakeFiles/drivetrain.dir/all] Error 2
+make: *** [Makefile:141: all] Error 2

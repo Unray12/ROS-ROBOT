@@ -1,0 +1,27 @@
+[  0%] Built target std_msgs_generate_messages_eus
+[  0%] Built target std_msgs_generate_messages_py
+[  0%] Built target std_msgs_generate_messages_nodejs
+[  0%] Built target rosgraph_msgs_generate_messages_eus
+[  0%] Built target rosgraph_msgs_generate_messages_cpp
+[  0%] Built target roscpp_generate_messages_nodejs
+[  0%] Built target roscpp_generate_messages_eus
+[  0%] Built target _can_control_generate_messages_check_deps_MecanumControl
+[  0%] Built target roscpp_generate_messages_cpp
+[  0%] Built target _can_control_generate_messages_check_deps_EncoderEstimates
+[  0%] Built target roscpp_generate_messages_py
+[  0%] Built target rosgraph_msgs_generate_messages_lisp
+[  0%] Built target roscpp_generate_messages_lisp
+[  0%] Built target std_msgs_generate_messages_lisp
+[  0%] Built target rosgraph_msgs_generate_messages_nodejs
+[  0%] Built target std_msgs_generate_messages_cpp
+[  0%] Built target rosgraph_msgs_generate_messages_py
+[ 23%] Built target can_control_generate_messages_py
+[ 35%] Built target can_control_generate_messages_eus
+[ 47%] Built target can_control_generate_messages_nodejs
+[ 70%] Built target can_control_generate_messages_lisp
+[ 70%] Built target can_control_generate_messages_cpp
+[35m[1mScanning dependencies of target drivetrain[0m
+[ 70%] Built target can_control_generate_messages
+[ 76%] [32mBuilding CXX object CMakeFiles/drivetrain.dir/src/drivetrain.cpp.o[0m
+[ 82%] [32m[1mLinking CXX executable /home/aclab/Desktop/ROS-VR/catkin_ws/devel/.private/can_control/lib/can_control/drivetrain[0m
+[100%] Built target drivetrain

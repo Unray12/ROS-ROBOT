@@ -1,0 +1,8 @@
+prefix=/home/aclab/Desktop/ROS-VR/catkin_ws/devel/.private/can_control
+
+Name: can_control
+Description: Description of can_control
+Version: 0.0.0
+Cflags: -I/home/aclab/Desktop/ROS-VR/catkin_ws/devel/.private/can_control/include
+Libs: -L${prefix}/lib 
+Requires: 

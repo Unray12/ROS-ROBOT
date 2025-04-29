@@ -23,15 +23,11 @@ const uint16_t rosSerialserverPort = 11411;
 
 const uint8_t broadcastAddress[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 
-
-esp_now_peer_info_t peerInfo;
-
 #ifdef GATEWAY
+esp_now_peer_info_t peerInfo;
 std_msgs::String strMsg;
 ros::Publisher chatter("Sensors", &strMsg);
 #endif
-
-
 
 ros::NodeHandle_<ArduinoHardware> nodeHandle;
 Robot mecanumRobot;
@@ -42,11 +38,11 @@ const long gmtOffset_sec = 7 * 3600;      // GMT+7 = 7 hours * 3600 seconds
 const int daylightOffset_sec = 0;        // No daylight saving time
 const char* ntpServer = "pool.ntp.org";
 #endif
+
 void esp32PublishTask(void *pvParameter)
 {
     std_msgs::String strMsg;
     ros::Publisher chatter("Sensors", &strMsg);
-    char hello[13] = "Hello world!";
 
     char buffer[256] = {'\0'};
     json_gen_str_t jsonString;
@@ -93,14 +89,13 @@ void publishSensorInfo(infoSensorMsg mySensorData) {
     // nodeHandle.advertise(chatter);
 
     strMsg.data = buffer;
-    Serial.println("hello");
     chatter.publish(&strMsg);
 }
 
 // callback when data is sent
 void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
 //   Serial.print("\r\nLast Packet Send Status:\t");
-  Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
+//   Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
 }
 
 // callback when data is receive
@@ -139,23 +134,21 @@ Angular state
 */
 
 void robotAction(int val) {
-    // mecanumRobot.stop();
-    // if (mecanumRobot.currentAngularState == 1) {
-    //     mecanumRobot.turnLeft(val);
-    //     Serial.println("1 left");
-    // } 
-    // else if (mecanumRobot.currentAngularState == 2) {
-    //     mecanumRobot.turnRight(val);
-    //     Serial.println("1 right");
-    // }
-    // else if (mecanumRobot.currentLinearState == 1) {
-    //     mecanumRobot.goForward(val);
-    // }
-    // else if (mecanumRobot.currentLinearState == 2) {
-    //     mecanumRobot.goBackward(val);
-    // }
-    // else
-    //     mecanumRobot.stop();
+    mecanumRobot.stop();
+    if (mecanumRobot.currentAngularState == 1) {
+        mecanumRobot.turnLeft(val);
+    } 
+    else if (mecanumRobot.currentAngularState == 2) {
+        mecanumRobot.turnRight(val);
+    }
+    else if (mecanumRobot.currentLinearState == 1) {
+        mecanumRobot.goForward(val);
+    }
+    else if (mecanumRobot.currentLinearState == 2) {
+        mecanumRobot.goBackward(val);
+    }
+    else
+        mecanumRobot.stop();
 }
 
 void twistMessage(const geometry_msgs::Twist &msg) {
@@ -180,10 +173,18 @@ void twistMessage(const geometry_msgs::Twist &msg) {
     }
 }
 
+#ifdef EVALUATE
+int sequence = 1;
+#endif
+
 void processVRMessage(const std_msgs::String &msg) {
+#ifdef EVALUATE
+    Serial.printf("%d %s\n", sequence, msg.data);
+    sequence++;
+#endif
+    // mecanumRobot.goRight(30);
     if (!mecanumRobot.isAutoMode) {
-        mecanumRobot.goRight(30);
-        if (strcmp(msg.data, "Right") == 0) {
+        if (strcmp(msg.data, "Right1") == 0) {
             mecanumRobot.currentAngularState = 2;
             mecanumRobot.currentLinearState = 0;
         } else if (strcmp(msg.data, "Left") == 0) {
@@ -218,14 +219,14 @@ void wifiTask(void *pvParameters) {
 
     //init esp32 now
     intEsp32Now(OnDataSent, OnDataRecv);
-// #ifdef GATEWAY
+
+    //gw add broadcast peer, sensor add gw peer
     addPeer(broadcastAddress, peerInfo);
-// #endif
+
 
     //take time from NTP
 #ifdef EVALUATE
     configTime(gmtOffset_sec, daylightOffset_sec, ntpServer);
-
     struct tm timeinfo;
     while (!getLocalTime(&timeinfo)) {
         Serial.println("Waiting for time...");
@@ -234,7 +235,6 @@ void wifiTask(void *pvParameters) {
 #endif
     // connect to rosserial server
     nodeHandle.getHardware()->setConnection(IPRosSerialServer, rosSerialserverPort);
-
     vTaskDelete(NULL); // Delete the task when done
 }
 
@@ -265,8 +265,6 @@ void spinOnceTask(void *pvParameter) {
     while (true)
     {
         nodeHandle.spinOnce();
-        // Serial.print("[DEFAULT] ESP32 Board MAC Address: ");
-        // readMacAddress();
         vTaskDelay(1 / portTICK_PERIOD_MS);
     }
 }
@@ -279,7 +277,7 @@ void espNowGwTask(void *pvParamater) {
                 sendEspNow(broadcastAddress, myData);
             }
         }
-        // mecanumRobot.motorDriver.printTime();
+        mecanumRobot.motorDriver.printTime();
         vTaskDelay(2000 / portTICK_PERIOD_MS);
     }
 
@@ -297,11 +295,9 @@ void espNowSensorTask(void * pvParameter) {
                 sendEspNow(broadcastAddress, myData);
             }
         }
-        
         vTaskDelay(2000 / portTICK_PERIOD_MS);
     }
     vTaskDelete(NULL);
-
 }
 
 void setup()
@@ -310,9 +306,10 @@ void setup()
     pinMode(48, OUTPUT);
     // xTaskCreate(wifiTask, "WiFiTask", 4096, NULL, 3, NULL);
     xTaskCreatePinnedToCore(wifiTask, "WiFiTask", 4096, NULL, 3, NULL, 1);
+
 #ifdef SENSOR
     dht20.begin();
-    // xTaskCreate(espNowSensorTask, "espNowSensorTask", 4096, NULL, 1, NULL);
+    xTaskCreate(espNowSensorTask, "espNowSensorTask", 4096, NULL, 1, NULL);
 #endif
 
 #ifdef GATEWAY
@@ -325,8 +322,8 @@ void setup()
     Serial.print("[DEFAULT] ESP32 Board MAC Address: ");
     readMacAddress();
     // xTaskCreate(esp32PublishTask, "esp32PublishTask", 4096, NULL, 1, NULL);
-    xTaskCreate(robotActionTask, "robotActionTask", 4096, NULL, 1, NULL);
-    xTaskCreate(espNowGwTask, "espNowGwTask", 4096, NULL, 1, NULL);
+    // xTaskCreate(robotActionTask, "robotActionTask", 4096, NULL, 1, NULL);
+    // xTaskCreate(espNowGwTask, "espNowGwTask", 4096, NULL, 1, NULL);
     // xTaskCreate(spinOnceTask, "spinOnceTask", 4096, NULL, 1, NULL);
     xTaskCreatePinnedToCore(spinOnceTask, "spinOnceTask", 4096, NULL, 1, NULL, 1);
 #endif
@@ -334,5 +331,4 @@ void setup()
 
 void loop()
 {
-
 }

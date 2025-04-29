@@ -1,0 +1,8 @@
+prefix=/home/aclab/Desktop/ROS-VR/catkin_ws/install
+
+Name: can_control
+Description: Description of can_control
+Version: 0.0.0
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib 
+Requires: 

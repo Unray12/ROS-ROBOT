@@ -1,0 +1,187 @@
+[35m[1mScanning dependencies of target drivetrain[0m
+[  0%] Built target std_msgs_generate_messages_eus
+[  0%] Built target std_msgs_generate_messages_py
+[  0%] Built target std_msgs_generate_messages_nodejs
+[  7%] [32mBuilding CXX object CMakeFiles/drivetrain.dir/src/drivetrain.cpp.o[0m
+[  7%] Built target std_msgs_generate_messages_lisp
+[  7%] Built target _can_control_generate_messages_check_deps_MecanumControl
+[  7%] Built target std_msgs_generate_messages_cpp
+[  7%] Built target _can_control_generate_messages_check_deps_EncoderEstimates
+[ 42%] Built target can_control_generate_messages_nodejs
+[ 42%] Built target can_control_generate_messages_eus
+[ 57%] Built target can_control_generate_messages_lisp
+[ 92%] Built target can_control_generate_messages_py
+[ 85%] Built target can_control_generate_messages_cpp
+[ 92%] Built target can_control_generate_messages
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:52:22:[m[K [01;31m[Kerror: [m[K‘[01m[Kmecanum_drivetrain[m[K’ does not name a type
+   52 |     void onCmd(const [01;31m[Kmecanum_drivetrain[m[K::MecanumControl::ConstPtr &m)
+      |                      [01;31m[K^~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:52:56:[m[K [01;31m[Kerror: [m[Kexpected unqualified-id before ‘[01m[K::[m[K’ token
+   52 |     void onCmd(const mecanum_drivetrain::MecanumControl[01;31m[K::[m[KConstPtr &m)
+      |                                                        [01;31m[K^~[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:52:56:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K)[m[K’ before ‘[01m[K::[m[K’ token
+   52 |     void onCmd[34m[K([m[Kconst mecanum_drivetrain::MecanumControl[01;31m[K:[m[K[32m[K:[m[KConstPtr &m)
+      |               [34m[K~[m[K                                        [01;31m[K^[m[K[32m[K~[m[K
+      |                                                        [32m[K)[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:52:42:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K;[m[K’ at end of member declaration
+   52 |     void onCmd(const mecanum_drivetrain::[01;31m[KMecanumControl[m[K::ConstPtr &m)
+      |                                          [01;31m[K^~~~~~~~~~~~~~[m[K
+      |                                                        [32m[K;[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:52:58:[m[K [01;31m[Kerror: [m[K‘[01m[KConstPtr[m[K’ in namespace ‘[01m[K::[m[K’ does not name a type
+   52 |     void onCmd(const mecanum_drivetrain::MecanumControl::[01;31m[KConstPtr[m[K &m)
+      |                                                          [01;31m[K^~~~~~~~[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:[m[K In constructor ‘[01m[KDrivetrain::Drivetrain()[m[K’:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:27:73:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[Kros::NodeHandle::subscribe(const char [12], int, void (Drivetrain::*)(...), Drivetrain*)[m[K’
+   27 |         sub_ = nh_.subscribe("mecanum_cmd", 10, &Drivetrain::onCmd, this[01;31m[K)[m[K;
+      |                                                                         [01;31m[K^[m[K
+In file included from [01m[K/opt/ros/noetic/include/ros/ros.h:45[m[K,
+                 from [01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:1[m[K:
+[01m[K/opt/ros/noetic/include/ros/node_handle.h:400:14:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class M, class T> ros::Subscriber ros::NodeHandle::subscribe(const string&, uint32_t, void (T::*)(M), T*, const ros::TransportHints&)[m[K’
+  400 |   Subscriber [01;36m[Ksubscribe[m[K(const std::string& topic, uint32_t queue_size, void(T::*fp)(M), T* obj,
+      |              [01;36m[K^~~~~~~~~[m[K
+[01m[K/opt/ros/noetic/include/ros/node_handle.h:400:14:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:27:73:[m[K [01;36m[Knote: [m[K  candidate expects 2 arguments, 1 provided
+   27 |         sub_ = nh_.subscribe("mecanum_cmd", 10, &Drivetrain::onCmd, this[01;36m[K)[m[K;
+      |                                                                         [01;36m[K^[m[K
+In file included from [01m[K/opt/ros/noetic/include/ros/ros.h:45[m[K,
+                 from [01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:1[m[K:
+[01m[K/opt/ros/noetic/include/ros/node_handle.h:411:14:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class M, class T> ros::Subscriber ros::NodeHandle::subscribe(const string&, uint32_t, void (T::*)(M) const, T*, const ros::TransportHints&)[m[K’
+  411 |   Subscriber [01;36m[Ksubscribe[m[K(const std::string& topic, uint32_t queue_size, void(T::*fp)(M) const, T* obj,
+      |              [01;36m[K^~~~~~~~~[m[K
+[01m[K/opt/ros/noetic/include/ros/node_handle.h:411:14:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:27:73:[m[K [01;36m[Knote: [m[K  types ‘[01m[Kvoid (T::)(M) const[m[K’ and ‘[01m[Kvoid (Drivetrain::)(...)[m[K’ have incompatible cv-qualifiers
+   27 |         sub_ = nh_.subscribe("mecanum_cmd", 10, &Drivetrain::onCmd, this[01;36m[K)[m[K;
+      |                                                                         [01;36m[K^[m[K
+In file included from [01m[K/opt/ros/noetic/include/ros/ros.h:45[m[K,
+                 from [01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:1[m[K:
+[01m[K/opt/ros/noetic/include/ros/node_handle.h:463:14:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class M, class T> ros::Subscriber ros::NodeHandle::subscribe(const string&, uint32_t, void (T::*)(const boost::shared_ptr<const M>&), T*, const ros::TransportHints&)[m[K’
+  463 |   Subscriber [01;36m[Ksubscribe[m[K(const std::string& topic, uint32_t queue_size,
+      |              [01;36m[K^~~~~~~~~[m[K
+[01m[K/opt/ros/noetic/include/ros/node_handle.h:463:14:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:27:73:[m[K [01;36m[Knote: [m[K  candidate expects 2 arguments, 1 provided
+   27 |         sub_ = nh_.subscribe("mecanum_cmd", 10, &Drivetrain::onCmd, this[01;36m[K)[m[K;
+      |                                                                         [01;36m[K^[m[K
+In file included from [01m[K/opt/ros/noetic/include/ros/ros.h:45[m[K,
+                 from [01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:1[m[K:
+[01m[K/opt/ros/noetic/include/ros/node_handle.h:473:14:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class M, class T> ros::Subscriber ros::NodeHandle::subscribe(const string&, uint32_t, void (T::*)(const boost::shared_ptr<const M>&) const, T*, const ros::TransportHints&)[m[K’
+  473 |   Subscriber [01;36m[Ksubscribe[m[K(const std::string& topic, uint32_t queue_size,
+      |              [01;36m[K^~~~~~~~~[m[K
+[01m[K/opt/ros/noetic/include/ros/node_handle.h:473:14:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:27:73:[m[K [01;36m[Knote: [m[K  types ‘[01m[Kvoid (T::)(const boost::shared_ptr<const M>&) const[m[K’ and ‘[01m[Kvoid (Drivetrain::)(...)[m[K’ have incompatible cv-qualifiers
+   27 |         sub_ = nh_.subscribe("mecanum_cmd", 10, &Drivetrain::onCmd, this[01;36m[K)[m[K;
+      |                                                                         [01;36m[K^[m[K
+In file included from [01m[K/opt/ros/noetic/include/ros/ros.h:45[m[K,
+                 from [01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:1[m[K:
+[01m[K/opt/ros/noetic/include/ros/node_handle.h:527:14:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class M, class T> ros::Subscriber ros::NodeHandle::subscribe(const string&, uint32_t, void (T::*)(M), const boost::shared_ptr<U>&, const ros::TransportHints&)[m[K’
+  527 |   Subscriber [01;36m[Ksubscribe[m[K(const std::string& topic, uint32_t queue_size, void(T::*fp)(M),
+      |              [01;36m[K^~~~~~~~~[m[K
+[01m[K/opt/ros/noetic/include/ros/node_handle.h:527:14:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:27:73:[m[K [01;36m[Knote: [m[K  candidate expects 2 arguments, 1 provided
+   27 |         sub_ = nh_.subscribe("mecanum_cmd", 10, &Drivetrain::onCmd, this[01;36m[K)[m[K;
+      |                                                                         [01;36m[K^[m[K
+In file included from [01m[K/opt/ros/noetic/include/ros/ros.h:45[m[K,
+                 from [01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:1[m[K:
+[01m[K/opt/ros/noetic/include/ros/node_handle.h:538:14:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class M, class T> ros::Subscriber ros::NodeHandle::subscribe(const string&, uint32_t, void (T::*)(M) const, const boost::shared_ptr<U>&, const ros::TransportHints&)[m[K’
+  538 |   Subscriber [01;36m[Ksubscribe[m[K(const std::string& topic, uint32_t queue_size, void(T::*fp)(M) const,
+      |              [01;36m[K^~~~~~~~~[m[K
+[01m[K/opt/ros/noetic/include/ros/node_handle.h:538:14:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:27:73:[m[K [01;36m[Knote: [m[K  types ‘[01m[Kvoid (T::)(M) const[m[K’ and ‘[01m[Kvoid (Drivetrain::)(...)[m[K’ have incompatible cv-qualifiers
+   27 |         sub_ = nh_.subscribe("mecanum_cmd", 10, &Drivetrain::onCmd, this[01;36m[K)[m[K;
+      |                                                                         [01;36m[K^[m[K
+In file included from [01m[K/opt/ros/noetic/include/ros/ros.h:45[m[K,
+                 from [01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:1[m[K:
+[01m[K/opt/ros/noetic/include/ros/node_handle.h:592:14:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class M, class T> ros::Subscriber ros::NodeHandle::subscribe(const string&, uint32_t, void (T::*)(const boost::shared_ptr<const M>&), const boost::shared_ptr<U>&, const ros::TransportHints&)[m[K’
+  592 |   Subscriber [01;36m[Ksubscribe[m[K(const std::string& topic, uint32_t queue_size,
+      |              [01;36m[K^~~~~~~~~[m[K
+[01m[K/opt/ros/noetic/include/ros/node_handle.h:592:14:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:27:73:[m[K [01;36m[Knote: [m[K  candidate expects 2 arguments, 1 provided
+   27 |         sub_ = nh_.subscribe("mecanum_cmd", 10, &Drivetrain::onCmd, this[01;36m[K)[m[K;
+      |                                                                         [01;36m[K^[m[K
+In file included from [01m[K/opt/ros/noetic/include/ros/ros.h:45[m[K,
+                 from [01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:1[m[K:
+[01m[K/opt/ros/noetic/include/ros/node_handle.h:603:14:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class M, class T> ros::Subscriber ros::NodeHandle::subscribe(const string&, uint32_t, void (T::*)(const boost::shared_ptr<const M>&) const, const boost::shared_ptr<U>&, const ros::TransportHints&)[m[K’
+  603 |   Subscriber [01;36m[Ksubscribe[m[K(const std::string& topic, uint32_t queue_size,
+      |              [01;36m[K^~~~~~~~~[m[K
+[01m[K/opt/ros/noetic/include/ros/node_handle.h:603:14:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:27:73:[m[K [01;36m[Knote: [m[K  types ‘[01m[Kvoid (T::)(const boost::shared_ptr<const M>&) const[m[K’ and ‘[01m[Kvoid (Drivetrain::)(...)[m[K’ have incompatible cv-qualifiers
+   27 |         sub_ = nh_.subscribe("mecanum_cmd", 10, &Drivetrain::onCmd, this[01;36m[K)[m[K;
+      |                                                                         [01;36m[K^[m[K
+In file included from [01m[K/opt/ros/noetic/include/ros/ros.h:45[m[K,
+                 from [01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:1[m[K:
+[01m[K/opt/ros/noetic/include/ros/node_handle.h:654:14:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class M> ros::Subscriber ros::NodeHandle::subscribe(const string&, uint32_t, void (*)(M), const ros::TransportHints&)[m[K’
+  654 |   Subscriber [01;36m[Ksubscribe[m[K(const std::string& topic, uint32_t queue_size, void(*fp)(M), const TransportHints& transport_hints = TransportHints())
+      |              [01;36m[K^~~~~~~~~[m[K
+[01m[K/opt/ros/noetic/include/ros/node_handle.h:654:14:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:27:73:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[Kvoid (*)(M)[m[K’ and ‘[01m[Kvoid (Drivetrain::*)(...)[m[K’
+   27 |         sub_ = nh_.subscribe("mecanum_cmd", 10, &Drivetrain::onCmd, this[01;36m[K)[m[K;
+      |                                                                         [01;36m[K^[m[K
+In file included from [01m[K/opt/ros/noetic/include/ros/ros.h:45[m[K,
+                 from [01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:1[m[K:
+[01m[K/opt/ros/noetic/include/ros/node_handle.h:702:14:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class M> ros::Subscriber ros::NodeHandle::subscribe(const string&, uint32_t, void (*)(const boost::shared_ptr<const M>&), const ros::TransportHints&)[m[K’
+  702 |   Subscriber [01;36m[Ksubscribe[m[K(const std::string& topic, uint32_t queue_size, void(*fp)(const boost::shared_ptr<M const>&), const TransportHints& transport_hints = TransportHints())
+      |              [01;36m[K^~~~~~~~~[m[K
+[01m[K/opt/ros/noetic/include/ros/node_handle.h:702:14:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:27:73:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[Kvoid (*)(const boost::shared_ptr<const M>&)[m[K’ and ‘[01m[Kvoid (Drivetrain::*)(...)[m[K’
+   27 |         sub_ = nh_.subscribe("mecanum_cmd", 10, &Drivetrain::onCmd, this[01;36m[K)[m[K;
+      |                                                                         [01;36m[K^[m[K
+In file included from [01m[K/opt/ros/noetic/include/ros/ros.h:45[m[K,
+                 from [01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:1[m[K:
+[01m[K/opt/ros/noetic/include/ros/node_handle.h:748:14:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class M> ros::Subscriber ros::NodeHandle::subscribe(const string&, uint32_t, const boost::function<void(const boost::shared_ptr<const M>&)>&, const VoidConstPtr&, const ros::TransportHints&)[m[K’
+  748 |   Subscriber [01;36m[Ksubscribe[m[K(const std::string& topic, uint32_t queue_size, const boost::function<void (const boost::shared_ptr<M const>&)>& callback,
+      |              [01;36m[K^~~~~~~~~[m[K
+[01m[K/opt/ros/noetic/include/ros/node_handle.h:748:14:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:27:73:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[Kconst boost::function<void(const boost::shared_ptr<const M>&)>[m[K’ and ‘[01m[Kvoid (Drivetrain::*)(...)[m[K’
+   27 |         sub_ = nh_.subscribe("mecanum_cmd", 10, &Drivetrain::onCmd, this[01;36m[K)[m[K;
+      |                                                                         [01;36m[K^[m[K
+In file included from [01m[K/opt/ros/noetic/include/ros/ros.h:45[m[K,
+                 from [01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:1[m[K:
+[01m[K/opt/ros/noetic/include/ros/node_handle.h:797:14:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class M, class C> ros::Subscriber ros::NodeHandle::subscribe(const string&, uint32_t, const boost::function<void(C)>&, const VoidConstPtr&, const ros::TransportHints&)[m[K’
+  797 |   Subscriber [01;36m[Ksubscribe[m[K(const std::string& topic, uint32_t queue_size, const boost::function<void (C)>& callback,
+      |              [01;36m[K^~~~~~~~~[m[K
+[01m[K/opt/ros/noetic/include/ros/node_handle.h:797:14:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:27:73:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[Kconst boost::function<void(C)>[m[K’ and ‘[01m[Kvoid (Drivetrain::*)(...)[m[K’
+   27 |         sub_ = nh_.subscribe("mecanum_cmd", 10, &Drivetrain::onCmd, this[01;36m[K)[m[K;
+      |                                                                         [01;36m[K^[m[K
+In file included from [01m[K/opt/ros/noetic/include/ros/ros.h:45[m[K,
+                 from [01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:1[m[K:
+[01m[K/opt/ros/noetic/include/ros/node_handle.h:834:14:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Kros::Subscriber ros::NodeHandle::subscribe(ros::SubscribeOptions&)[m[K’
+  834 |   Subscriber [01;36m[Ksubscribe[m[K(SubscribeOptions& ops);
+      |              [01;36m[K^~~~~~~~~[m[K
+[01m[K/opt/ros/noetic/include/ros/node_handle.h:834:14:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 4 provided
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:28:34:[m[K [01;31m[Kerror: [m[K‘[01m[Kmecanum_drivetrain[m[K’ was not declared in this scope
+   28 |         pub_enc_ = nh_.advertise<[01;31m[Kmecanum_drivetrain[m[K::EncoderEstimates>("odrive_encoder", 10);
+      |                                  [01;31m[K^~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:28:24:[m[K [01;31m[Kerror: [m[Kparse error in template argument list
+   28 |         pub_enc_ = nh_.[01;31m[Kadvertise<mecanum_drivetrain::EncoderEstimates>[m[K("odrive_encoder", 10);
+      |                        [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:28:92:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[Kros::NodeHandle::advertise<<expression error> >(const char [15], int)[m[K’
+   28 |         pub_enc_ = nh_.advertise<mecanum_drivetrain::EncoderEstimates>("odrive_encoder", 10[01;31m[K)[m[K;
+      |                                                                                            [01;31m[K^[m[K
+In file included from [01m[K/opt/ros/noetic/include/ros/ros.h:45[m[K,
+                 from [01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:1[m[K:
+[01m[K/opt/ros/noetic/include/ros/node_handle.h:247:15:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class M> ros::Publisher ros::NodeHandle::advertise(const string&, uint32_t, bool)[m[K’
+  247 |     Publisher [01;36m[Kadvertise[m[K(const std::string& topic, uint32_t queue_size, bool latch = false)
+      |               [01;36m[K^~~~~~~~~[m[K
+[01m[K/opt/ros/noetic/include/ros/node_handle.h:247:15:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:28:92:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+   28 |         pub_enc_ = nh_.advertise<mecanum_drivetrain::EncoderEstimates>("odrive_encoder", 10[01;31m[K)[m[K;
+      |                                                                                            [01;31m[K^[m[K
+In file included from [01m[K/opt/ros/noetic/include/ros/ros.h:45[m[K,
+                 from [01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:1[m[K:
+[01m[K/opt/ros/noetic/include/ros/node_handle.h:313:13:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class M> ros::Publisher ros::NodeHandle::advertise(const string&, uint32_t, const SubscriberStatusCallback&, const SubscriberStatusCallback&, const VoidConstPtr&, bool)[m[K’
+  313 |   Publisher [01;36m[Kadvertise[m[K(const std::string& topic, uint32_t queue_size,
+      |             [01;36m[K^~~~~~~~~[m[K
+[01m[K/opt/ros/noetic/include/ros/node_handle.h:313:13:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:28:92:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+   28 |         pub_enc_ = nh_.advertise<mecanum_drivetrain::EncoderEstimates>("odrive_encoder", 10[01;31m[K)[m[K;
+      |                                                                                            [01;31m[K^[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:[m[K In member function ‘[01m[Kvoid Drivetrain::onFb(uint32_t, const uint8_t*)[m[K’:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:88:9:[m[K [01;31m[Kerror: [m[K‘[01m[Kmecanum_drivetrain[m[K’ has not been declared
+   88 |         [01;31m[Kmecanum_drivetrain[m[K::EncoderEstimates msg;
+      |         [01;31m[K^~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:89:9:[m[K [01;31m[Kerror: [m[K‘[01m[Kmsg[m[K’ was not declared in this scope
+   89 |         [01;31m[Kmsg[m[K.device_id = device_id;
+      |         [01;31m[K^~~[m[K
+make[2]: *** [CMakeFiles/drivetrain.dir/build.make:63: CMakeFiles/drivetrain.dir/src/drivetrain.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:169: CMakeFiles/drivetrain.dir/all] Error 2
+make: *** [Makefile:141: all] Error 2

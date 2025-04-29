@@ -1,0 +1,28 @@
+[31m[1mCMake Error[0m at /home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/CMakeLists.txt:190 (add_executable):
+  Cannot find source file:
+
+    src/ctrl_auto.cpp
+
+  Tried extensions .c .C .c++ .cc .cpp .cxx .cu .m .M .mm .h .hh .h++ .hm
+  .hpp .hxx .in .txx
+
+
+[31m[1mCMake Error[0m at /home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/CMakeLists.txt:189 (add_executable):
+  Cannot find source file:
+
+    src/ctrl_manual.cpp
+
+  Tried extensions .c .C .c++ .cc .cpp .cxx .cu .m .M .mm .h .hh .h++ .hm
+  .hpp .hxx .in .txx
+
+
+[31m[1mCMake Error[0m at /home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/CMakeLists.txt:190 (add_executable):
+  No SOURCES given to target: ctrl_auto
+
+
+[31m[1mCMake Error[0m at /home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/CMakeLists.txt:189 (add_executable):
+  No SOURCES given to target: ctrl_manual
+
+
+CMake Generate step failed.  Build files cannot be regenerated correctly.
+make: *** [Makefile:530: cmake_check_build_system] Error 1

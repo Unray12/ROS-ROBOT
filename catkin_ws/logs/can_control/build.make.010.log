@@ -1,0 +1,22 @@
+[35m[1mScanning dependencies of target drivetrain[0m
+[  0%] Built target std_msgs_generate_messages_py
+[  7%] [32mBuilding CXX object CMakeFiles/drivetrain.dir/src/drivetrain.cpp.o[0m
+[  7%] Built target std_msgs_generate_messages_nodejs
+[  7%] Built target std_msgs_generate_messages_eus
+[  7%] Built target std_msgs_generate_messages_lisp
+[  7%] Built target std_msgs_generate_messages_cpp
+[  7%] Built target _can_control_generate_messages_check_deps_EncoderEstimates
+[  7%] Built target _can_control_generate_messages_check_deps_MecanumControl
+[ 28%] Built target can_control_generate_messages_py
+[ 42%] Built target can_control_generate_messages_lisp
+[ 64%] Built target can_control_generate_messages_eus
+[ 92%] Built target can_control_generate_messages_cpp
+[ 92%] Built target can_control_generate_messages_nodejs
+[ 92%] Built target can_control_generate_messages
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/drivetrain.cpp:2:10:[m[K [01;31m[Kfatal error: [m[Kmecanum_drivetrain/MecanumControl.h: No such file or directory
+    2 | #include [01;31m[K<mecanum_drivetrain/MecanumControl.h>[m[K
+      |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+compilation terminated.
+make[2]: *** [CMakeFiles/drivetrain.dir/build.make:63: CMakeFiles/drivetrain.dir/src/drivetrain.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:169: CMakeFiles/drivetrain.dir/all] Error 2
+make: *** [Makefile:141: all] Error 2

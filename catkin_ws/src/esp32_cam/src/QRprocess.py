@@ -135,7 +135,7 @@ class RTSPQRScanner:
             return None
 
 def main():
-    rtsp_url = "rtsp://admin:ACLAB2023@172.28.182.200/ISAPI/Streaming/channels/1"
+    rtsp_url = "http://192.168.1.2:6677/videofeed"
     
     scanner = RTSPQRScanner(rtsp_url)
     scanner.start()

@@ -1,5 +1,30 @@
 #include "Esp32Now.h"
 
+
+
+
+uint32_t infoSensorMsg::fnv1aHash(const void* data, size_t len) {
+  uint32_t hash = 2166136261u;
+  const uint8_t* ptr = static_cast<const uint8_t*>(data);
+  for (size_t i = 0; i < len; ++i) {
+      hash ^= ptr[i];
+      hash *= 16777619u;
+  }
+  return hash;
+}
+
+
+void infoSensorMsg::computeChecksum() {
+  size_t sizeWithoutChecksum = sizeof(infoSensorMsg) - sizeof(checksum);
+  checksum = fnv1aHash(this, sizeWithoutChecksum);
+}
+
+bool infoSensorMsg::validateChecksum() const {
+  size_t sizeWithoutChecksum = sizeof(infoSensorMsg) - sizeof(checksum);
+  return checksum == fnv1aHash(this, sizeWithoutChecksum);
+}
+
+
 // {0xCC, 0xBA, 0x97, 0x0D, 0xE4, 0xA0};
 void readMacAddress(){
     uint8_t baseMac[6];

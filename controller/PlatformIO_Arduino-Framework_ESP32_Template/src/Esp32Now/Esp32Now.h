@@ -14,9 +14,15 @@ typedef struct infoSensorMsg {
     //reply sensor info: 1
     float humidityValue;
     float temperatureValue;
+    uint32_t checksum;
 
     infoSensorMsg(uint8_t typeMsg = 0, uint8_t sensorType = 0, uint16_t humidity = 0, uint16_t temperature = 0) 
-    : typeMessage(typeMsg), infoSensorType(sensorType), humidityValue(humidity), temperatureValue(temperature) {}
+    : typeMessage(typeMsg), infoSensorType(sensorType), humidityValue(humidity), temperatureValue(temperature){}
+
+    void computeChecksum();
+    bool validateChecksum() const;
+
+    static uint32_t fnv1aHash(const void* data, size_t len);
 } infoSensorMsg;
 
 

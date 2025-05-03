@@ -1,6 +1,7 @@
 /home/aclab/Desktop/ROS-VR/catkin_ws/build/can_control/CMakeFiles/install/strip.dir
 /home/aclab/Desktop/ROS-VR/catkin_ws/build/can_control/CMakeFiles/install.dir
 /home/aclab/Desktop/ROS-VR/catkin_ws/build/can_control/CMakeFiles/edit_cache.dir
+/home/aclab/Desktop/ROS-VR/catkin_ws/build/can_control/CMakeFiles/main.dir
 /home/aclab/Desktop/ROS-VR/catkin_ws/build/can_control/CMakeFiles/ctrl_manual.dir
 /home/aclab/Desktop/ROS-VR/catkin_ws/build/can_control/CMakeFiles/drivetrain.dir
 /home/aclab/Desktop/ROS-VR/catkin_ws/build/can_control/CMakeFiles/can_control_generate_messages_py.dir

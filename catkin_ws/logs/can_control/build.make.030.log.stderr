@@ -1,0 +1,20 @@
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/main.cpp:53:40:[m[K [01;31m[Kerror: [m[K‘[01m[KString[m[K’ in namespace ‘[01m[Kstd_msgs[m[K’ does not name a type
+   53 | void VRcontrolCallback(const std_msgs::[01;31m[KString[m[K::ConstPtr& msg)
+      |                                        [01;31m[K^~~~~~[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/main.cpp:53:56:[m[K [01;31m[Kerror: [m[Kexpected unqualified-id before ‘[01m[K&[m[K’ token
+   53 | void VRcontrolCallback(const std_msgs::String::ConstPtr[01;31m[K&[m[K msg)
+      |                                                        [01;31m[K^[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/main.cpp:53:56:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K)[m[K’ before ‘[01m[K&[m[K’ token
+   53 | void VRcontrolCallback[34m[K([m[Kconst std_msgs::String::ConstPtr[01;31m[K&[m[K msg)
+      |                       [34m[K~[m[K                                [01;31m[K^[m[K
+      |                                                        [32m[K)[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/main.cpp:53:58:[m[K [01;31m[Kerror: [m[Kexpected initializer before ‘[01m[Kmsg[m[K’
+   53 | void VRcontrolCallback(const std_msgs::String::ConstPtr& [01;31m[Kmsg[m[K)
+      |                                                          [01;31m[K^~~[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/main.cpp:[m[K In function ‘[01m[Kint main(int, char**)[m[K’:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/main.cpp:83:61:[m[K [01;31m[Kerror: [m[K‘[01m[KVRcontrolCallback[m[K’ was not declared in this scope
+   83 |     ros::Subscriber vr_sub = nh.subscribe("VR_control", 10, [01;31m[KVRcontrolCallback[m[K);
+      |                                                             [01;31m[K^~~~~~~~~~~~~~~~~[m[K
+make[2]: *** [CMakeFiles/main.dir/build.make:63: CMakeFiles/main.dir/src/main.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:194: CMakeFiles/main.dir/all] Error 2
+make: *** [Makefile:141: all] Error 2

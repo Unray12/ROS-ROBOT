@@ -1,0 +1,20 @@
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/main.cpp:81:25:[m[K [01;31m[Kerror: [m[K‘[01m[Kgeometry_msgs[m[K’ does not name a type
+   81 | void twistMessage(const [01;31m[Kgeometry_msgs[m[K::Twist &msg) {
+      |                         [01;31m[K^~~~~~~~~~~~~[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/main.cpp:81:46:[m[K [01;31m[Kerror: [m[Kexpected unqualified-id before ‘[01m[K&[m[K’ token
+   81 | void twistMessage(const geometry_msgs::Twist [01;31m[K&[m[Kmsg) {
+      |                                              [01;31m[K^[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/main.cpp:81:45:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K)[m[K’ before ‘[01m[K&[m[K’ token
+   81 | void twistMessage[34m[K([m[Kconst geometry_msgs::Twist[01;31m[K [m[K[32m[K&[m[Kmsg) {
+      |                  [34m[K~[m[K                          [01;31m[K^[m[K[32m[K~[m[K
+      |                                             [32m[K)[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/main.cpp:81:47:[m[K [01;31m[Kerror: [m[Kexpected initializer before ‘[01m[Kmsg[m[K’
+   81 | void twistMessage(const geometry_msgs::Twist &[01;31m[Kmsg[m[K) {
+      |                                               [01;31m[K^~~[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/main.cpp:[m[K In function ‘[01m[Kint main(int, char**)[m[K’:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/main.cpp:100:60:[m[K [01;31m[Kerror: [m[K‘[01m[KtwistMessage[m[K’ was not declared in this scope
+  100 |     ros::Subscriber lidarSub = nh.subscribe("cmd_vel", 10, [01;31m[KtwistMessage[m[K);
+      |                                                            [01;31m[K^~~~~~~~~~~~[m[K
+make[2]: *** [CMakeFiles/main.dir/build.make:63: CMakeFiles/main.dir/src/main.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:194: CMakeFiles/main.dir/all] Error 2
+make: *** [Makefile:141: all] Error 2

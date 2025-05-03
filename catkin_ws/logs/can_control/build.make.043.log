@@ -1,0 +1,59 @@
+[  0%] Built target rosgraph_msgs_generate_messages_eus
+[  0%] Built target std_msgs_generate_messages_nodejs
+[  0%] Built target std_msgs_generate_messages_eus
+[  0%] Built target std_msgs_generate_messages_py
+[  0%] Built target roscpp_generate_messages_nodejs
+[  0%] Built target rosgraph_msgs_generate_messages_cpp
+[  0%] Built target _can_control_generate_messages_check_deps_EncoderEstimates
+[  0%] Built target _can_control_generate_messages_check_deps_MecanumControl
+[  0%] Built target roscpp_generate_messages_cpp
+[  0%] Built target roscpp_generate_messages_eus
+[  0%] Built target roscpp_generate_messages_py
+[  0%] Built target rosgraph_msgs_generate_messages_lisp
+[  0%] Built target std_msgs_generate_messages_lisp
+[  0%] Built target roscpp_generate_messages_lisp
+[  0%] Built target std_msgs_generate_messages_cpp
+[  0%] Built target rosgraph_msgs_generate_messages_nodejs
+[  0%] Built target rosgraph_msgs_generate_messages_py
+[ 13%] Built target can_control_generate_messages_eus
+[ 22%] Built target can_control_generate_messages_nodejs
+[ 36%] Built target can_control_generate_messages_py
+[ 45%] Built target can_control_generate_messages_cpp
+[ 54%] Built target can_control_generate_messages_lisp
+[35m[1mScanning dependencies of target main[0m
+[ 54%] Built target can_control_generate_messages
+[ 68%] Built target ctrl_manual
+[ 68%] [32mBuilding CXX object CMakeFiles/main.dir/src/main.cpp.o[0m
+[ 86%] Built target drivetrain
+[ 95%] Built target ctrl_auto
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/main.cpp:55:18:[m[K [01;31m[Kerror: [m[Kvariable or field ‘[01m[KrobotAction[m[K’ declared void
+   55 | void robotAction([01;31m[Kstring[m[K direction) {
+      |                  [01;31m[K^~~~~~[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/main.cpp:55:18:[m[K [01;31m[Kerror: [m[K‘[01m[Kstring[m[K’ was not declared in this scope
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/main.cpp:55:18:[m[K [01;36m[Knote: [m[Ksuggested alternatives:
+In file included from [01m[K/usr/include/c++/9/string:39[m[K,
+                 from [01m[K/opt/ros/noetic/include/ros/platform.h:38[m[K,
+                 from [01m[K/opt/ros/noetic/include/ros/time.h:53[m[K,
+                 from [01m[K/opt/ros/noetic/include/ros/ros.h:38[m[K,
+                 from [01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/main.cpp:1[m[K:
+[01m[K/usr/include/c++/9/bits/stringfwd.h:79:33:[m[K [01;36m[Knote: [m[K  ‘[01m[Kstd::string[m[K’
+   79 |   typedef basic_string<char>    [01;36m[Kstring[m[K;
+      |                                 [01;36m[K^~~~~~[m[K
+In file included from [01m[K/usr/include/boost/lexical_cast/detail/converter_lexical.hpp:52[m[K,
+                 from [01m[K/usr/include/boost/lexical_cast/try_lexical_convert.hpp:44[m[K,
+                 from [01m[K/usr/include/boost/lexical_cast.hpp:32[m[K,
+                 from [01m[K/opt/ros/noetic/include/ros/transport_hints.h:34[m[K,
+                 from [01m[K/opt/ros/noetic/include/ros/subscribe_options.h:33[m[K,
+                 from [01m[K/opt/ros/noetic/include/ros/node_handle.h:42[m[K,
+                 from [01m[K/opt/ros/noetic/include/ros/ros.h:45[m[K,
+                 from [01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/main.cpp:1[m[K:
+[01m[K/usr/include/boost/container/container_fwd.hpp:191:31:[m[K [01;36m[Knote: [m[K  ‘[01m[Kboost::container::string[m[K’
+  191 | typedef basic_string <char>   [01;36m[Kstring[m[K;
+      |                               [01;36m[K^~~~~~[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/main.cpp:[m[K In function ‘[01m[Kvoid VRcontrolCallback(const ConstPtr&)[m[K’:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/main.cpp:74:5:[m[K [01;31m[Kerror: [m[K‘[01m[KrobotAction[m[K’ was not declared in this scope
+   74 |     [01;31m[KrobotAction[m[K(msg->data);
+      |     [01;31m[K^~~~~~~~~~~[m[K
+make[2]: *** [CMakeFiles/main.dir/build.make:63: CMakeFiles/main.dir/src/main.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:194: CMakeFiles/main.dir/all] Error 2
+make: *** [Makefile:141: all] Error 2

@@ -232,6 +232,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
+  "CMakeFiles/main.dir/DependInfo.cmake"
   "CMakeFiles/ctrl_manual.dir/DependInfo.cmake"
   "CMakeFiles/drivetrain.dir/DependInfo.cmake"
   "CMakeFiles/can_control_generate_messages_py.dir/DependInfo.cmake"

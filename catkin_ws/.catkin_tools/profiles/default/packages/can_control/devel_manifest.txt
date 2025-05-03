@@ -20,6 +20,7 @@ can_control
 /home/aclab/Desktop/ROS-VR/catkin_ws/devel/.private/can_control/include/can_control/MecanumControl.h /home/aclab/Desktop/ROS-VR/catkin_ws/devel/include/can_control/MecanumControl.h
 /home/aclab/Desktop/ROS-VR/catkin_ws/devel/.private/can_control/include/can_control/EncoderEstimates.h /home/aclab/Desktop/ROS-VR/catkin_ws/devel/include/can_control/EncoderEstimates.h
 /home/aclab/Desktop/ROS-VR/catkin_ws/devel/.private/can_control/lib/can_control/ctrl_manual /home/aclab/Desktop/ROS-VR/catkin_ws/devel/lib/can_control/ctrl_manual
+/home/aclab/Desktop/ROS-VR/catkin_ws/devel/.private/can_control/lib/can_control/main /home/aclab/Desktop/ROS-VR/catkin_ws/devel/lib/can_control/main
 /home/aclab/Desktop/ROS-VR/catkin_ws/devel/.private/can_control/lib/can_control/drivetrain /home/aclab/Desktop/ROS-VR/catkin_ws/devel/lib/can_control/drivetrain
 /home/aclab/Desktop/ROS-VR/catkin_ws/devel/.private/can_control/lib/can_control/ctrl_auto /home/aclab/Desktop/ROS-VR/catkin_ws/devel/lib/can_control/ctrl_auto
 /home/aclab/Desktop/ROS-VR/catkin_ws/devel/.private/can_control/lib/python3/dist-packages/can_control/__init__.py /home/aclab/Desktop/ROS-VR/catkin_ws/devel/lib/python3/dist-packages/can_control/__init__.py

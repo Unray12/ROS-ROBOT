@@ -1,0 +1,34 @@
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/main.cpp:[m[K In function ‘[01m[Kvoid VRcontrolCallback(const Twist&)[m[K’:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/main.cpp:66:30:[m[K [01;31m[Kerror: [m[Kbase operand of ‘[01m[K->[m[K’ has non-pointer type ‘[01m[Kconst Twist[m[K’ {aka ‘[01m[Kconst geometry_msgs::Twist_<std::allocator<void> >[m[K’}
+   66 |     auto it = DIR_VR.find(msg[01;31m[K->[m[Kdata);
+      |                              [01;31m[K^~[m[K
+In file included from [01m[K/opt/ros/noetic/include/ros/ros.h:40[m[K,
+                 from [01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/main.cpp:1[m[K:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/main.cpp:68:47:[m[K [01;31m[Kerror: [m[Kbase operand of ‘[01m[K->[m[K’ has non-pointer type ‘[01m[Kconst Twist[m[K’ {aka ‘[01m[Kconst geometry_msgs::Twist_<std::allocator<void> >[m[K’}
+   68 |         ROS_WARN("Unknown VR command: %s", msg[01;31m[K->[m[Kdata.c_str());
+      |                                               [01;31m[K^~[m[K
+[01m[K/opt/ros/noetic/include/ros/console.h:351:165:[m[K [01;36m[Knote: [m[Kin definition of macro ‘[01m[KROSCONSOLE_PRINT_AT_LOCATION_WITH_FILTER[m[K’
+  351 |     ::ros::console::print(filter, __rosconsole_define_location__loc.logger_, __rosconsole_define_location__loc.level_, __FILE__, __LINE__, __ROSCONSOLE_FUNCTION__, [01;36m[K__VA_ARGS__[m[K)
+      |                                                                                                                                                                     [01;36m[K^~~~~~~~~~~[m[K
+[01m[K/opt/ros/noetic/include/ros/console.h:390:7:[m[K [01;36m[Knote: [m[Kin expansion of macro ‘[01m[KROSCONSOLE_PRINT_AT_LOCATION[m[K’
+  390 |       [01;36m[KROSCONSOLE_PRINT_AT_LOCATION[m[K(__VA_ARGS__); \
+      |       [01;36m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/opt/ros/noetic/include/ros/console.h:575:35:[m[K [01;36m[Knote: [m[Kin expansion of macro ‘[01m[KROS_LOG_COND[m[K’
+  575 | #define ROS_LOG(level, name, ...) [01;36m[KROS_LOG_COND[m[K(true, level, name, __VA_ARGS__)
+      |                                   [01;36m[K^~~~~~~~~~~~[m[K
+[01m[K/opt/ros/noetic/include/rosconsole/macros_generated.h:162:23:[m[K [01;36m[Knote: [m[Kin expansion of macro ‘[01m[KROS_LOG[m[K’
+  162 | #define ROS_WARN(...) [01;36m[KROS_LOG[m[K(::ros::console::levels::Warn, ROSCONSOLE_DEFAULT_NAME, __VA_ARGS__)
+      |                       [01;36m[K^~~~~~~[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/main.cpp:68:9:[m[K [01;36m[Knote: [m[Kin expansion of macro ‘[01m[KROS_WARN[m[K’
+   68 |         [01;36m[KROS_WARN[m[K("Unknown VR command: %s", msg->data.c_str());
+      |         [01;36m[K^~~~~~~~[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/main.cpp:[m[K In function ‘[01m[Kvoid twistMessage(const ConstPtr&)[m[K’:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/main.cpp:82:28:[m[K [01;31m[Kerror: [m[K‘[01m[Kconst ConstPtr[m[K’ {aka ‘[01m[Kconst class boost::shared_ptr<const std_msgs::String_<std::allocator<void> > >[m[K’} has no member named ‘[01m[Kangular[m[K’
+   82 |     double angular_z = msg.[01;31m[Kangular[m[K.z;
+      |                            [01;31m[K^~~~~~~[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/main.cpp:83:27:[m[K [01;31m[Kerror: [m[K‘[01m[Kconst ConstPtr[m[K’ {aka ‘[01m[Kconst class boost::shared_ptr<const std_msgs::String_<std::allocator<void> > >[m[K’} has no member named ‘[01m[Klinear[m[K’
+   83 |     double linear_x = msg.[01;31m[Klinear[m[K.x;
+      |                           [01;31m[K^~~~~~[m[K
+make[2]: *** [CMakeFiles/main.dir/build.make:63: CMakeFiles/main.dir/src/main.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:194: CMakeFiles/main.dir/all] Error 2
+make: *** [Makefile:141: all] Error 2

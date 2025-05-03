@@ -1,0 +1,7 @@
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/main.cpp:[m[K In function ‘[01m[Kvoid twistMessage(const Twist&)[m[K’:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/main.cpp:78:22:[m[K [01;31m[Kerror: [m[K‘[01m[Kconst Twist[m[K’ {aka ‘[01m[Kconst struct geometry_msgs::Twist_<std::allocator<void> >[m[K’} has no member named ‘[01m[Kdata[m[K’
+   78 |     std::cout << msg.[01;31m[Kdata[m[K;
+      |                      [01;31m[K^~~~[m[K
+make[2]: *** [CMakeFiles/main.dir/build.make:63: CMakeFiles/main.dir/src/main.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:194: CMakeFiles/main.dir/all] Error 2
+make: *** [Makefile:141: all] Error 2

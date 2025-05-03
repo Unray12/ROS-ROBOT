@@ -50,6 +50,11 @@ add_executable(ctrl_auto src/ctrl_auto.cpp)
 add_dependencies(ctrl_auto ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(ctrl_auto ${catkin_LIBRARIES})
 
+
+# main executable
+add_executable(main src/main.cpp)
+add_dependencies(main ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(main ${catkin_LIBRARIES})
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 

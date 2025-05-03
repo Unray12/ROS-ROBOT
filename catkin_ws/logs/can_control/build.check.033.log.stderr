@@ -1,0 +1,8 @@
+[31m[1mCMake Error[0m at /home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/CMakeLists.txt:55 (add_executable):
+  add_executable cannot create target "ctrl_auto" because another target with
+  the same name already exists.  The existing target is an executable created
+  in source directory "/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control".
+  See documentation for policy CMP0002 for more details.
+
+
+make: *** [Makefile:904: cmake_check_build_system] Error 1

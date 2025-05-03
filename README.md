@@ -24,3 +24,10 @@ rosrun can_control drivetrai
 rosrun can_control ctrl_manual 
 // send cmd for unlock mode: 0 -> 3 clc
 rosrun can_control ctrl_auto
+rosrun can_control main
+
+
+sudo slcand -o -c -s6 /dev/ttyACMx can0
+sudo ip link set can0 up type can bitrate 500000
+sudo ip link set can0 up
+source ~/catkin_ws/devel/setup.bash

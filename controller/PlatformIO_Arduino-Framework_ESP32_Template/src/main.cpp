@@ -240,7 +240,6 @@ void robotActionTask(void *pvParameter) {
         if (mecanumRobot.nextAngularState != mecanumRobot.currentAngularState) {
             mecanumRobot.currentAngularState = mecanumRobot.nextAngularState;
             mecanumRobot.nextAngularState = 0;
-        
             if (mecanumRobot.currentAngularState == 1) {
                 mecanumRobot.turnLeft(30);
                 Serial.println("1 left");

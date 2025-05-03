@@ -13,9 +13,9 @@
 #include <json_generator.h>
 #include <string.h>
 
-// #define SENSOR
+#define SENSOR
 // #define EVALUATE
-#define GATEWAY
+// #define GATEWAY
 const char *ssid = "ACLAB";
 const char *password = "ACLAB2023";
 IPAddress IPRosSerialServer(172, 28, 182, 162); //34 162
@@ -23,11 +23,11 @@ const uint16_t rosSerialserverPort = 11411;
 
 const uint8_t broadcastAddress[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 
-#ifdef GATEWAY
+// #ifdef GATEWAY
 esp_now_peer_info_t peerInfo;
 std_msgs::String strMsg;
 ros::Publisher chatter("Sensors", &strMsg);
-#endif
+// #endif
 
 ros::NodeHandle_<ArduinoHardware> nodeHandle;
 Robot mecanumRobot;
@@ -65,28 +65,25 @@ void esp32PublishTask(void *pvParameter)
 
 void sendSensorInfo(const uint8_t *gwMAC) {
     // esp_now_peer_info_t gwPeerInfo;
+    // Serial.println("Send sensor info");
     dht20.read();
     infoSensorMsg myData(0, 1, dht20.getHumidity(), dht20.getTemperature());
     if (WiFi.status() == WL_CONNECTED) {
+        // Serial.printf("Humidity: %f, Temperature: %f\n", myData.humidityValue, myData.temperatureValue);
         sendEspNow(broadcastAddress, myData);
     }
 }
 
 //publish to ROS
 void publishSensorInfo(infoSensorMsg mySensorData) {
-    // std_msgs::String strMsg;
-    // ros::Publisher chatter("Sensors", &strMsg);
-
+    // Serial.println("Publish ...");
     char buffer[256] = {'\0'};
     json_gen_str_t jsonString;
     json_gen_str_start(&jsonString, buffer, sizeof(buffer), NULL, NULL);
-
     json_gen_start_object(&jsonString);
     json_gen_obj_set_float(&jsonString, "Humidity", mySensorData.humidityValue);
     json_gen_obj_set_float(&jsonString, "Temperature", mySensorData.temperatureValue);
     json_gen_end_object(&jsonString);
-
-    // nodeHandle.advertise(chatter);
 
     strMsg.data = buffer;
     chatter.publish(&strMsg);
@@ -96,25 +93,25 @@ void publishSensorInfo(infoSensorMsg mySensorData) {
 void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
 //   Serial.print("\r\nLast Packet Send Status:\t");
 //   Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
+    // Serial.println("ESP NOW send");
 }
 
 // callback when data is receive
 void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
-    Serial.println("hello receive");
+    // Serial.println("hello receive");
     infoSensorMsg myData;
     memcpy(&myData, incomingData, sizeof(infoSensorMsg));
 
     if (myData.typeMessage == 0) {
+    #ifdef SENSOR
         if (myData.infoSensorType == 0) {
-            #ifdef SENSOR
             sendSensorInfo(mac);
-            #endif
         }
+    #endif
 
     #ifdef GATEWAY 
-        else if (myData.infoSensorType == 1) {
+        if (myData.infoSensorType == 1) {
             publishSensorInfo(myData);
-            // esp32PublishTask();
         }
     #endif
     }
@@ -277,7 +274,9 @@ void espNowGwTask(void *pvParamater) {
                 sendEspNow(broadcastAddress, myData);
             }
         }
+        #ifdef EVALUATE
         mecanumRobot.motorDriver.printTime();
+        #endif
         vTaskDelay(2000 / portTICK_PERIOD_MS);
     }
 
@@ -309,11 +308,12 @@ void setup()
 
 #ifdef SENSOR
     dht20.begin();
-    xTaskCreate(espNowSensorTask, "espNowSensorTask", 4096, NULL, 1, NULL);
+    // xTaskCreate(espNowSensorTask, "espNowSensorTask", 4096, NULL, 1, NULL);
 #endif
 
 #ifdef GATEWAY
     nodeHandle.initNode();
+    dht20.begin();
     nodeHandle.subscribe(lidarSub);
     nodeHandle.subscribe(VRcontrolSub);
     nodeHandle.advertise(chatter);
@@ -323,7 +323,7 @@ void setup()
     readMacAddress();
     // xTaskCreate(esp32PublishTask, "esp32PublishTask", 4096, NULL, 1, NULL);
     // xTaskCreate(robotActionTask, "robotActionTask", 4096, NULL, 1, NULL);
-    // xTaskCreate(espNowGwTask, "espNowGwTask", 4096, NULL, 1, NULL);
+    xTaskCreate(espNowGwTask, "espNowGwTask", 4096, NULL, 1, NULL);
     // xTaskCreate(spinOnceTask, "spinOnceTask", 4096, NULL, 1, NULL);
     xTaskCreatePinnedToCore(spinOnceTask, "spinOnceTask", 4096, NULL, 1, NULL, 1);
 #endif

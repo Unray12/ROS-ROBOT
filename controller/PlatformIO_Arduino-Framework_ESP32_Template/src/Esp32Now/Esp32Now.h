@@ -16,7 +16,7 @@ typedef struct infoSensorMsg {
     float temperatureValue;
     uint32_t checksum;
 
-    infoSensorMsg(uint8_t typeMsg = 0, uint8_t sensorType = 0, uint16_t humidity = 0, uint16_t temperature = 0) 
+    infoSensorMsg(uint8_t typeMsg = 0, uint8_t sensorType = 0, float humidity = 0, float temperature = 0) 
     : typeMessage(typeMsg), infoSensorType(sensorType), humidityValue(humidity), temperatureValue(temperature){}
 
     void computeChecksum();

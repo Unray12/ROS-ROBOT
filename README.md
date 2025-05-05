@@ -31,3 +31,36 @@ sudo slcand -o -c -s6 /dev/ttyACMx can0
 sudo ip link set can0 up type can bitrate 500000
 sudo ip link set can0 up
 source ~/catkin_ws/devel/setup.bash
+
+ls /dev/ttyACM* |  
+roscore
+cd ~/catkin_ws/src/rplidar_ros/launch/
+roslauch rplidar_a2m8.launch
+rosrun esp32_controller controllerPublisher.py
+rosrun can_control drivetrain
+rosrun can_control main
+rosrun can_control ctrl_manual
+
+
+#!/bin/bash
+tty_device=$(ls /dev/ttyACM* 2>/dev/null | head -n 1)
+sudo slcand -o -c -s6 "$tty_device" can0
+sudo ip link set can0 up type can bitrate 500000
+sudo ip link set can0 up
+
+lxterminal -e "bash -c 'source /opt/ros/noetic/setup.bash; roscore; exec bash'" &
+sleep 4
+
+lxterminal -e "bash -c 'source /opt/ros/noetic/setup.bash; source ~/catkin_ws/devel/setup.bash; cd ~/catkin_ws/src/rplidar_ros/launch/ && roslaunch rplidar_a2m8.launch; exec bash'" &
+sleep 1
+
+lxterminal -e "bash -c 'source /opt/ros/noetic/setup.bash; source ~/catkin_ws/devel/setup.bash; rosrun esp32_controller controllerPublisher.py; exec bash'" &
+sleep 1
+ 
+lxterminal -e "bash -c 'source /opt/ros/noetic/setup.bash; source ~/catkin_ws/devel/setup.bash; rosrun can_control drivetrain; exec bash'" &
+sleep 1
+
+lxterminal -e "bash -c 'source /opt/ros/noetic/setup.bash; source ~/catkin_ws/devel/setup.bash; rosrun can_control main; exec bash'" &
+sleep 1
+
+lxterminal -e "bash -c 'source /opt/ros/noetic/setup.bash; source ~/catkin_ws/devel/setup.bash; rosrun can_control ctrl_manual; exec bash'"

@@ -7,6 +7,7 @@
 #include <array>
 #include <termios.h>
 #include <unistd.h>
+#include "std_msgs/Int32.h"
 #include "Robot/Robot.h"
 
 using can_control::MecanumControl;
@@ -23,36 +24,23 @@ static const std::unordered_map<char, std::array<float, 4>> DIR = {
     {'5', {0, 0, 0, 0}}      // STOP
 };
 
-const std::unordered_map<std::string, std::array<float, 4>> DIR_VR = {
-    {"Forward",  {+1, +1, +1, +1}},
-    {"Backward", {-1, -1, -1, -1}},
-    {"Left",     {-1, +1, -1, +1}},
-    {"Right",    {+1, -1, +1, -1}},
-    {"Stop",     {0, 0, 0, 0}}
-};
 
 Robot mecanumRobot;
 
-
-
 void VRcontrolCallback(const std_msgs::String::ConstPtr& msg)
 {
-    mecanumRobot.robotDirection(msg->data);
+    if (!mecanumRobot.isAuto && mecanumRobot.isActive)
+        mecanumRobot.processModeManual(msg->data);
 }
 
+void VRpickCallback(const std_msgs::Int32::ConstPtr& msg) {
+    if (msg->data == mecanumRobot.id)
+        mecanumRobot.isActive = 1;
+}
 
 void twistMessage(const geometry_msgs::Twist& msg) {
-    double angular_z = msg.angular.z;
-    double linear_x = msg.linear.x;
-    int vel = 50;
-    if (angular_z > 0) {
-        mecanumRobot.robotDirection("Left");
-    }
-    else if (angular_z < 0) {
-        mecanumRobot.robotDirection("Right");
-    }
-    else 
-        mecanumRobot.robotDirection("Forward");
+    if (mecanumRobot.isAuto)
+        mecanumRobot.processModeAuto(msg);
 }
 
 int main(int argc, char **argv)
@@ -60,8 +48,9 @@ int main(int argc, char **argv)
     ros::init(argc, argv, "main");
     ros::NodeHandle nh;
     mecanumRobot.mecanumCmdPub = nh.advertise<MecanumControl>("mecanum_cmd", 10);
-    ros::Subscriber vr_sub = nh.subscribe("VR_control", 10, VRcontrolCallback);
-    //ros::Subscriber lidarSub = nh.subscribe("cmd_vel", 10, twistMessage);
+    ros::Subscriber vrControlSub = nh.subscribe("VR_control", 10, VRcontrolCallback);
+    ros::Subscriber vrPickSub = nh.subscribe("pick_robot", 10, VRpickCallback);
+    ros::Subscriber lidarSub = nh.subscribe("cmd_vel", 10, twistMessage);
 
     float vel = 8.0f;
 

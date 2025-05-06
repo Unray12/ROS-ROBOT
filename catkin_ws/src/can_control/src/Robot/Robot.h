@@ -31,6 +31,9 @@ class Robot {
         Robot() {}
         int currentState;
         int nextState;
+        bool isAuto = 0;
+        bool isActive = 0;
+        int id = 0;
         /*
         0: Stop
         1: Forward
@@ -40,7 +43,7 @@ class Robot {
         */
        ros::Publisher mecanumCmdPub;
         void robotDirection(std::string direction) {
-            this->nextState = this->DIR_STATE.find(direction);
+            this->nextState = this->DIR_STATE.find(direction)->second;
             if (this->nextState != this->currentState) {
                 this->currentState = this->nextState;
                 for (uint8_t id = 0; id < 4; ++id) {
@@ -69,6 +72,24 @@ class Robot {
                 }
             
             }
+        }
+
+        void processModeManual(std::string direction) {
+            this->robotDirection(direction);
+        }
+
+        void processModeAuto(const geometry_msgs::Twist& msg) {
+            double angular_z = msg.angular.z;
+            double linear_x = msg.linear.x;
+            int vel = 50;
+            if (angular_z > 0) {
+                this->robotDirection("Left");
+            }
+            else if (angular_z < 0) {
+                this->robotDirection("Right");
+            }
+            else 
+                this->robotDirection("Forward");
         }
 
 };

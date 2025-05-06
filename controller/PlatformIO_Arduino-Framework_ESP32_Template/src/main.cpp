@@ -175,6 +175,12 @@ int sequence = 1;
 #endif
 
 void processVRMessage(const std_msgs::String &msg) {
+
+void VRpickCallback(const std_msgs::Int32::ConstPtr& msg) {
+    if (msg->data == mecanumRobot.id)
+        mecanumRobot.isActive = 1;
+}
+
 #ifdef EVALUATE
     Serial.printf("%d %s\n", sequence, msg.data);
     sequence++;
@@ -199,6 +205,7 @@ void processVRMessage(const std_msgs::String &msg) {
 
 ros::Subscriber<geometry_msgs::Twist> lidarSub("cmd_vel", &twistMessage);
 ros::Subscriber<std_msgs::String> VRcontrolSub("VR_control", &processVRMessage);
+ros::Subscriber<std_msgs::String> VRcontrolSub("pick_robot", &VRpickCallback);
 
 
 void wifiTask(void *pvParameters) {

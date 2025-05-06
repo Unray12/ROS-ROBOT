@@ -7,6 +7,7 @@
 #include <array>
 #include <termios.h>
 #include <unistd.h>
+#include "Robot/Robot.h"
 
 using can_control::MecanumControl;
 
@@ -30,140 +31,46 @@ const std::unordered_map<std::string, std::array<float, 4>> DIR_VR = {
     {"Stop",     {0, 0, 0, 0}}
 };
 
-ros::Publisher mecanumCmdPub;
+Robot mecanumRobot;
 
-class RawMode
-{
-    termios orig_;
 
-public:
-    RawMode()
-    {
-        tcgetattr(STDIN_FILENO, &orig_);
-        termios raw = orig_;
-        raw.c_lflag &= ~(ICANON | ECHO);
-        tcsetattr(STDIN_FILENO, TCSANOW, &raw);
-    }
-
-    ~RawMode()
-    {
-        tcsetattr(STDIN_FILENO, TCSANOW, &orig_);
-    }
-};
-
-void robotAction(std::string direction) {
-    auto it = DIR_VR.find(direction);
-    std::cout << direction;
-    if (it == DIR_VR.end()) {
-        ROS_WARN("Unknown VR command: %s", direction.c_str());
-        return;
-    }
-
-    for (uint8_t id = 0; id < 4; ++id) {
-        MecanumControl m;
-        m.device_id = id;
-        m.mode = MecanumControl::MODE_SET_TARGET;
-        m.value = it->second[id] * 8.0f;
-        mecanumCmdPub.publish(m);
-    }
-}
 
 void VRcontrolCallback(const std_msgs::String::ConstPtr& msg)
 {
-    robotAction(msg->data);
+    mecanumRobot.robotDirection(msg->data);
 }
+
 
 void twistMessage(const geometry_msgs::Twist& msg) {
     double angular_z = msg.angular.z;
     double linear_x = msg.linear.x;
     int vel = 50;
     if (angular_z > 0) {
-        robotAction("Left");
+        mecanumRobot.robotDirection("Left");
     }
     else if (angular_z < 0) {
-          robotAction("Right");
+        mecanumRobot.robotDirection("Right");
     }
     else 
-        robotAction("Forward");
+        mecanumRobot.robotDirection("Forward");
 }
 
 int main(int argc, char **argv)
 {
     ros::init(argc, argv, "main");
     ros::NodeHandle nh;
-    mecanumCmdPub = nh.advertise<MecanumControl>("mecanum_cmd", 10);
+    mecanumRobot.mecanumCmdPub = nh.advertise<MecanumControl>("mecanum_cmd", 10);
     ros::Subscriber vr_sub = nh.subscribe("VR_control", 10, VRcontrolCallback);
-    ros::Subscriber lidarSub = nh.subscribe("cmd_vel", 10, twistMessage);
+    //ros::Subscriber lidarSub = nh.subscribe("cmd_vel", 10, twistMessage);
 
     float vel = 8.0f;
-    RawMode _raw;
 
     ros::Rate rate(100); // To avoid spinning too fast
 
-    for (uint8_t id = 0; id < 4; ++id) {
-        MecanumControl m;
-        m.device_id = id;
-        m.mode = MecanumControl::MODE_CLOSE_LOOP;
-        m.value = 0;
-        mecanumCmdPub.publish(m);
-    }
 
     while (ros::ok())
     {
-        /*
-        char c;
-        if (::read(STDIN_FILENO, &c, 1) != 1)
-            continue;
-
-        if (c == '+' || c == '=')
-        {
-            vel += 5;
-            std::cout << "vel=" << vel << "\n";
-            continue;
-        }
-
-        if (c == '-')
-        {
-            vel -= 5;
-            if (vel < 0)
-                vel = 0;
-            std::cout << "vel=" << vel << "\n";
-            continue;
-        }
-
-        if (c == 'q')
-            break;
-
-        if (c == '0' || c == '\n')
-        {
-            uint8_t mode = (c == '0') ? MecanumControl::MODE_IDLE : MecanumControl::MODE_CLOSE_LOOP;
-            for (uint8_t id = 0; id < 4; ++id)
-            {
-                MecanumControl m;
-                m.device_id = id;
-                m.mode = mode;
-                m.value = 0;
-                pub.publish(m);
-            }
-            ros::spinOnce();
-            continue;
-        }
-
-        auto it = DIR.find(c);
-        if (it == DIR.end())
-            continue;
-
-        for (uint8_t id = 0; id < 4; ++id)
-        {
-            MecanumControl m;
-            m.device_id = id;
-            m.mode = MecanumControl::MODE_SET_TARGET;
-            m.value = it->second[id] * vel;
-            pub.publish(m);
-        }
-        */
         ros::spinOnce();
-        //rate.sleep();
     }
 
     return 0;

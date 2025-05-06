@@ -42,6 +42,10 @@ rosrun can_control main
 rosrun can_control ctrl_manual
 
 
+rostopic pub /your_topic_name std_msgs/String "abcd"
+
+
+####### Bashscript for raspi ########
 #!/bin/bash
 tty_device=$(ls /dev/ttyACM* 2>/dev/null | head -n 1)
 sudo slcand -o -c -s6 "$tty_device" can0
@@ -64,3 +68,5 @@ lxterminal -e "bash -c 'source /opt/ros/noetic/setup.bash; source ~/catkin_ws/de
 sleep 1
 
 lxterminal -e "bash -c 'source /opt/ros/noetic/setup.bash; source ~/catkin_ws/devel/setup.bash; rosrun can_control ctrl_manual; exec bash'"
+
+lxterminal -e "bash -c 'source /opt/ros/noetic/setup.bash; source ~/catkin_ws/devel/setup.bash; rosrun can_control ctrl_auto; exec bash'"

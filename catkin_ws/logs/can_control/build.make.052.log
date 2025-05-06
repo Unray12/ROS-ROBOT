@@ -1,0 +1,44 @@
+[  0%] Built target std_msgs_generate_messages_eus
+[  0%] Built target rosgraph_msgs_generate_messages_eus
+[  0%] Built target std_msgs_generate_messages_py
+[  0%] Built target std_msgs_generate_messages_nodejs
+[  0%] Built target rosgraph_msgs_generate_messages_cpp
+[  0%] Built target roscpp_generate_messages_cpp
+[  0%] Built target roscpp_generate_messages_nodejs
+[  0%] Built target roscpp_generate_messages_eus
+[  0%] Built target _can_control_generate_messages_check_deps_EncoderEstimates
+[  0%] Built target _can_control_generate_messages_check_deps_MecanumControl
+[  0%] Built target rosgraph_msgs_generate_messages_lisp
+[  0%] Built target roscpp_generate_messages_lisp
+[  0%] Built target roscpp_generate_messages_py
+[  0%] Built target rosgraph_msgs_generate_messages_nodejs
+[  0%] Built target std_msgs_generate_messages_lisp
+[  0%] Built target std_msgs_generate_messages_cpp
+[  0%] Built target rosgraph_msgs_generate_messages_py
+[ 27%] Built target can_control_generate_messages_eus
+[ 27%] Built target can_control_generate_messages_py
+[ 36%] Built target can_control_generate_messages_lisp
+[ 45%] Built target can_control_generate_messages_nodejs
+[ 54%] Built target can_control_generate_messages_cpp
+[35m[1mScanning dependencies of target main[0m
+[ 63%] Built target ctrl_manual
+[ 68%] [32mBuilding CXX object CMakeFiles/main.dir/src/main.cpp.o[0m
+[ 68%] Built target can_control_generate_messages
+[ 86%] Built target drivetrain
+[ 95%] Built target ctrl_auto
+In file included from [01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/main.cpp:10[m[K:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/Robot/Robot.h:59:2:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K;[m[K’ after class definition
+   59 | }
+      |  [01;31m[K^[m[K
+      |  [32m[K;[m[K
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/main.cpp:[m[K In function ‘[01m[Kint main(int, char**)[m[K’:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/main.cpp:101:18:[m[K [01;31m[Kerror: [m[K‘[01m[Kros::Publisher Robot::mecanumCmdPub[m[K’ is private within this context
+  101 |     mecanumRobot.[01;31m[KmecanumCmdPub[m[K = nh.advertise<MecanumControl>("mecanum_cmd", 10);
+      |                  [01;31m[K^~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/main.cpp:10[m[K:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/Robot/Robot.h:14:24:[m[K [01;36m[Knote: [m[Kdeclared private here
+   14 |         ros::Publisher [01;36m[KmecanumCmdPub[m[K;
+      |                        [01;36m[K^~~~~~~~~~~~~[m[K
+make[2]: *** [CMakeFiles/main.dir/build.make:63: CMakeFiles/main.dir/src/main.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:194: CMakeFiles/main.dir/all] Error 2
+make: *** [Makefile:141: all] Error 2

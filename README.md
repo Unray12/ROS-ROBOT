@@ -67,6 +67,17 @@ sleep 1
 lxterminal -e "bash -c 'source /opt/ros/noetic/setup.bash; source ~/catkin_ws/devel/setup.bash; rosrun can_control main; exec bash'" &
 sleep 1
 
-lxterminal -e "bash -c 'source /opt/ros/noetic/setup.bash; source ~/catkin_ws/devel/setup.bash; rosrun can_control ctrl_manual; exec bash'"
+# lxterminal -e "bash -c 'source /opt/ros/noetic/setup.bash; source ~/catkin_ws/devel/setup.bash; rosrun can_control ctrl_manual; exec bash'" &
+sleep 1
 
-lxterminal -e "bash -c 'source /opt/ros/noetic/setup.bash; source ~/catkin_ws/devel/setup.bash; rosrun can_control ctrl_auto; exec bash'"
+lxterminal -e "bash -c 'source /opt/ros/noetic/setup.bash; source ~/catkin_ws/devel/setup.bash; rosrun rosserial_server socket_node; exec bash'" &
+sleep 1
+
+lxterminal -e "bash -c 'source /opt/ros/noetic/setup.bash; source ~/catkin_ws/devel/setup.bash; rosrun ros_tcp_endpoint default_server_endpoint.py; exec bash'"
+
+
+
+
+
+
+

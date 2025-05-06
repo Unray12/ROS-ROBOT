@@ -12,13 +12,14 @@
 #include "DHT20.h"
 #include <json_generator.h>
 #include <string.h>
+#include "std_msgs/Int32.h"
 
-#define SENSOR
+// #define SENSOR
 // #define EVALUATE
-// #define GATEWAY
+#define GATEWAY
 const char *ssid = "ACLAB";
 const char *password = "ACLAB2023";
-IPAddress IPRosSerialServer(172, 28, 182, 162); //34 162
+IPAddress IPRosSerialServer(172, 28, 182, 12); //34 162
 const uint16_t rosSerialserverPort = 11411;
 
 const uint8_t broadcastAddress[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
@@ -175,19 +176,13 @@ int sequence = 1;
 #endif
 
 void processVRMessage(const std_msgs::String &msg) {
-
-void VRpickCallback(const std_msgs::Int32::ConstPtr& msg) {
-    if (msg->data == mecanumRobot.id)
-        mecanumRobot.isActive = 1;
-}
-
 #ifdef EVALUATE
     Serial.printf("%d %s\n", sequence, msg.data);
     sequence++;
 #endif
     // mecanumRobot.goRight(30);
-    if (!mecanumRobot.isAutoMode) {
-        if (strcmp(msg.data, "Right1") == 0) {
+    if (!mecanumRobot.isAutoMode && mecanumRobot.isActive) {
+        if (strcmp(msg.data, "Right") == 0) {
             mecanumRobot.currentAngularState = 2;
             mecanumRobot.currentLinearState = 0;
         } else if (strcmp(msg.data, "Left") == 0) {
@@ -200,12 +195,17 @@ void VRpickCallback(const std_msgs::Int32::ConstPtr& msg) {
             mecanumRobot.currentLinearState = 2;
             mecanumRobot.currentAngularState = 0;
         }
+        robotAction(50);
     }
 }
 
+void VRpickCallback(const std_msgs::Int32& msg) {
+    if (msg.data == mecanumRobot.id)
+        mecanumRobot.isActive = 1;
+}
 ros::Subscriber<geometry_msgs::Twist> lidarSub("cmd_vel", &twistMessage);
 ros::Subscriber<std_msgs::String> VRcontrolSub("VR_control", &processVRMessage);
-ros::Subscriber<std_msgs::String> VRcontrolSub("pick_robot", &VRpickCallback);
+ros::Subscriber<std_msgs::Int32> VRpickSub("pick_robot", &VRpickCallback);
 
 
 void wifiTask(void *pvParameters) {

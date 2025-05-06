@@ -32,7 +32,7 @@ class Robot {
         int currentState;
         int nextState;
         bool isAuto = 0;
-        bool isActive = 0;
+        bool isActive = 1;
         int id = 0;
         /*
         0: Stop

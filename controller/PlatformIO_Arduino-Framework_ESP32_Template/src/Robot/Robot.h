@@ -26,6 +26,7 @@ public:
     int currentAngularState = 0;
     int nextAngularState = 0;
     bool isActive = 0;
+    int id = 1;
 
     Robot()
     {

@@ -83,10 +83,10 @@ class Avoider:
             self._set_velocity(self.NORMAL_LIN_VEL, 0.0)
             return self.vel_obj
 
-        if "front_C" in blocked_zones or "front_L" in blocked_zones or "right_L" in blocked_zones:
+        if "front_C" in blocked_zones or "front_L" in blocked_zones:
             self._set_velocity(self.TRANS_LIN_VEL, -self.TRANS_ANG_VEL)
             return self.vel_obj
-        elif "front_R" in blocked_zones or "left_R" in blocked_zones:
+        elif "front_R" in blocked_zones:
             self._set_velocity(self.TRANS_LIN_VEL, self.TRANS_ANG_VEL)
             return self.vel_obj
 

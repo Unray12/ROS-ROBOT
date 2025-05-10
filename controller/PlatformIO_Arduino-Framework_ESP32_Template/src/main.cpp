@@ -181,7 +181,7 @@ void processVRMessage(const std_msgs::String &msg) {
     sequence++;
 #endif
     // mecanumRobot.goRight(30);
-    if (!mecanumRobot.isAutoMode && mecanumRobot.isActive) {
+    if (mecanumRobot.isActive) {
         if (strcmp(msg.data, "Right") == 0) {
             mecanumRobot.currentAngularState = 2;
             mecanumRobot.currentLinearState = 0;
@@ -322,14 +322,15 @@ void setup()
     dht20.begin();
     nodeHandle.subscribe(lidarSub);
     nodeHandle.subscribe(VRcontrolSub);
+    nodeHandle.subscribe(VRpickSub);
     nodeHandle.advertise(chatter);
     // mecanumRobot.stop();
 
     Serial.print("[DEFAULT] ESP32 Board MAC Address: ");
     readMacAddress();
     // xTaskCreate(esp32PublishTask, "esp32PublishTask", 4096, NULL, 1, NULL);
-    // xTaskCreate(robotActionTask, "robotActionTask", 4096, NULL, 1, NULL);
-    xTaskCreate(espNowGwTask, "espNowGwTask", 4096, NULL, 1, NULL);
+    xTaskCreate(robotActionTask, "robotActionTask", 4096, NULL, 1, NULL);
+    // xTaskCreate(espNowGwTask, "espNowGwTask", 4096, NULL, 1, NULL);
     // xTaskCreate(spinOnceTask, "spinOnceTask", 4096, NULL, 1, NULL);
     xTaskCreatePinnedToCore(spinOnceTask, "spinOnceTask", 4096, NULL, 1, NULL, 1);
 #endif

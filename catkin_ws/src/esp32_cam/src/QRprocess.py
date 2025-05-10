@@ -128,14 +128,14 @@ class RTSPQRScanner:
         try:
             # return self.result_queue.get_nowait()
             resultJson = self.QRresultJson(self.result_queue.get_nowait())
-            QR_pub = rospy.Publisher("/information", std_msgs.msg.String, queue_size = 1)
+            QR_pub = rospy.Publisher("/QR_info", std_msgs.msg.String, queue_size = 1)
             QR_pub.publish(json.dumps(resultJson))
 
         except queue.Empty:
             return None
 
 def main():
-    rtsp_url = "rtsp://admin:ACLAB2023@172.28.182.200/ISAPI/Streaming/channels/1"
+    rtsp_url = "rtsp://admin:ACLAB@2023@172.28.182.199/ISAPI/Streaming/channels/1"
     
     scanner = RTSPQRScanner(rtsp_url)
     scanner.start()

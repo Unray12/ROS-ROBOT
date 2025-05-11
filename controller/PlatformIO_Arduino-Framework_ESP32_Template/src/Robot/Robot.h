@@ -27,10 +27,9 @@ public:
     int nextAngularState = 0;
     bool isActive = 0;
     int id = 1;
+    int speed = 0;
 
-    Robot()
-    {
-    }
+    Robot() {}
 
     void stop()
     {
@@ -43,6 +42,7 @@ public:
         motorDriver.set_motors(M2, speed);
         motorDriver.set_motors(M3, speed);
         motorDriver.set_motors(M4, speed * -1);
+        this->speed = speed;
     }
 
     void goBackward(int speed)
@@ -51,6 +51,7 @@ public:
         motorDriver.set_motors(M2, speed * -1);
         motorDriver.set_motors(M3, speed * -1);
         motorDriver.set_motors(M4, speed);
+        this->speed = speed;
     }
 
     void goLeft(int speed)
@@ -59,6 +60,7 @@ public:
         motorDriver.set_motors(M2, speed);
         motorDriver.set_motors(M3, speed);
         motorDriver.set_motors(M4, speed);
+        this->speed = speed;
     }
 
     void goRight(int speed)
@@ -67,6 +69,7 @@ public:
         motorDriver.set_motors(M2, speed * -1);
         motorDriver.set_motors(M3, speed * -1);
         motorDriver.set_motors(M4, speed* -1);
+        this->speed = speed;
     }
 
     void turnLeft(int speed)
@@ -75,6 +78,7 @@ public:
         motorDriver.set_motors(M2, speed * -1);
         motorDriver.set_motors(M3, speed);
         motorDriver.set_motors(M4, speed);
+        this->speed = speed;
     }
 
     void turnRight(int speed)
@@ -83,6 +87,7 @@ public:
         motorDriver.set_motors(M2, speed );
         motorDriver.set_motors(M3, speed * -1);
         motorDriver.set_motors(M4, speed * -1);
+        this->speed = speed;
     }
 
 };

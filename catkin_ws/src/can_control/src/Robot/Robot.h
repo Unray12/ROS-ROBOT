@@ -28,12 +28,18 @@ class Robot {
         };
 
     public:
-        Robot() {}
         int currentState;
         int nextState;
-        bool isAuto = 0;
+        bool isAuto = 1;
         bool isActive = 1;
         int id = 0;
+        int speed = 0;
+        
+        Robot(int ID) {
+            this->id = ID;
+            this->speed = 0;
+        }
+
         /*
         0: Stop
         1: Forward
@@ -67,10 +73,10 @@ class Robot {
                     MecanumControl m;
                     m.device_id = id;
                     m.mode = MecanumControl::MODE_SET_TARGET;
-                    m.value = it->second[id] * 15.0f;
+                    m.value = it->second[id] * 6.0f;
+                    this->speed = 6;
                     this->mecanumCmdPub.publish(m);
                 }
-            
             }
         }
 
@@ -83,14 +89,15 @@ class Robot {
             double linear_x = msg.linear.x;
             int vel = 50;
             if (angular_z > 0) {
-                this->robotDirection("Left");
-            }
-            else if (angular_z < 0) {
                 this->robotDirection("Right");
             }
-            else 
+            else if (angular_z < 0) {
+                this->robotDirection("Left");
+            }
+            else
                 this->robotDirection("Forward");
         }
+        
 
 };
 

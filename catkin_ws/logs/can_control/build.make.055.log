@@ -1,0 +1,37 @@
+[  0%] Built target std_msgs_generate_messages_eus
+[  0%] Built target rosgraph_msgs_generate_messages_cpp
+[  0%] Built target std_msgs_generate_messages_nodejs
+[  0%] Built target rosgraph_msgs_generate_messages_eus
+[  0%] Built target std_msgs_generate_messages_py
+[  0%] Built target roscpp_generate_messages_nodejs
+[  0%] Built target roscpp_generate_messages_cpp
+[  0%] Built target roscpp_generate_messages_py
+[  0%] Built target roscpp_generate_messages_eus
+[  0%] Built target rosgraph_msgs_generate_messages_lisp
+[  0%] Built target _can_control_generate_messages_check_deps_MecanumControl
+[  0%] Built target _can_control_generate_messages_check_deps_EncoderEstimates
+[  0%] Built target std_msgs_generate_messages_cpp
+[  0%] Built target rosgraph_msgs_generate_messages_nodejs
+[  0%] Built target std_msgs_generate_messages_lisp
+[  0%] Built target roscpp_generate_messages_lisp
+[  0%] Built target rosgraph_msgs_generate_messages_py
+[  9%] Built target can_control_generate_messages_nodejs
+[ 27%] Built target can_control_generate_messages_lisp
+[ 31%] Built target can_control_generate_messages_eus
+[ 40%] Built target can_control_generate_messages_cpp
+[ 54%] Built target can_control_generate_messages_py
+[35m[1mScanning dependencies of target main[0m
+[ 54%] Built target can_control_generate_messages
+[ 63%] Built target ctrl_auto
+[ 90%] [32mBuilding CXX object CMakeFiles/main.dir/src/main.cpp.o[0m
+[ 90%] Built target ctrl_manual
+[ 95%] Built target drivetrain
+In file included from [01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/main.cpp:11[m[K:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/Robot/Robot.h:[m[K In constructor ‘[01m[KRobot::Robot(int)[m[K’:
+[01m[K/home/aclab/Desktop/ROS-VR/catkin_ws/src/can_control/src/Robot/Robot.h:31:37:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K;[m[K’ before ‘[01m[K}[m[K’ token
+   31 |         Robot(int ID) {this->id = ID[01;31m[K}[m[K;
+      |                                     [01;31m[K^[m[K
+      |                                     [32m[K;[m[K
+make[2]: *** [CMakeFiles/main.dir/build.make:63: CMakeFiles/main.dir/src/main.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:194: CMakeFiles/main.dir/all] Error 2
+make: *** [Makefile:141: all] Error 2

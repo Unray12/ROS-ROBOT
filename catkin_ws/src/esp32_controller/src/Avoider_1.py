@@ -2,7 +2,7 @@
 import numpy as np
 
 class Avoider:
-    def __init__(self, vel_obj, obstacle_threshold=0.3, normal_lin_vel=0.2,
+    def __init__(self, vel_obj, obstacle_threshold=0.7, normal_lin_vel=0.2,
                  trans_lin_vel=-0.05, trans_ang_vel=1.0):
         self.vel_obj = vel_obj
         self.OBSTACLE_DIST = obstacle_threshold
@@ -82,21 +82,39 @@ class Avoider:
         if not blocked_zones:
             self._set_velocity(self.NORMAL_LIN_VEL, 0.0)
             return self.vel_obj
-
-        if "front_C" in blocked_zones or "front_L" in blocked_zones:
+        
+        if "front_C" in blocked_zones:
+            if "front_L" in blocked_zones:
+                self._set_velocity(self.TRANS_LIN_VEL, -self.TRANS_ANG_VEL)
+                return self.vel_obj
+            elif "front_R" in blocked_zones:
+                self._set_velocity(self.TRANS_LIN_VEL, self.TRANS_ANG_VEL)
+                return self.vel_obj
+        elif "front_L" in blocked_zones and "front_R" in blocked_zones:
+            if "left_R" in blocked_zones:
+                self._set_velocity(self.TRANS_LIN_VEL, -self.TRANS_ANG_VEL)
+                return self.vel_obj
+            elif "right_L" in blocked_zones:
+                self._set_velocity(self.TRANS_LIN_VEL, self.TRANS_ANG_VEL)
+                return self.vel_obj
+            else:
+                self._set_velocity(self.TRANS_LIN_VEL, self.TRANS_ANG_VEL)
+                return self.vel_obj
+        elif "front_L" in blocked_zones:
             self._set_velocity(self.TRANS_LIN_VEL, -self.TRANS_ANG_VEL)
             return self.vel_obj
         elif "front_R" in blocked_zones:
             self._set_velocity(self.TRANS_LIN_VEL, self.TRANS_ANG_VEL)
             return self.vel_obj
+        
 
-        should_rotate, rotation_vel = self._clearance_test("front_C")
-        if should_rotate:
-            self._set_velocity(0.0, rotation_vel)
-        else:
+        #should_rotate, rotation_vel = self._clearance_test("front_C")
+        #if should_rotate:
+            #self._set_velocity(0.0, rotation_vel)
+        #else:
             # fallback: dừng lại
-            self._set_velocity(0.0, 0.0)
-
+            #self._set_velocity(0.0, 0.0)
+        self._set_velocity(0, 0)
         return self.vel_obj
 
 

@@ -25,7 +25,7 @@ static const std::unordered_map<char, std::array<float, 4>> DIR = {
 };
 
 
-Robot mecanumRobot;
+Robot mecanumRobot(0);
 
 void VRcontrolCallback(const std_msgs::String::ConstPtr& msg)
 {
@@ -36,6 +36,8 @@ void VRcontrolCallback(const std_msgs::String::ConstPtr& msg)
 void VRpickCallback(const std_msgs::Int32::ConstPtr& msg) {
     if (msg->data == mecanumRobot.id)
         mecanumRobot.isActive = 1;
+    else if (msg->data == 2)
+        mecanumRobot.isAuto = !mecanumRobot.isAuto;
 }
 
 void twistMessage(const geometry_msgs::Twist& msg) {

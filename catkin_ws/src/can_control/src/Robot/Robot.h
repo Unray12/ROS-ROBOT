@@ -12,40 +12,40 @@ class Robot {
 
     private:
         const std::unordered_map<std::string, std::array<float, 4>> DIR_VR = {
-            {"Forward",  {+1, +1, +1, +1}},
-            {"Backward", {-1, -1, -1, -1}},
-            {"Left",     {-1, +1, -1, +1}},
-            {"Right",    {+1, -1, +1, -1}},
-            {"Stop",     {0, 0, 0, 0}}
+            {"Forward",         {+1, +1, +1, +1}},
+            {"Backward",        {-1, -1, -1, -1}},
+            {"Right",           {-1, +1, -1, +1}},
+            {"Left",            {+1, -1, +1, -1}},
+            {"RotateLeft",      {+1, -1, -1, +1}},
+            {"RotateRight",     {-1, +1, +1, -1}},
+            {"Stop",                {0, 0, 0, 0}}
         };
 
         const std::unordered_map<std::string, int> DIR_STATE = {
-            {"Forward",  1},
-            {"Backward", 2},
-            {"Left",     3},
-            {"Right",    4},
-            {"Stop",     0}
+            {"Forward",         1},
+            {"Backward",        2},
+            {"Left",            3},
+            {"Right",           4},
+            {"RotateRight",     5},
+            {"RotateLeft",      6},
+            {"Stop",            0}
         };
 
     public:
+        //Robot(int ID) {this->id = ID;}
         int currentState;
         int nextState;
-        bool isAuto = 1;
+        bool isAuto = 0;
         bool isActive = 1;
         int id = 0;
-        int speed = 0;
-        
-        Robot(int ID) {
-            this->id = ID;
-            this->speed = 0;
-        }
-
         /*
         0: Stop
         1: Forward
         2: Backward
         3: Left
         4: Right
+        5: RotateRight
+        6: RotateLeft
         */
        ros::Publisher mecanumCmdPub;
         void robotDirection(std::string direction) {
@@ -73,8 +73,7 @@ class Robot {
                     MecanumControl m;
                     m.device_id = id;
                     m.mode = MecanumControl::MODE_SET_TARGET;
-                    m.value = it->second[id] * 6.0f;
-                    this->speed = 6;
+                    m.value = it->second[id] * 8.0f;
                     this->mecanumCmdPub.publish(m);
                 }
             }

@@ -132,13 +132,18 @@ Angular state
 */
 
 void robotAction(int val) {
-    mecanumRobot.stop();
+    // mecanumRobot.stop();
+    Serial.println(mecanumRobot.nextAngularState);
+    Serial.println(mecanumRobot.currentAngularState);
     if (mecanumRobot.nextAngularState != mecanumRobot.currentAngularState || mecanumRobot.nextLinearState != mecanumRobot.currentLinearState) {
+        mecanumRobot.currentAngularState= mecanumRobot.nextAngularState;
+        mecanumRobot.currentLinearState = mecanumRobot.nextLinearState;
         if (mecanumRobot.currentAngularState == 1) {
             mecanumRobot.turnLeft(val);
         } 
         else if (mecanumRobot.currentAngularState == 2) {
             mecanumRobot.turnRight(val);
+            Serial.println("Hello");
         }
         else if (mecanumRobot.currentLinearState == 1) {
             mecanumRobot.goForward(val);

@@ -25,7 +25,7 @@ static const std::unordered_map<char, std::array<float, 4>> DIR = {
 };
 
 
-Robot mecanumRobot(0);
+Robot mecanumRobot;
 
 void VRcontrolCallback(const std_msgs::String::ConstPtr& msg)
 {
@@ -66,3 +66,4 @@ int main(int argc, char **argv)
 
     return 0;
 }
+

@@ -14,12 +14,12 @@
 #include <string.h>
 #include "std_msgs/Int32.h"
 
-// #define SENSOR
+#define SENSOR
 // #define EVALUATE
-#define GATEWAY
-const char *ssid = "ACLAB";
+// #define GATEWAY
+const char *ssid = "ACLAB1";
 const char *password = "ACLAB2023";
-IPAddress IPRosSerialServer(172, 28, 182, 162); //34 162
+IPAddress IPRosSerialServer(172, 28, 182, 197); //34 162
 const uint16_t rosSerialserverPort = 11411;
 
 const uint8_t broadcastAddress[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
@@ -124,11 +124,13 @@ Linear state
 0: stop
 1: forward
 2: backward
+3: left
+4: right
 
 Angular state
 0: stop
-1: left
-2: right
+1: turn left
+2: turn right
 */
 
 void robotAction(int val) {
@@ -138,11 +140,11 @@ void robotAction(int val) {
     if (mecanumRobot.nextAngularState != mecanumRobot.currentAngularState || mecanumRobot.nextLinearState != mecanumRobot.currentLinearState) {
         mecanumRobot.currentAngularState= mecanumRobot.nextAngularState;
         mecanumRobot.currentLinearState = mecanumRobot.nextLinearState;
-        if (mecanumRobot.currentAngularState == 1) {
-            mecanumRobot.turnLeft(val);
+        if (mecanumRobot.currentLinearState == 4) {
+            mecanumRobot.goRight(val);
         } 
-        else if (mecanumRobot.currentAngularState == 2) {
-            mecanumRobot.turnRight(val);
+        else if (mecanumRobot.currentLinearState == 3) {
+            mecanumRobot.goLeft(val);
             Serial.println("Hello");
         }
         else if (mecanumRobot.currentLinearState == 1) {
@@ -150,6 +152,12 @@ void robotAction(int val) {
         }
         else if (mecanumRobot.currentLinearState == 2) {
             mecanumRobot.goBackward(val);
+        }
+        else if (mecanumRobot.currentAngularState == 1) {
+            mecanumRobot.turnLeft(val);
+        }
+        else if (mecanumRobot.currentAngularState == 2) {
+            mecanumRobot.turnRight(val);
         }
         else
             mecanumRobot.stop();
@@ -190,11 +198,17 @@ void processVRMessage(const std_msgs::String &msg) {
     // mecanumRobot.goRight(30);
     if (mecanumRobot.isActive) {
         if (strcmp(msg.data, "Right") == 0) {
-            mecanumRobot.nextAngularState = 2;
-            mecanumRobot.nextLinearState = 0;
+            mecanumRobot.nextLinearState = 4;
+            mecanumRobot.nextAngularState = 0;
             Serial.println("Robot 1");
         } else if (strcmp(msg.data, "Left") == 0) {
+            mecanumRobot.nextLinearState  = 3;
+            mecanumRobot.nextAngularState = 0;
+        } else if (strcmp(msg.data, "RotateLeft") == 0) {
             mecanumRobot.nextAngularState  = 1;
+            mecanumRobot.nextLinearState = 0;
+        } else if (strcmp(msg.data, "RotateRight") == 0) {
+            mecanumRobot.nextAngularState  = 2;
             mecanumRobot.nextLinearState = 0;
         } else if (strcmp(msg.data, "Forward") == 0) {
             mecanumRobot.nextLinearState  = 1;
@@ -202,14 +216,25 @@ void processVRMessage(const std_msgs::String &msg) {
         } else if (strcmp(msg.data, "Backward") == 0) {
             mecanumRobot.nextLinearState = 2;
             mecanumRobot.nextAngularState = 0;
+        } else if (strcmp(msg.data, "Stop") == 0) {
+            mecanumRobot.nextLinearState = 0;
+            mecanumRobot.nextAngularState = 0;
         }
         robotAction(50);
     }
 }
 
 void VRpickCallback(const std_msgs::Int32& msg) {
-    if (msg.data == mecanumRobot.id)
+    if (msg.data == 0) {
+        mecanumRobot.isActive = 0;
+        mecanumRobot.stop();
+    }
+    else if (msg.data == 1)
         mecanumRobot.isActive = 1;
+    else if (msg.data == 2) {
+        mecanumRobot.isActive = 0;
+        mecanumRobot.stop();
+    }
 }
 ros::Subscriber<geometry_msgs::Twist> lidarSub("cmd_vel", &twistMessage);
 ros::Subscriber<std_msgs::String> VRcontrolSub("VR_control", &processVRMessage);
@@ -282,6 +307,7 @@ void spinOnceTask(void *pvParameter) {
 
 void espNowGwTask(void *pvParamater) {
     while (true) {
+        Serial.print("hello");
         if (true) {
             infoSensorMsg myData;
             if (WiFi.status() == WL_CONNECTED) {
@@ -291,8 +317,9 @@ void espNowGwTask(void *pvParamater) {
         #ifdef EVALUATE
         mecanumRobot.motorDriver.printTime();
         #endif
-        vTaskDelay(2000 / portTICK_PERIOD_MS);
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
+    
 
     vTaskDelete(NULL);
 }
@@ -308,7 +335,7 @@ void espNowSensorTask(void * pvParameter) {
                 sendEspNow(broadcastAddress, myData);
             }
         }
-        vTaskDelay(2000 / portTICK_PERIOD_MS);
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
     vTaskDelete(NULL);
 }
@@ -321,7 +348,7 @@ void setup()
 
 #ifdef SENSOR
     dht20.begin();
-    // xTaskCreate(espNowSensorTask, "espNowSensorTask", 4096, NULL, 1, NULL);
+    xTaskCreate(espNowSensorTask, "espNowSensorTask", 4096, NULL, 1, NULL);
 #endif
 
 #ifdef GATEWAY
@@ -331,13 +358,13 @@ void setup()
     nodeHandle.subscribe(VRcontrolSub);
     nodeHandle.subscribe(VRpickSub);
     nodeHandle.advertise(chatter);
-    // mecanumRobot.stop();
+    mecanumRobot.stop();
 
     Serial.print("[DEFAULT] ESP32 Board MAC Address: ");
     readMacAddress();
     // xTaskCreate(esp32PublishTask, "esp32PublishTask", 4096, NULL, 1, NULL);
     // xTaskCreate(robotActionTask, "robotActionTask", 4096, NULL, 1, NULL);
-    // xTaskCreate(espNowGwTask, "espNowGwTask", 4096, NULL, 1, NULL);
+    xTaskCreate(espNowGwTask, "espNowGwTask", 4096, NULL, 1, NULL);
     // xTaskCreate(spinOnceTask, "spinOnceTask", 4096, NULL, 1, NULL);
     xTaskCreatePinnedToCore(spinOnceTask, "spinOnceTask", 4096, NULL, 1, NULL, 1);
 #endif
@@ -345,4 +372,5 @@ void setup()
 
 void loop()
 {
+
 }

@@ -29,7 +29,7 @@ public:
     int id = 1;
     int speed = 0;
 
-    Robot() {}
+    // Robot() {}
 
     void stop()
     {
@@ -39,7 +39,7 @@ public:
     void goForward(int speed)
     {
         motorDriver.set_motors(M1, speed);
-        motorDriver.set_motors(M2, speed);
+        motorDriver.set_motors(M2, speed * -1);
         motorDriver.set_motors(M3, speed);
         motorDriver.set_motors(M4, speed * -1);
         this->speed = speed;
@@ -48,7 +48,7 @@ public:
     void goBackward(int speed)
     {
         motorDriver.set_motors(M1, speed * -1);
-        motorDriver.set_motors(M2, speed * -1);
+        motorDriver.set_motors(M2, speed);
         motorDriver.set_motors(M3, speed * -1);
         motorDriver.set_motors(M4, speed);
         this->speed = speed;
@@ -57,7 +57,7 @@ public:
     void goLeft(int speed)
     {
         motorDriver.set_motors(M1, speed * -1);
-        motorDriver.set_motors(M2, speed);
+        motorDriver.set_motors(M2, speed * -1);
         motorDriver.set_motors(M3, speed);
         motorDriver.set_motors(M4, speed);
         this->speed = speed;
@@ -66,7 +66,7 @@ public:
     void goRight(int speed)
     {
         motorDriver.set_motors(M1, speed);
-        motorDriver.set_motors(M2, speed * -1);
+        motorDriver.set_motors(M2, speed);
         motorDriver.set_motors(M3, speed * -1);
         motorDriver.set_motors(M4, speed* -1);
         this->speed = speed;
@@ -75,7 +75,7 @@ public:
     void turnLeft(int speed)
     {
         motorDriver.set_motors(M1, speed);
-        motorDriver.set_motors(M2, speed * -1);
+        motorDriver.set_motors(M2, speed);
         motorDriver.set_motors(M3, speed);
         motorDriver.set_motors(M4, speed);
         this->speed = speed;
@@ -84,7 +84,7 @@ public:
     void turnRight(int speed)
     {
         motorDriver.set_motors(M1, speed * -1);
-        motorDriver.set_motors(M2, speed );
+        motorDriver.set_motors(M2, speed * -1);
         motorDriver.set_motors(M3, speed * -1);
         motorDriver.set_motors(M4, speed * -1);
         this->speed = speed;

@@ -34,10 +34,18 @@ void VRcontrolCallback(const std_msgs::String::ConstPtr& msg)
 }
 
 void VRpickCallback(const std_msgs::Int32::ConstPtr& msg) {
-    if (msg->data == mecanumRobot.id)
+    if (msg->data == 0) {
         mecanumRobot.isActive = 1;
-    else if (msg->data == 2)
-        mecanumRobot.isAuto = !mecanumRobot.isAuto;
+        mecanumRobot.isAuto = 1;
+    } 
+    else if (msg->data == 2) {
+        mecanumRobot.isActive = 1;
+        mecanumRobot.isAuto = 0;
+    }
+    else if (msg-> data == 1) {
+        mecanumRobot.isActive = 0;
+        mecanumRobot.isAuto = 0;
+    }
 }
 
 void twistMessage(const geometry_msgs::Twist& msg) {

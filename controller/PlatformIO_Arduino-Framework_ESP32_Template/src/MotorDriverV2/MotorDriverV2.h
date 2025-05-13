@@ -282,7 +282,7 @@ private:
     #ifdef EVALUATE
         this->printTime();
     #endif EVALUATE
-
+        Wire.beginTransmission(_addr);
         Wire.write(register_addr);
         for (size_t i = 0; i < length; i++)
         {
@@ -292,23 +292,6 @@ private:
         Wire.endTransmission();
         int status = Wire.endTransmission();
     }
-
-    //   void _write_16_array(uint8_t register_addr, uint16_t* data, size_t length) {
-    //     uint8_t buffer[2 * length];  // Tạo bộ đệm chứa dữ liệu
-
-    //     // Chuyển đổi dữ liệu 16-bit thành dạng Little Endian
-    //     for (size_t i = 0; i < length; i++) {
-    //         buffer[2 * i] = data[i] & 0xFF;         // Byte thấp (LSB)
-    //         buffer[2 * i + 1] = (data[i] >> 8) & 0xFF; // Byte cao (MSB)
-    //     }
-
-    //     Wire.beginTransmission(_addr);
-    //     Wire.write(register_addr);
-    //     Wire.write(buffer, 2 * length);
-    //     int status = Wire.endTransmission();
-    //     Serial.println("hellllllllllllllllllllllo");
-    //     Serial.println(status);
-    // }
 
     uint8_t _read_8(uint8_t register_addr)
     {

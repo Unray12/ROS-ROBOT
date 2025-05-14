@@ -4,6 +4,7 @@ import numpy as np
 from pyzbar.pyzbar import decode
 import threading
 import queue
+import os
 import time
 import std_msgs.msg
 import sensor_msgs.msg
@@ -11,7 +12,8 @@ import rospy
 from cv_bridge import CvBridge, CvBridgeError
 from pynput import keyboard
 import json
-
+os.environ['ROS_MASTER_URI'] = 'http://172.28.181.211:11311'
+os.environ['ROS_IP'] = '172.28.181.29'  # Replace with your machine's IP
 class RTSPQRScanner:
     def __init__(self, rtsp_url):
 
@@ -135,7 +137,7 @@ class RTSPQRScanner:
             return None
 
 def main():
-    rtsp_url = "rtsp://admin:ACLAB@2023@172.28.182.199/ISAPI/Streaming/channels/1"
+    rtsp_url = "rtsp://admin:ACLAB@2023@172.28.181.199/ISAPI/Streaming/channels/1"
     
     scanner = RTSPQRScanner(rtsp_url)
     scanner.start()

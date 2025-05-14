@@ -14,12 +14,12 @@
 #include <string.h>
 #include "std_msgs/Int32.h"
 
-#define SENSOR
-// #define EVALUATE
-// #define GATEWAY
+// #define SENSOR
+// #define EVALUAE
+#define GATEWAY
 const char *ssid = "ACLAB1";
 const char *password = "ACLAB2023";
-IPAddress IPRosSerialServer(172, 28, 182, 197); //34 162
+IPAddress IPRosSerialServer(172, 28, 181, 211); //34 162
 const uint16_t rosSerialserverPort = 11411;
 
 const uint8_t broadcastAddress[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};

@@ -31,6 +31,14 @@ class Robot {
             {"Stop",            0}
         };
 
+
+        void decelerationRobot(float currentSpeed) {
+
+        }
+
+        void setRobotVelocity(float speed) {
+
+        }
     public:
         //Robot(int ID) {this->id = ID;}
         int currentState;
@@ -38,6 +46,7 @@ class Robot {
         bool isAuto = 0;
         bool isActive = 1;
         int id = 0;
+        float speed = 0.0;
         /*
         0: Stop
         1: Forward
@@ -68,12 +77,12 @@ class Robot {
                     ROS_WARN("Unknown VR command: %s", direction.c_str());
                     return;
                 }
-            
                 for (uint8_t id = 0; id < 4; ++id) {
                     MecanumControl m;
                     m.device_id = id;
                     m.mode = MecanumControl::MODE_SET_TARGET;
-                    m.value = it->second[id] * 8.0f;
+                    this->speed = 8.0f;
+                    m.value = it->second[id] * this->speed;
                     this->mecanumCmdPub.publish(m);
                 }
             }

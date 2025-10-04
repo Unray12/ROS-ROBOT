@@ -5,13 +5,14 @@ import termios
 import tty
 import rospy
 import std_msgs.msg
+import threading
 # MQTT settings
 BROKER_ADDRESS = "172.28.182.68"  # Free public broker
 MQTT_PORT = 1883
 TOPICS = ['VR_control']
 os.environ['ROS_MASTER_URI'] = 'http://172.28.182.68:11311'
 os.environ['ROS_IP'] = '172.28.182.165'
-
+client = mqtt.Client()
 
 # Hàm đọc phím 1 ký tự
 def get_key():
@@ -35,6 +36,9 @@ def on_connect(client, userdata, flags, rc):
 
 def on_message(client, userdata, msg):
     print(f"Received message: '{msg.payload.decode()}' on topic '{msg.topic}'")
+    if(msg.topic == "VR_control"):
+        ros_pub = rospy.Publisher("/VR_control", std_msgs.msg.String, queue_size=10)
+        ros_pub.publish(msg.payload.decode())
 
 def on_subscribe(mosq, obj, mid, granted_qos):
     print("Subscribed: " "include message: "+ str(mid))
@@ -42,17 +46,19 @@ def on_subscribe(mosq, obj, mid, granted_qos):
 def on_publish(mosq, obj, mid):
     print(f"Mesage {mid} has been sent to broker")
 
-client = mqtt.Client()
-client.on_connect = on_connect
-client.on_message = on_message
-client.on_subscribe = on_subscribe
-client.on_publish = on_publish
+def mqtt_thread():
+    global client
+    client.on_connect = on_connect
+    client.on_message = on_message
 
-# Connect to MQTT broker
-client.connect(BROKER_ADDRESS, MQTT_PORT, 60)
-client.subscribe(TOPICS[0], 0)
-client.loop_start()
-client.publish(TOPICS[0], "Hello from Python!")
+    client.connect(BROKER_ADDRESS, MQTT_PORT, 60)
+    client.subscribe(TOPICS[0], 0)
+    # client.publish(TOPICS[0], "Right")
+    client.loop_forever()   # Block ở đây nhưng nằm trong thread riêng
+
+
+    
+
 
 
 def main():
@@ -64,6 +70,8 @@ def main():
 
     # vel_msg = Twist()
     print("Điều khiển robot bằng phím WASD, nhấn 'q' để thoát")
+    MQTT_Thread = threading.Thread(target=mqtt_thread, daemon=True)
+    MQTT_Thread.start()
 
     while not rospy.is_shutdown():
         key = get_key().lower()
@@ -97,10 +105,11 @@ def main():
         if cmd:
 
             # ros_pub = rospy.Publisher("/VR_control", std_msgs.msg.String, queue_size=10)
-            ros_pub.publish(cmd)
+            # ros_pub.publish(cmd)
             # Publish MQTT
+            
             client.publish(TOPICS[0], cmd)
-            rospy.loginfo(f"Gửi: {cmd}")
+            # rospy.loginfo(f"Gửi: {cmd}")
         rate.sleep()
          
     client.loop_stop()
